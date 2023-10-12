@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <h1>FitFusion</h1>
+    <h1 class="underline">FitFusion</h1>
   </div>
 </template>
 
