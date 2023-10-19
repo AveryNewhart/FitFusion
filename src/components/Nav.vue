@@ -2,12 +2,12 @@
 </script>
 
 <template>
-
-  <div class="">
-    <h1>nav</h1>
+  <div class="nav">
+    <router-link to="/">Home</router-link>
+    <router-link to="/profile">Profile</router-link>
   </div>
-
 </template>
+
 
 <style scoped>
 </style>
