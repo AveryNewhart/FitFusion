@@ -11,6 +11,9 @@ dependencies:
   '@vue/apollo-composable':
     specifier: 4.0.0-beta.11
     version: 4.0.0-beta.11(@apollo/client@3.8.5)(graphql@16.8.1)(typescript@5.2.2)(vue@3.3.4)
+  '@vue/compiler-sfc':
+    specifier: ^3.3.4
+    version: 3.3.4
   graphql:
     specifier: ^16.8.1
     version: 16.8.1
@@ -20,6 +23,9 @@ dependencies:
   vue:
     specifier: ^3.3.4
     version: 3.3.4
+  vue-router:
+    specifier: ^4.2.5
+    version: 4.2.5(vue@3.3.4)
 
 devDependencies:
   '@vitejs/plugin-vue':
@@ -447,6 +453,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.3.4
       '@vue/shared': 3.3.4
+
+  /@vue/devtools-api@6.5.1:
+    resolution: {integrity: sha512-+KpckaAQyfbvshdDW5xQylLni1asvNSGme1JFs8I1+/H5pHEhqUKMEQD/qn3Nx5+/nycBq11qAEi8lk+LXI2dA==}
+    dev: false
 
   /@vue/language-core@1.8.19(typescript@5.2.2):
     resolution: {integrity: sha512-nt3dodGs97UM6fnxeQBazO50yYCKBK53waFWB3qMbLmR6eL3aUryZgQtZoBe1pye17Wl8fs9HysV3si6xMgndQ==}
@@ -1306,6 +1316,15 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      vue: 3.3.4
+    dev: false
+
+  /vue-router@4.2.5(vue@3.3.4):
+    resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.5.1
       vue: 3.3.4
     dev: false
 

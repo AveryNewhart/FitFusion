@@ -1,17 +1,21 @@
-<script setup lang="ts">
-import Nav from './components/Nav.vue';
-import Home from './components/Home.vue';
-import Footer from './components/Footer.vue';
-</script>
-
 <template>
-  <Nav />
-    <div>
-      <Home />
-    </div>
-  <Footer />
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped>
-</style>
+<script lang="ts">
+
+import { defineComponent } from 'vue';
+
+
+
+export default defineComponent({
+  setup() {
+
+  },
+});
+</script>
+
+
 
