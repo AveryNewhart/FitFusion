@@ -5,6 +5,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client/core';
 import App from './App.vue';
 import Home from './components/Home.vue';
 import Profile from './components/Profile.vue';
+import Login from './components/Login.vue';
 
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
@@ -18,6 +19,7 @@ app.use(createRouter({
   routes: [
     { path: '/', name: 'Home', component: Home },
     { path: '/profile', name: 'Profile', component: Profile },
+    { path: '/login', name: 'Login', component: Login },
   ],
 }));
 
