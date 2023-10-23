@@ -6,6 +6,9 @@ import App from './App.vue';
 import Home from './components/Home.vue';
 import Profile from './components/Profile.vue';
 import Login from './components/Login.vue';
+import Feed from './components/Feed.vue';
+import CalorieTracker from './components/CalorieTracker.vue'
+import RunningRoutes from './components/RunningRoutes.vue';
 
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
@@ -20,6 +23,9 @@ app.use(createRouter({
     { path: '/', name: 'Home', component: Home },
     { path: '/profile', name: 'Profile', component: Profile },
     { path: '/login', name: 'Login', component: Login },
+    { path: '/feed', name: 'Feed', component: Feed },
+    { path: '/calorietracker', name: 'CalorieTracker', component: CalorieTracker },
+    { path: '/runningroutes', name: 'RunningRoutes', component: RunningRoutes },
   ],
 }));
 

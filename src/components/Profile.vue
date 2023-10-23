@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import Nav from './/Nav.vue';
+import Goals from './Goals.vue';
+import WorkoutCalender from './WorkoutCalender.vue';
 
 </script>
 
@@ -10,6 +12,14 @@ import Nav from './/Nav.vue';
  </div> 
   <div class="">
     <h1>profile</h1>
+    <div>
+      <Goals />
+      <p>div for the imported goals component, personal goals to be added on the users profile</p>
+    </div>
+    <div>
+      <WorkoutCalender />
+      <p>div for the workout calender</p>
+    </div>
   </div>
 
 </template>
