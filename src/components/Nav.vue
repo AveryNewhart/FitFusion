@@ -18,14 +18,14 @@ const closeSettingsModal = () => {
 
 <template>
   <div class="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/profile">Profile</router-link>
-    <router-link to="/login">Login/Signup</router-link>
-    <router-link to ="/feed">Feed</router-link>
-    <router-link to ="/calorietracker">Calorie Tracker</router-link>
-    <router-link to ="/runningroutes">Running Routes</router-link>
+    <router-link class="links" to="/">Home</router-link>
+    <router-link class="links" to="/profile">Profile</router-link>
+    <router-link class="links" to="/login">Login/Signup</router-link>
+    <router-link class="links" to ="/feed">Feed</router-link>
+    <router-link class="links" to ="/calorietracker">Calorie Tracker</router-link>
+    <router-link class="links" to ="/runningroutes">Running Routes</router-link>
 
-    <button @click="openSettingsModal">Settings</button>
+    <button class="links" @click="openSettingsModal">Settings</button>
 
     <!-- Modal for settings component -->
     <div class="modal" v-if="isSettingsModalOpen">
@@ -70,6 +70,10 @@ const closeSettingsModal = () => {
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+.links {
+  margin-right: 25px;
 }
 
 
