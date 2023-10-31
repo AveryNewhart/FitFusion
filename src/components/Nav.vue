@@ -17,13 +17,17 @@ const closeSettingsModal = () => {
 </script>
 
 <template>
-  <div class="nav">
-    <router-link class="links" to="/">Home</router-link>
-    <router-link class="links" to="/profile">Profile</router-link>
-    <router-link class="links" to="/login">Login/Signup</router-link>
-    <router-link class="links" to ="/feed">Feed</router-link>
-    <router-link class="links" to ="/calorietracker">Calorie Tracker</router-link>
-    <router-link class="links" to ="/runningroutes">Running Routes</router-link>
+  <nav class="bg-gradient-to-r from-green-400 to-blue-500 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <router-link to="/" class="text-white text-2xl font-bold">FitFusion</router-link>
+
+      <div class="space-x-4">
+        <router-link to="/" class="text-white">Home</router-link>
+        <router-link to="/profile" class="text-white">Profile</router-link>
+        <router-link to="/login" class="text-white">Login/Signup</router-link>
+        <router-link to="/feed" class="text-white">Feed</router-link>
+        <router-link to="/calorietracker" class="text-white">Calorie Tracker</router-link>
+        <router-link to="/runningroutes" class="text-white">Running Routes</router-link>
 
     <button class="links" @click="openSettingsModal">Settings</button>
 
@@ -37,6 +41,8 @@ const closeSettingsModal = () => {
       </div>
     </div>
   </div>
+  </div>
+</nav>
 </template>
 
 
