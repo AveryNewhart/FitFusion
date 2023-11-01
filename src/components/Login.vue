@@ -20,49 +20,43 @@ const toggleForm = () => {
       <div class="centered-container">
         <!-- Login Form -->
         <transition name="flip" mode="out-in">
-          <div :key="loginMode" class="login-box login-box-1" v-if="loginMode === 'login'">
-            <h2>Login</h2>
-            <form id="login-form">
-                <div class="user-box">
-                    <input type="text" name="" id="username-login">
-                    <label for="username-login">Username</label>
-                </div>
-                <div class="user-box">
-                    <input type="password" name="" id="password-login">
-                    <label for="password-login">Password</label>
-                </div>
-                <button class="login-btn" type="submit">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Submit
+            <div :key="loginMode" class="login-box login-box-1" v-if="loginMode === 'login'">
+                <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Login</h2>
+                <form id="login-form" class="space-y-4">
+                    <div class="relative">
+                        <input type="text" name="username-login" id="username-login" placeholder=" " class="peer h-10 w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500">
+                        <label for="username-login" class="absolute top-0 -z-1 duration-300 origin-0 transform translate-y-2 text-gray-600">Username</label>
+                    </div>
+                    <div class="relative">
+                        <input type="password" name="password-login" id="password-login" placeholder=" " class="peer h-10 w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500">
+                        <label for="password-login" class="absolute top-0 -z-1 duration-300 origin-0 transform translate-y-2 text-gray-600">Password</label>
+                    </div>
+                    <button class="login-btn relative overflow-hidden text-white bg-gradient-to-r from-green-400 to-blue-500 py-2 px-4 rounded-full transform transition hover:scale-105">
+                        <span class="absolute top-0 left-0 w-full h-full transform scale-x-0 bg-gradient-to-r from-green-400 to-blue-500"></span>
+                        Submit
                     </button>
-            </form>
-            <button class="toggle-form" @click="toggleForm">No account, sign up here</button>
-           </div>
+                </form>
+                <button class="toggle-form text-blue-500 hover:underline" @click="toggleForm">No account, sign up here</button>
+            </div>
           <!-- Signup Form -->
-          <div :key="loginMode + '-signup'" class="login-box login-box-2" v-else>
-            <h2>Sign-Up</h2>
-            <form id="signup-form">
-                <div class="user-box">
-                    <input type="text" name=""  id="username-signup">
-                    <label for="username-signup">Username</label>
-                </div>
-                <div class="user-box">
-                    <input type="password" name="" id="password-signup">
-                    <label for="password-signup">Password</label>
-                </div>
-                <button class="login-btn" type="submit">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Submit
-                </button>
-            </form>
-            <button class="toggle-form" @click="toggleForm">Already have an account? Log in</button>
-          </div>
+            <div :key="loginMode + '-signup'" class="login-box login-box-2" v-else>
+                <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Sign-Up</h2>
+                <form id="signup-form" class="space-y-4">
+                    <div class="relative">
+                        <input type="text" name="username-signup" id="username-signup" placeholder=" " class="peer h-10 w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500">
+                        <label for="username-signup" class="absolute top-0 -z-1 duration-300 origin-0 transform translate-y-2 text-gray-600">Username</label>
+                    </div>
+                    <div class="relative">
+                        <input type="password" name="password-signup" id="password-signup" placeholder=" " class="peer h-10 w-full border-b-2 border-gray-300 focus:outline-none focus:border-blue-500">
+                        <label for="password-signup" class="absolute top-0 -z-1 duration-300 origin-0 transform translate-y-2 text-gray-600">Password</label>
+                    </div>
+                    <button class="login-btn relative overflow-hidden text-white bg-gradient-to-r from-green-400 to-blue-500 py-2 px-4 rounded-full transform transition hover:scale-105">
+                        <span class="absolute top-0 left-0 w-full h-full transform scale-x-0 bg-gradient-to-r from-green-400 to-blue-500"></span>
+                        Submit
+                    </button>
+                </form>
+                <button class="toggle-form text-blue-500 hover:underline" @click="toggleForm">Already have an account? Log in</button>
+            </div>
         </transition>
       </div>
     </div>
