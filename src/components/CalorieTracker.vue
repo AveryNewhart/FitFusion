@@ -4,19 +4,23 @@ import Nav from './/Nav.vue';
 
 import { ref } from 'vue';
 
-const caloriesConsumed = ref();
-const calorieEntries = ref<number[]>([]);
-const totalCalories = ref(0);
 
-const addCaloriesEntry = () => {
-  const calories = parseInt(caloriesConsumed.value as string, 10);
-  if (!isNaN(calories)) {
-    calorieEntries.value.push(calories);
-    totalCalories.value += calories;
-    caloriesConsumed.value = 0;
+const foods = ref<string[]>(Array(7).fill(''));
+const calories = ref<number[]>(Array(7).fill(0));
+const totalCaloriesPerDay = ref<number[]>(Array(7).fill(0));
+const totalCalories = ref(0);
+const days: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const addCaloriesEntry = (index: number): void => {
+  const caloriesValue: number = parseInt(calories.value[index].toString(), 10);
+  if (!isNaN(caloriesValue)) {
+    totalCaloriesPerDay.value[index] += caloriesValue;
   }
 };
 
+const calculateTotalCalories = (): void => {
+  totalCalories.value = totalCaloriesPerDay.value.reduce((acc, value) => acc + value, 0);
+};
 </script>
 
 <!-- I WANT TO ADD A ADDITIONAL SPOT FOR THE USER TO ENTER THEIR FOOD, TO ALIGN IT WITH THE AMOUNT OF CALORIES IT IS. -->
@@ -28,37 +32,73 @@ const addCaloriesEntry = () => {
     <Nav />
     <div class="calories-tracker">
       <h1>Track Your Calories</h1>
-      <div class="calories-input">
-        <input type="number" v-model="caloriesConsumed" placeholder="Enter calories">
-        <button @click="addCaloriesEntry">Add</button>
-      </div>
-      <ul>
-        <li v-for="(entry, index) in calorieEntries" :key="index">
-          {{ entry }} calories
-        </li>
-      </ul>
-      <p>Total Calories: {{ totalCalories }}</p>
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Food</th>
+            <th>Calories</th>
+            <th>Add</th>
+            <th>Total Calories</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(day, index) in days" :key="index">
+            <td>{{ day }}</td>
+            <td><input type="text" v-model="foods[index]" placeholder="Food"></td>
+            <td><input type="number" v-model="calories[index]" placeholder="Calories"></td>
+            <td>
+              <button @click="addCaloriesEntry(index)">Add</button>
+            </td>
+            <td>{{ totalCaloriesPerDay[index] }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button @click="calculateTotalCalories">Total Calories</button>
+      <p>Total Calories for the Week: {{ totalCalories }}</p>
     </div>
   </div>
 </template>
 
-<style scoped>
 
+<style scoped>
 .calories-tracker {
   text-align: center;
 }
 
-.calories-input {
-  margin: 20px 0;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+thead {
+  background-color: #333;
+  color: white;
 }
 
-li {
-  margin: 5px 0;
+thead th {
+  padding: 10px;
 }
 
+tbody td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+p {
+  margin-top: 20px;
+}
 </style>
+
+
+
+
+
