@@ -17,17 +17,22 @@ import ProfilePicture from './ProfilePicture.vue';
       <Goals />
       <p>div for the imported goals component, personal goals to be added on the users profile</p>
     </div>
-    <div>
+    <div class="workoutCalenderDiv">
       <WorkoutCalender />
-      <p>div for the workout calender</p>
     </div>
     <div>
       <ProfilePicture />
-      <p>div for the profile picturer</p>
     </div>
   </div>
 
 </template>
 
 <style scoped>
+
+.workoutCalenderDiv {
+  border: 1px solid green;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 </style>
