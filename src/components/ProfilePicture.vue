@@ -20,7 +20,7 @@ export default defineComponent({
 
 <template>
     <div class="profilePictureDiv">
-      <h2>Upload Input</h2>
+      <h2>Upload Profile Picture</h2>
       <img :src="imageUrl" alt="" class="uploaded-image">
       <form action="index.html" method="post">
         <input type="file" name="file" id="file" @change="handleFileChange" accept="image/*">
