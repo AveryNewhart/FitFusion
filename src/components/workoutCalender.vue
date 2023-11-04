@@ -15,11 +15,17 @@ const toggleDay = (index: number) => {
   offDays.value[index] = !offDays.value[index];
 };
 
+//FOR THE GENERATE WORKOUT FUNCTION, HAVE A DIFFERENT GENERATE BUTTON FOR EACH TYPE OF WORKOUT, EX... ARMS, LEGS, CHEST, BACK. MAYBE A DROPDOWN MENU TO HAVE YOU SELECT WHICH TO GENERATE. 
+
+//ALLOW THE USER TO SELECT WHICH DAY TO GENERATE THE WORKOUT FOR.
+
 // function to generate the workout
 const generateWorkout = () => {
   // workout generation logic here
 };
 </script>
+
+<!-- GET DATE TO WORK FOR THE SUNDAY-SATURDAY. HAVE THE ACTUAL DATE SHOW AS WELL AND ACTUALLY KEEP TRACK OF WHAT DAY OF THE MONTH IT IS. -->
 
 <template>
   <div class="p-4">
