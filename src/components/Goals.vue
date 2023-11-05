@@ -48,16 +48,16 @@ onMounted(() => {
 
 <template>
   <div>
-    <h1>User's Goals</h1>
+    <h1>User's Goals(5 GOALS MAX)(PRESS ENTER WHEN YOU TYPE GOAL)</h1>
     <div>
       <button @click="addGoal" class="bg-blue-500 text-white p-2">Add Goal</button>
     </div>
     <ul>
       <li v-for="(goal, index) in goals" :key="index">
         <input v-if="goal.editing" v-model="goal.text" @keyup.enter="saveGoal(index)" @keyup.esc="cancelEdit(index)" class="goalInput">
-        <span v-else>{{ goal.text }}</span>
-        <button @click="editGoal(index)" v-if="!goal.editing">Edit</button>
-        <button @click="deleteGoal(index)">Delete</button>
+        <span v-else class="goalText">{{ goal.text }}</span>
+        <button @click="editGoal(index)" v-if="!goal.editing" class="editButton">Edit</button>
+        <button @click="deleteGoal(index)" class="deleteButton">Delete</button>
       </li>
     </ul>
   </div>
@@ -68,6 +68,22 @@ onMounted(() => {
 
 .goalInput {
   border: 1px solid blue;
+}
+
+.editButton {
+  margin-left: 5px;
+  margin-right: 5px;
+  background: green;
+}
+
+.deleteButton {
+  margin-left: 5px;
+  margin-right: 5px;
+  background: red;
+}
+
+.goalText {
+  background-color: yellow;
 }
 
 </style>
