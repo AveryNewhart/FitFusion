@@ -19,7 +19,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="profilePictureDiv">
+    <div>
       <h2>Upload Profile Picture</h2>
       <img :src="imageUrl" alt="" class="uploaded-image">
       <form action="index.html" method="post">
@@ -36,10 +36,5 @@ export default defineComponent({
   border-radius: 50px;
 }
 
-.profilePictureDiv {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid red;
-}
 
 </style>
