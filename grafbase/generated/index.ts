@@ -1,4 +1,4 @@
-// This is a generated file. It should not be edited manually.
+/// This is a generated file. It should not be edited manually.
 //
 // You can decide to commit this file or add it to your `.gitignore`.
 //
