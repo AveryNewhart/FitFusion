@@ -19,15 +19,15 @@ import ProfilePicture from './ProfilePicture.vue';
  </div> 
   <div class="">
     <h1>profile</h1>
-    <div>
+    <div class="profilePictureDiv">
+      <h3>this is where the users data will go/be called in. the users username next to the profile picture and such</h3>
+      <ProfilePicture />
+    </div>
+    <div class="goalDiv">
       <Goals />
-      <p>div for the imported goals component, personal goals to be added on the users profile</p>
     </div>
     <div class="workoutCalenderDiv">
       <WorkoutCalender />
-    </div>
-    <div>
-      <ProfilePicture />
     </div>
   </div>
 
@@ -39,6 +39,18 @@ import ProfilePicture from './ProfilePicture.vue';
   border: 1px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.goalDiv {
+  border: 1px solid purple;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.profilePictureDiv {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid red;
 }
 
 </style>
