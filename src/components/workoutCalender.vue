@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-// import WorkoutGenerator from './WorkoutGenerator.vue';
+import { ref, computed } from 'vue';
+
+const selectedWorkoutType = ref('Arms'); // Default workout type
+
+const workoutTypes = ['Arms', 'Legs', 'Chest', 'Back'];
+
+const generateWorkoutLabel = computed(() => `Generate ${selectedWorkoutType.value} Workout`);
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -15,15 +20,14 @@ const toggleDay = (index: number) => {
   offDays.value[index] = !offDays.value[index];
 };
 
-//FOR THE GENERATE WORKOUT FUNCTION, HAVE A DIFFERENT GENERATE BUTTON FOR EACH TYPE OF WORKOUT, EX... ARMS, LEGS, CHEST, BACK. MAYBE A DROPDOWN MENU TO HAVE YOU SELECT WHICH TO GENERATE. 
-
-//ALLOW THE USER TO SELECT WHICH DAY TO GENERATE THE WORKOUT FOR.
-
 // function to generate the workout
 const generateWorkout = () => {
   // workout generation logic here
 };
 </script>
+
+<!-- FOR THE GENERATE WORKOUT FUNCTION, HAVE A DIFFERENT GENERATE BUTTON FOR EACH TYPE OF WORKOUT, EX... ARMS, LEGS, CHEST, BACK. MAYBE A DROPDOWN MENU TO HAVE YOU SELECT WHICH TO GENERATE.  -->
+<!-- ALLOW THE USER TO SELECT WHICH DAY TO GENERATE THE WORKOUT FOR. -->
 
 <!-- GET DATE TO WORK FOR THE SUNDAY-SATURDAY. HAVE THE ACTUAL DATE SHOW AS WELL AND ACTUALLY KEEP TRACK OF WHAT DAY OF THE MONTH IT IS. -->
 
@@ -53,10 +57,21 @@ const generateWorkout = () => {
       </div>
     </div>
 
-    <!-- Generate Workout button -->
+    <!-- Generate Workout button
     <button @click="generateWorkout" class="bg-blue-500 text-white p-2 rounded">
       Generate Workout
+    </button> -->
+
+    <!-- Dropdown menu to select workout type -->
+    <select v-model="selectedWorkoutType" class="p-2 rounded mb-2">
+      <option v-for="type in workoutTypes" :key="type" :value="type">{{ type }}</option>
+    </select>
+
+     <!-- Generate Workout button with dynamic label -->
+    <button @click="generateWorkout" class="bg-blue-500 text-white p-2 rounded">
+      {{ generateWorkoutLabel }}
     </button>
+
   </div>
 </template>
 
