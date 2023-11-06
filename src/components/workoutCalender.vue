@@ -1,5 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+
+const currentDate = new Date();
+
+const getDayDate = computed(() => {
+  // array to hold the formatted dates
+  const formattedDates = [];
+
+  // calculate the day of the week for the current date
+  const currentDayOfWeek = currentDate.getDay();
+
+  // calculate the date for the first day of the current week
+  const firstDayOfWeek = new Date(currentDate);
+  firstDayOfWeek.setDate(currentDate.getDate() - currentDayOfWeek);
+
+  // loop through the days of the week
+  for (let i = 0; i < daysOfWeek.length; i++) {
+    // calculate the date for each day by adding the offset to the first day of the week
+    const dayDate = new Date(firstDayOfWeek);
+    dayDate.setDate(firstDayOfWeek.getDate() + i);
+
+    // format the date as MM/DD
+    const formattedDate = `${String(dayDate.getMonth() + 1).padStart(2, '0')}/${String(dayDate.getDate()).padStart(2, '0')}`;
+
+    formattedDates.push(formattedDate);
+  }
+
+  return formattedDates;
+});
 
 // default workout type
 const selectedWorkoutType = ref('Arms');
@@ -37,10 +65,11 @@ const generateWorkout = () => {
 
 </script>
 
-<!-- FOR THE GENERATE WORKOUT FUNCTION, HAVE A DIFFERENT GENERATE BUTTON FOR EACH TYPE OF WORKOUT, EX... ARMS, LEGS, CHEST, BACK. MAYBE A DROPDOWN MENU TO HAVE YOU SELECT WHICH TO GENERATE.  -->
-<!-- ALLOW THE USER TO SELECT WHICH DAY TO GENERATE THE WORKOUT FOR. -->
 
-<!-- GET DATE TO WORK FOR THE SUNDAY-SATURDAY. HAVE THE ACTUAL DATE SHOW AS WELL AND ACTUALLY KEEP TRACK OF WHAT DAY OF THE MONTH IT IS. -->
+<!-- NEXT TASK IS TO CREATE THE FUNCTIONS FOR EACH WORKOUT THAT CAN BE GENERATED. -->
+<!-- EACH WORKOUT WILL HAVE A POOL OF WORKOUTS FOR THAT TYPE THAT WILL HAVE 5 WORKOUTS TO BE PICKED FROM THERE AT RANDOM -->
+<!-- THE 5 RANDOM WORKOUTS FOR THAT TYPE WILL GO INTO THE 5 INPUT FIELDS FOR THE DAY SELECTED -->
+
 
 <template>
   <div class="p-4">
@@ -54,7 +83,8 @@ const generateWorkout = () => {
           class="mb-2 p-2 cursor-pointer rounded"
           @click="toggleDay(index)"
         >
-          {{ day }}
+            {{ day }}
+            {{ getDayDate[index] }} 
         </div>
         <div>
           <input
