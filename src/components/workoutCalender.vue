@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
-const selectedWorkoutType = ref('Arms'); // Default workout type
+// default workout type
+const selectedWorkoutType = ref('Arms');
 
 const workoutTypes = ['Arms', 'Legs', 'Chest', 'Back'];
 
-const generateWorkoutLabel = computed(() => `Generate ${selectedWorkoutType.value} Workout`);
+// const generateWorkoutLabel = computed(() => `Generate ${selectedWorkoutType.value} Workout`);
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -20,10 +21,20 @@ const toggleDay = (index: number) => {
   offDays.value[index] = !offDays.value[index];
 };
 
-// function to generate the workout
+// default day
+const selectedDay = ref('Sunday');
+
 const generateWorkout = () => {
-  // workout generation logic here
+  // get the selected workout type and day
+
+  // const workoutType = selectedWorkoutType.value;
+  // const day = selectedDay.value;
+
+  // generate the workout based on the selected type and day
+  // implement your workout generation logic here
 };
+
+
 </script>
 
 <!-- FOR THE GENERATE WORKOUT FUNCTION, HAVE A DIFFERENT GENERATE BUTTON FOR EACH TYPE OF WORKOUT, EX... ARMS, LEGS, CHEST, BACK. MAYBE A DROPDOWN MENU TO HAVE YOU SELECT WHICH TO GENERATE.  -->
@@ -57,19 +68,22 @@ const generateWorkout = () => {
       </div>
     </div>
 
-    <!-- Generate Workout button
-    <button @click="generateWorkout" class="bg-blue-500 text-white p-2 rounded">
-      Generate Workout
-    </button> -->
+
+    <!-- WILL HAVE TO FURTHER INVESTIGATE WHY THE RED > . CODE STILL WORKS BUT ODD ERROR WHILE TYPING CODE -->
 
     <!-- Dropdown menu to select workout type -->
     <select v-model="selectedWorkoutType" class="p-2 rounded mb-2">
       <option v-for="type in workoutTypes" :key="type" :value="type">{{ type }}</option>
     </select>
 
-     <!-- Generate Workout button with dynamic label -->
+    <!-- Dropdown menu to select the day -->
+    <select v-model="selectedDay" class="p-2 rounded mb-2">
+      <option v-for="day in daysOfWeek" :key="day" :value="day">{{ day }}</option>
+    </select>
+
+    <!-- Generate Workout button with dynamic label -->
     <button @click="generateWorkout" class="bg-blue-500 text-white p-2 rounded">
-      {{ generateWorkoutLabel }}
+      Generate {{ selectedWorkoutType }} Workout for {{ selectedDay }}
     </button>
 
   </div>
