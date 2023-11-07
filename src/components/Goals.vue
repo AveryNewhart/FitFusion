@@ -7,11 +7,13 @@ interface Goal {
 }
 
 const goals = ref<Goal[]>([]);
+  const newGoal = ref('');
 const maxGoals = 5;
 
 const addGoal = () => {
-  if (goals.value.length < maxGoals) {
-    goals.value.push({ text: '', editing: true });
+  if (newGoal.value && goals.value.length < maxGoals) {
+    goals.value.push({ text: newGoal.value, editing: false });
+    newGoal.value = '';
   }
 };
 
@@ -35,12 +37,13 @@ onMounted(() => {
 });
 </script>
 
-<!-- NEXT I WANT TO MAKE IT SO THEIR IS A BUTTON THE USER CLICKS TO ADD THE GOAL INSTEAD OF PRESSING ENTER. -->
+<!-- NEXT I WANT TO MAKE IT SO THE USER CAN HAVE A TITLE FOR THEIR GOAL, AND THEN A DESCRIPTION OF COURSE -->
 
 <template>
   <div>
-    <h1>User's Goals (5 GOALS MAX) (PRESS ENTER WHEN YOU TYPE GOAL)</h1>
+    <h1>User's Goals (5 GOALS MAX)</h1>
     <div>
+      <input v-model="newGoal" class="goalInput" />
       <button @click="addGoal" class="bg-blue-500 text-white p-2">Add Goal</button>
     </div>
     <div class="flex flex-wrap justify-center">
@@ -55,6 +58,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
 
 
 
