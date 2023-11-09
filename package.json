@@ -9,18 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@apollo/client": "^3.8.5",
+    "@apollo/client": "^3.8.7",
     "@grafbase/sdk": "^0.7.2",
     "@jridgewell/sourcemap-codec": "^1.4.15",
     "@vue/apollo-composable": "4.0.0-beta.11",
-    "@vue/compiler-sfc": "^3.3.4",
+    "@vue/compiler-sfc": "^3.3.7",
     "braces": "^3.0.2",
     "grafbase": "^0.41.3",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "mapbox-gl": "^2.15.0",
     "sourcemap-codec": "^1.4.8",
-    "vue": "^3.2.36",
+    "vue": "^3.3.7",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
@@ -29,9 +29,9 @@
     "@vitejs/plugin-vue": "^4.4.0",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
-    "vite": "^4.4.11",
-    "vue-tsc": "^1.8.19"
+    "vite": "^4.5.0",
+    "vue-tsc": "^1.8.22"
   }
 }
