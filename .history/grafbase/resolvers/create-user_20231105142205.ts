@@ -1,0 +1,31 @@
+const baseUrl = process.env.MONGODB_DATA_API_URL
+const apiKey = process.env.MONGODB_DATA_API_KEY
+
+export default async function CreateUserResolver(_, { input }) {
+  const { name, username, email, password } = input
+
+  try {
+    // ...
+  } catch (err) {
+    return null
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default async function CreateUserResolver(_, { input }) {
+  const { name, username, email, password } = input
