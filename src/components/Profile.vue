@@ -4,6 +4,9 @@ import Nav from './/Nav.vue';
 import Goals from './Goals.vue';
 import WorkoutCalender from './WorkoutCalender.vue';
 import ProfilePicture from './ProfilePicture.vue';
+import Followers from './Followers.vue';
+import Following from './Following.vue';
+import usersPosts from './usersPosts.vue';
 
 </script>
 
@@ -19,9 +22,19 @@ import ProfilePicture from './ProfilePicture.vue';
  </div> 
   <div class="">
     <h1>profile</h1>
-    <div class="profilePictureDiv">
-      <h3>this is where the users data will go/be called in. the users username next to the profile picture and such</h3>
+    <div class="mainProfileDiv">
+      <h2>this is where the users data will go/be called in. the users username next to the profile picture and such</h2>
+      <h2>Username HERE</h2>
       <ProfilePicture />
+      <div class="followingDiv">
+        <Following />
+      </div>
+      <div class="followerDiv">
+        <Followers />
+      </div>
+    </div>
+    <div class="usersPostsDiv">
+      <usersPosts />
     </div>
     <div class="goalDiv">
       <Goals />
@@ -35,22 +48,32 @@ import ProfilePicture from './ProfilePicture.vue';
 
 <style scoped>
 
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .workoutCalenderDiv {
   border: 1px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .goalDiv {
   border: 1px solid purple;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.profilePictureDiv {
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
+.mainProfileDiv {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid red;
+}
+
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
+.usersPostsDiv {
+  border: 1px solid darkblue;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 </style>
