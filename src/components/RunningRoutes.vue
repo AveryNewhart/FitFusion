@@ -1,6 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 
 import Nav from './/Nav.vue';
+
+const searchLocation = ref('');
+
+const searchRoutes = () => {
+  // logic for searching routes based on the entered location
+  // use the value of searchLocation here
+};
 
 
 </script>
@@ -16,6 +24,21 @@ import Nav from './/Nav.vue';
   </div>
   <div class="flex flex-col items-center mt-8">
     <h1 class="text-3xl font-semibold mb-4">Generate Running Routes</h1>
+
+    <!-- Search Bar -->
+    <div class="mb-4">
+      <input
+        v-model="searchLocation"
+        placeholder="where's the next run?"
+        class="border rounded px-3 py-2"
+      />
+      <button
+        @click="searchRoutes"
+        class="bg-blue-500 text-white px-4 py-2 rounded ml-2"
+      >
+        Search
+      </button>
+    </div>
 
     <!-- MAP CONTAINER -->
     <div ref="mapContainer" class="w-full h-96 rounded-lg mb-8 mapContainer">the map will be in here</div>
