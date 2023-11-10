@@ -49,6 +49,13 @@ const searchRoutes = () => {
       <button class="bg-blue-500 text-white px-4 py-2 rounded">Save This Route</button>
     </div>
 
+    <!-- Personal Best Section -->
+    <div class="w-full mt-8 mb-4">
+      <h2 class="text-xl font-semibold mb-2">Personal Best For This Route... </h2>
+      <!-- Display the personal best time -->
+      <!-- <p>{{ personalBestTime ? `Your Personal Best: ${personalBestTime}` : 'No Personal Best recorded yet' }}</p> -->
+    </div>
+
     <!-- saved routes section -->
     <div class="w-full">
       <h2 class="text-xl font-semibold mb-2">Your Saved Routes</h2>
