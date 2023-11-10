@@ -21,8 +21,9 @@ import Following from './Following.vue';
  </div> 
   <div class="">
     <h1>profile</h1>
-    <div class="profilePictureDiv">
-      <h3>this is where the users data will go/be called in. the users username next to the profile picture and such</h3>
+    <div class="mainProfileDiv">
+      <h2>this is where the users data will go/be called in. the users username next to the profile picture and such</h2>
+      <h2>Username HERE</h2>
       <ProfilePicture />
       <div class="followingDiv">
         <Following />
@@ -55,7 +56,7 @@ import Following from './Following.vue';
   margin-bottom: 10px;
 }
 
-.profilePictureDiv {
+.mainProfileDiv {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid red;
