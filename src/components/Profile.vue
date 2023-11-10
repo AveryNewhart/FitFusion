@@ -4,6 +4,8 @@ import Nav from './/Nav.vue';
 import Goals from './Goals.vue';
 import WorkoutCalender from './WorkoutCalender.vue';
 import ProfilePicture from './ProfilePicture.vue';
+import Followers from './Followers.vue';
+import Following from './Following.vue';
 
 </script>
 
@@ -22,6 +24,12 @@ import ProfilePicture from './ProfilePicture.vue';
     <div class="profilePictureDiv">
       <h3>this is where the users data will go/be called in. the users username next to the profile picture and such</h3>
       <ProfilePicture />
+      <div class="followingDiv">
+        <Following />
+      </div>
+      <div class="followerDiv">
+        <Followers />
+      </div>
     </div>
     <div class="goalDiv">
       <Goals />
