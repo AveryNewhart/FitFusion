@@ -6,6 +6,7 @@ import WorkoutCalender from './WorkoutCalender.vue';
 import ProfilePicture from './ProfilePicture.vue';
 import Followers from './Followers.vue';
 import Following from './Following.vue';
+import usersPosts from './usersPosts.vue';
 
 </script>
 
@@ -32,6 +33,9 @@ import Following from './Following.vue';
         <Followers />
       </div>
     </div>
+    <div class="usersPostsDiv">
+      <usersPosts />
+    </div>
     <div class="goalDiv">
       <Goals />
     </div>
@@ -44,22 +48,32 @@ import Following from './Following.vue';
 
 <style scoped>
 
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .workoutCalenderDiv {
   border: 1px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .goalDiv {
   border: 1px solid purple;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .mainProfileDiv {
     margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid red;
+}
+
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
+.usersPostsDiv {
+  border: 1px solid darkblue;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 </style>
