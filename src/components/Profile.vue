@@ -81,12 +81,12 @@ import UsersRoutes from './UsersRoutes.vue';
 .mainProfileDiv {
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid red;
+    border: 5px solid red;
 }
 
 /* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .usersPostsDiv {
-  border: 1px solid darkblue;
+  border: 5px solid darkblue;
   margin-top: 10px;
   margin-bottom: 10px;
 }
