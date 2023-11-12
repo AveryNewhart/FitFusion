@@ -1,21 +1,101 @@
 <script setup lang="ts">
+import { ref, Ref, ComputedRef, computed } from 'vue';
+
+// interface for personal best
+interface PersonalBest {
+  type: string;
+  value: number;
+  visible: boolean;
+  isEditing: boolean;
+}
+
+const personalBests: Ref<PersonalBest[]> = ref([
+// example personal best entries
+// the types are what the personal bests are 
+  { type: 'Bench Press', value: 200, visible: true, isEditing: false },
+  { type: 'Squat', value: 300, visible: true, isEditing: false },
+]);
+
+const isEditModalOpen = ref(false);
+const editingPersonalBest: Ref<PersonalBest | null> = ref(null);
+
+const selectedPersonalBests: ComputedRef<PersonalBest[]> = computed(() =>
+  personalBests.value.filter((pb) => pb.visible)
+);
+
+const openEditModal = () => {
+  isEditModalOpen.value = true;
+};
+
+const editPersonalBest = (personalBest: PersonalBest) => {
+    // create a copy for editing
+  editingPersonalBest.value = { ...personalBest };
+};
+
+const savePersonalBest = (editedPersonalBest: PersonalBest) => {
+// logic for saving personal best to the backend
+// this is subject to change. starting functionality. 
+  if (editingPersonalBest.value) {
+    editingPersonalBest.value = Object.assign({}, editingPersonalBest.value, editedPersonalBest);
+    editingPersonalBest.value = null; 
+  }
+};
+
+const cancelEditModal = () => {
+  // logic for canceling the edit operation
+  editingPersonalBest.value = null; // clears the editing state
+  isEditModalOpen.value = false;
+};
+
 </script>
 
-<!-- CREATE A "PERSONAL BEST SECTION". THE USER CAN PUT THEIR BEST RUNS< WORKOUTS, etc. -->
-<!-- HAVE IT SO THE USER CAN SELECT WHICH PERSONALS BEST THINGS THEY WOULD LIKE TO DISPLAY UNDER THE PROFILE DIV, ABOVE THE USERS GOALS. PERSONAL BEST BENCH, SQUAT, FASTEST MILE, 40 YARD DASH, ETC... -->
-<!-- HAVE IT TO THE ONLY ONES THAT SHOW ARE THE ONES THE USER HAS A VALUE IN, IF NO VALUE THEN THE TEXT FOR THAT PERSONAL BEST ISN'T EVEN SHOWN. 
-  MAYBE HAVE LIKE AN "EYE" ICON THAT JUST ACTS AS A HIDE AND SHOW BUTTON EVEN IF THE USER HAS A VALUE ENTERED -->
+<!-- PLACEHOLDERS/BASIC SETUP CREATED -->
+
+<!-- NEED TO ADD IN ALL THE THINGS THE USER CAN SET AS PERSONAL BESTS -->
+
+<!-- STYLE THE INPUT BOXES AND BUTTONS -->
+
+<!-- HAVE TO STILL HAVE WHAT THE USER ENTERS IN THE INPUT BOX UPDATE THEIR PERSONAL BESTS, ITS ALL PLACEHOLDERS RIGHT NOW -->
+
 <!-- BE SURE WHEN CREATING USER ON BACKEND, THEY HAVE ALL OF THE DIFFERENT WORKOUTS THAT A USER CAN SET A PERSONAL BEST TO. -->
-<!-- MAYBE HAVE A SMALL EDIT BUTTON THAT DISPLAYS A MODAL OF ALL THE THINGS THE USER CAN SET A PERSONAL BEST TO. -->
-<!-- OF COURSE MAKE IT SO THE EDIT BUTTON IS ONLY SHOWN ON YOUR PROFILE, WHEN ON ANOTHER USERS PROFILE BE SURE TO HAVE THE EDIT BUTTON HIDDEN -->
+
 
 <template>
-
-  <div class="">
-    <h3>personal bests section</h3>
-  </div>
-
-</template>
+    <div>
+      <h3>Personal Bests Section</h3>
+      <button @click="openEditModal">Edit Personal Bests</button>
+  
+      <!-- modal for editing personal bests -->
+      <div v-if="isEditModalOpen">
+        <div v-for="personalBest in personalBests" :key="personalBest.type">
+          <label>
+            <input type="checkbox" v-model="personalBest.visible" />
+            {{ personalBest.type }}
+          </label>
+          <button @click="editPersonalBest(personalBest)">Edit</button>
+        </div>
+  
+        <div v-if="editingPersonalBest">
+          <input v-model="editingPersonalBest.value" />
+          <!-- other input fields for editing personal best values -->
+  
+          <button @click="savePersonalBest(editingPersonalBest)">Save</button>
+          <button @click="cancelEditModal">Cancel</button>
+        </div>
+        <button @click="cancelEditModal">Close</button>
+      </div>
+  
+      <!-- display selected personal bests -->
+      <div v-for="personalBest in selectedPersonalBests" :key="personalBest.type">
+        <!-- display personal best information -->
+        <div>
+          <span>{{ personalBest.type }}:</span>
+          <span v-if="personalBest.visible">{{ personalBest.value }}</span>
+          <span v-else>Not set</span>
+        </div>
+      </div>
+    </div>
+  </template>
 
 <style scoped>
 </style>
