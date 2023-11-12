@@ -63,7 +63,7 @@ const cancelEditModal = () => {
 <template>
     <div>
       <h3>Personal Bests Section</h3>
-      <button @click="openEditModal">Edit Personal Bests</button>
+      <button class="mainEdit p-1" @click="openEditModal">Edit Personal Bests</button>
   
       <!-- modal for editing personal bests -->
       <div v-if="isEditModalOpen">
@@ -72,17 +72,16 @@ const cancelEditModal = () => {
             <input type="checkbox" v-model="personalBest.visible" />
             {{ personalBest.type }}
           </label>
-          <button @click="editPersonalBest(personalBest)">Edit</button>
+          <button class="PrEditBtn" @click="editPersonalBest(personalBest)">Edit</button>
         </div>
   
         <div v-if="editingPersonalBest">
-          <input v-model="editingPersonalBest.value" />
-          <!-- other input fields for editing personal best values -->
+          <input class="editInput" v-model="editingPersonalBest.value" />
   
-          <button @click="savePersonalBest(editingPersonalBest)">Save</button>
-          <button @click="cancelEditModal">Cancel</button>
+          <button class="saveBtn" @click="savePersonalBest(editingPersonalBest)">Save</button>
+          <button class="closeBtn" @click="cancelEditModal">Cancel</button>
         </div>
-        <button @click="cancelEditModal">Close</button>
+        <button class="closeBtn" @click="cancelEditModal">Close</button>
       </div>
   
       <!-- display selected personal bests -->
@@ -98,4 +97,37 @@ const cancelEditModal = () => {
   </template>
 
 <style scoped>
+
+.mainEdit {
+    border: 1px solid darkblue;
+    background-color: orange;
+    border-radius: 10px;
+}
+
+.editInput {
+    border: 1px solid rgb(173, 35, 4);
+}
+
+.PrEditBtn {
+    margin-left: 10px;
+    border: 1px solid purple;
+    background-color: aqua;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.closeBtn {
+    border: 1px solid black;
+    background-color: red;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.saveBtn {
+    border: 1px solid black;
+    background-color: green;
+    border-radius: 10px;
+    padding: 5px;
+}
+
 </style>
