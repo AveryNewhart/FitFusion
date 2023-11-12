@@ -2,18 +2,15 @@
 
 import Nav from './/Nav.vue';
 import Goals from './Goals.vue';
-// import WorkoutCalender from './WorkoutCalender.vue';
 import ProfilePicture from './ProfilePicture.vue';
 import Followers from './Followers.vue';
 import Following from './Following.vue';
 import UsersPosts from './UsersPosts.vue';
 import PersonalBests from './PersonalBests.vue';
 import Bio from './Bio.vue';
+import UsersRoutes from './UsersRoutes.vue';
 
 </script>
-
-<!-- SET UP FOR AN AREA FOR "SAVED ROUTES", MAYBE HAVE A MODAL POP UP TO SHOW THE USERS SAVED ROUTES, MAYBE EVEN JUST HAVE "SAVED ROUTES" BE A BUTTON UNDER THE USERS BIO THAT 
-  ONCE CLICKS SHOWS A LIST OR OPENS A MODAL THAT DISPLAYS CLICKABLE LINKS THAT NAVIGATE TO /runningroutes AND DISPLAYS THAT ROUTE ON THE MAP(LOGIC TO BE DONE LATER) -->
 
 <!-- SET UP AN AREA FOR SAVED WORKOUTS, MAYBE HAVE A MODAL POP UP OF THE USERS SAVED WORKOUTS. -->
 
@@ -33,6 +30,9 @@ import Bio from './Bio.vue';
       <div class="followerDiv">
         <Followers />
       </div>
+      <div class="usersRoutesDiv">
+        <UsersRoutes />
+      </div>
       <div class="bioDiv">
         <Bio />
       </div>
@@ -49,9 +49,6 @@ import Bio from './Bio.vue';
     <div class="usersPostsDiv">
       <UsersPosts />
     </div>
-    <!-- <div class="workoutCalenderDiv">
-      <WorkoutCalender />
-    </div> -->
   </div>
 
 </template>
@@ -59,7 +56,7 @@ import Bio from './Bio.vue';
 <style scoped>
 
 /* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.workoutCalenderDiv {
+.usersRoutesDiv {
   border: 1px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
