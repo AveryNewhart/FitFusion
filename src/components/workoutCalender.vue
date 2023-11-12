@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
+import Nav from './/Nav.vue';
+
 const currentDate = new Date();
 
 const getDayDate = computed(() => {
@@ -77,7 +79,8 @@ const generateWorkout = () => {
 
 
 <template>
-  <div class="p-4">
+  <div class="">
+    <Nav />
     <h1 class="text-2xl font-bold mb-4">User's Schedule/Workout Calendar</h1>
 
     <!-- Days of the week with buttons to toggle background color and input areas -->

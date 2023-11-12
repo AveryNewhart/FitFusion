@@ -2,7 +2,7 @@
 
 import Nav from './/Nav.vue';
 import Goals from './Goals.vue';
-import WorkoutCalender from './WorkoutCalender.vue';
+// import WorkoutCalender from './WorkoutCalender.vue';
 import ProfilePicture from './ProfilePicture.vue';
 import Followers from './Followers.vue';
 import Following from './Following.vue';
@@ -49,9 +49,9 @@ import Bio from './Bio.vue';
     <div class="usersPostsDiv">
       <UsersPosts />
     </div>
-    <div class="workoutCalenderDiv">
+    <!-- <div class="workoutCalenderDiv">
       <WorkoutCalender />
-    </div>
+    </div> -->
   </div>
 
 </template>
