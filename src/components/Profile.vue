@@ -2,26 +2,25 @@
 
 import Nav from './/Nav.vue';
 import Goals from './Goals.vue';
-import WorkoutCalender from './WorkoutCalender.vue';
 import ProfilePicture from './ProfilePicture.vue';
 import Followers from './Followers.vue';
 import Following from './Following.vue';
-import usersPosts from './usersPosts.vue';
+import UsersPosts from './UsersPosts.vue';
+import PersonalBests from './PersonalBests.vue';
+import Bio from './Bio.vue';
+import UsersRoutes from './UsersRoutes.vue';
 
 </script>
 
-<!-- PUT PROFILE PICTURE TO THE TOP OF THE PAGE -->
-<!-- SET UP FOR AN AREA FOR "SAVED ROUTES", MAYBE HAVE A MODAL POP UP TO SHOW THE USERS SAVED ROUTES -->
-<!-- SET UP AN AREA FOR SAVED WORKOUTS, MAYBE HAVE A MODAL POP UP OF THE USERS SAVED WORKOUTS -->
-<!-- CREATE A "PERSONAL BEST SECTION". THE USER CAN PUT THEIR BEST RUNS< WORKOUTS, etc. -->
-<!-- ONCE CREATING A PROFILE IS SET-UP, HAVE THE USER WHO IS LOGGED IN(username) BE NEXT TO THE PROFILE PICTURE, JUST LIKE HOW IT WOULD BE ON ANY OTHER SOCIAL MEDIA APP -->
+<!-- SET UP AN AREA FOR FAVORITE WORKOUTS AND FOR EACH CATEGORY -->
+<!-- MAKE A NEW COMPONENT FOR IT. -->
 
 <template>
  <div>
     <Nav />
  </div> 
   <div class="">
-    <h1>profile</h1>
+    <h1 class="text-center">Your FitFusion Profile</h1>
     <div class="mainProfileDiv">
       <h2>this is where the users data will go/be called in. the users username next to the profile picture and such</h2>
       <h2>Username HERE</h2>
@@ -32,15 +31,24 @@ import usersPosts from './usersPosts.vue';
       <div class="followerDiv">
         <Followers />
       </div>
+      <div class="usersRoutesDiv">
+        <UsersRoutes />
+      </div>
+      <div class="bioDiv">
+        <Bio />
+      </div>
+    </div>
+    <div class="PrsAndGoals">
+      <h3 class="text-center">GOALS AND PRS</h3>
+      <div class="personalBestsDiv">
+        <PersonalBests />
+      </div>
+      <div class="goalDiv">
+        <Goals />
+      </div>
     </div>
     <div class="usersPostsDiv">
-      <usersPosts />
-    </div>
-    <div class="goalDiv">
-      <Goals />
-    </div>
-    <div class="workoutCalenderDiv">
-      <WorkoutCalender />
+      <UsersPosts />
     </div>
   </div>
 
@@ -49,7 +57,7 @@ import usersPosts from './usersPosts.vue';
 <style scoped>
 
 /* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.workoutCalenderDiv {
+.usersRoutesDiv {
   border: 1px solid green;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -63,15 +71,36 @@ import usersPosts from './usersPosts.vue';
 }
 
 /* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
+.personalBestsDiv {
+  border: 1px solid darkgoldenrod;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .mainProfileDiv {
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid red;
+    border: 5px solid red;
 }
 
 /* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .usersPostsDiv {
-  border: 1px solid darkblue;
+  border: 5px solid darkblue;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
+.bioDiv {
+  border: 1px solid rgb(212, 10, 195);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
+.PrsAndGoals {
+  border: 5px solid rgb(11, 87, 62);
   margin-top: 10px;
   margin-bottom: 10px;
 }

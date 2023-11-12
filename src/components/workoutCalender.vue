@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
+import Nav from './/Nav.vue';
+
 const currentDate = new Date();
 
 const getDayDate = computed(() => {
@@ -70,9 +72,17 @@ const generateWorkout = () => {
 <!-- EACH WORKOUT WILL HAVE A POOL OF WORKOUTS FOR THAT TYPE THAT WILL HAVE 5 WORKOUTS TO BE PICKED FROM THERE AT RANDOM -->
 <!-- THE 5 RANDOM WORKOUTS FOR THAT TYPE WILL GO INTO THE 5 INPUT FIELDS FOR THE DAY SELECTED -->
 
+<!-- USER SHOULD BE ABLE TO SAVE WORKOUTS TO THE RESPECTIVE CATEGORIES, EX SAVING A WORKOUT THAT IS FOR ARMS TO THE ARM CATEGORY. -->
+<!-- ON THE BACKEND THE USER WILL HAVE TO HAVE WORKOUTS SAVE TO THEM. -->
+
+<!-- HAVE UNDERNEATH THE WORKOUT CALENDER, THE CATEGORIES OF WORKOUTS AND WITH THE SAVED WORKOUTS OF THE USER ASSOCIATED WITH EACH OF THEIR RESPECTIVE CATEGORIES -->
+
+<!-- WHEN IT BECOMES MOBILE VIEW ON THIS PAGE, HAVE THE DAYS GO INTO A COLUMN STACK AND THE WORKOUT GENERATOR BUTTON AND SUCH SHOULD GO ABOVE THE DAYS SO THE USER DOESN'T HAVE TO SCROLL ALL THE WAY TO THE BUTTON TO SEE IT. -->
+
 
 <template>
-  <div class="p-4">
+  <div class="">
+    <Nav />
     <h1 class="text-2xl font-bold mb-4">User's Schedule/Workout Calendar</h1>
 
     <!-- Days of the week with buttons to toggle background color and input areas -->
