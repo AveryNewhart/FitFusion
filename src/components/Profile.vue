@@ -12,7 +12,8 @@ import UsersRoutes from './UsersRoutes.vue';
 
 </script>
 
-<!-- SET UP AN AREA FOR SAVED WORKOUTS, MAYBE HAVE A MODAL POP UP OF THE USERS SAVED WORKOUTS. -->
+<!-- SET UP AN AREA FOR FAVORITE WORKOUTS AND FOR EACH CATEGORY -->
+<!-- MAKE A NEW COMPONENT FOR IT. -->
 
 <template>
  <div>
