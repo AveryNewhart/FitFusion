@@ -7,11 +7,13 @@ interface Goal {
 }
 
 const goals = ref<Goal[]>([]);
+  const newGoal = ref('');
 const maxGoals = 5;
 
 const addGoal = () => {
-  if (goals.value.length < maxGoals) {
-    goals.value.push({ text: '', editing: true });
+  if (newGoal.value && goals.value.length < maxGoals) {
+    goals.value.push({ text: newGoal.value, editing: false });
+    newGoal.value = '';
   }
 };
 
@@ -35,33 +37,31 @@ onMounted(() => {
 });
 </script>
 
-
-
-
-<!-- I WANT TO MAKE IT SO THE USER HAS A PLACE TO WRITE 1-5 OF THEIR TOP GOALS -->
-<!-- IT SHOULD START BLANK WITH JUST A BUTTON THAT SAYS "ADD GOAL" -->
-<!-- WHEN THE USER SELECTS THE BUTTON, AN INPUT SHOULD DISPLAY, OR A MODAL THAT ALLOWS THE USER TO INPUT THEIR GOAL AND THEN THAT GOAL IS ADDED TO THE SECTION WITH AN EDIT AND A DELETE BUTTON -->
-<!-- THE USER SHOULD BE ABLE TO LIST UP TO FIVE GOALS ONLY -->
-<!-- IS A PROGRESS BAR POSSIBLE -->
-
-<!-- NEXT I WANT TO MAKE EACH GOAL A BOX IN A ROW, WITH THEM BEING CENTERED. -->
+<!-- NEXT I WANT TO MAKE IT SO THE USER CAN HAVE A TITLE FOR THEIR GOAL, AND THEN A DESCRIPTION OF COURSE -->
+<!-- MAKE IT SO THE "ADD GOAL" BUTTON IS ONLY VIEWABLE ON THE USERS OWN PROFILE. 
+  IF ON ANOTHER USERS PROFILE, HAVE JUST THE USERS GOALS, THE ADD GOAL BUTTON SHOULDN'T BE THERE BECAUSE WHY BE ABLE TO ADD GOALS TO SOME OTHER USERS PROFILE. -->
 
 <template>
   <div>
-    <h1>User's Goals(5 GOALS MAX)(PRESS ENTER WHEN YOU TYPE GOAL)</h1>
+    <h1>User's Goals (5 GOALS MAX)</h1>
     <div>
+      <input v-model="newGoal" class="goalInput" />
       <button @click="addGoal" class="bg-blue-500 text-white p-2">Add Goal</button>
     </div>
-    <ul>
-      <li v-for="(goal, index) in goals" :key="index">
-        <input v-if="goal.editing" v-model="goal.text" @keyup.enter="saveGoal(index)" @keyup.esc="cancelEdit(index)" class="goalInput">
-        <span v-else class="goalText">{{ goal.text }}</span>
-        <button @click="editGoal(index)" v-if="!goal.editing" class="editButton">Edit</button>
-        <button @click="deleteGoal(index)" class="deleteButton">Delete</button>
-      </li>
-    </ul>
+    <div class="flex flex-wrap justify-center">
+      <div v-for="(goal, index) in goals" :key="index" class="p-2">
+        <div class="goal-box">
+          <input v-if="goal.editing" v-model="goal.text" @keyup.enter="saveGoal(index)" @keyup.esc="cancelEdit(index)" class="goalInput">
+          <span v-else class="goalText">{{ goal.text }}</span>
+          <button @click="editGoal(index)" v-if="!goal.editing" class="editButton">Edit</button>
+          <button @click="deleteGoal(index)" class="deleteButton">Delete</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+
 
 
 <style scoped>

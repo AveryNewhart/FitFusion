@@ -28,6 +28,7 @@ const closeSettingsModal = () => {
         <router-link to="/feed" class="text-white">Feed</router-link>
         <router-link to="/calorietracker" class="text-white">Calorie Tracker</router-link>
         <router-link to="/runningroutes" class="text-white">Running Routes</router-link>
+        <router-link to="/workoutcalender" class="text-white">Workout Calender</router-link>
 
     <button class="links" @click="openSettingsModal">Settings</button>
 

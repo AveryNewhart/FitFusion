@@ -10,6 +10,7 @@ import Login from './components/Login.vue';
 import Feed from './components/Feed.vue';
 import CalorieTracker from './components/CalorieTracker.vue'
 import RunningRoutes from './components/RunningRoutes.vue';
+import WorkoutCalender from './components/WorkoutCalender.vue';
 
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
@@ -27,6 +28,7 @@ app.use(createRouter({
     { path: '/feed', name: 'Feed', component: Feed },
     { path: '/calorietracker', name: 'CalorieTracker', component: CalorieTracker },
     { path: '/runningroutes', name: 'RunningRoutes', component: RunningRoutes },
+    { path: '/workoutcalender', name: 'WorkoutCalender', component: WorkoutCalender },
   ],
 }));
 
