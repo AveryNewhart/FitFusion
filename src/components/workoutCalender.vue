@@ -31,9 +31,36 @@ const getDayDate = computed(() => {
   return formattedDates;
 });
 
+// might have to change _ to category later on when logic added
+const getSavedWorkoutsByCategory = (_: string): string[] => {
+  // logic to retrieve saved workouts for the category
+  // will have to access the users saved workouts to display them and their respective categories
+  // placeholder array
+  return ['Saved workout 1', 'Saved workout 2'];
+};
+
+
+const showModal = ref(false);
+const selectedCategory = ref('');
+
+// might have to change _ to index when logic is added
+const showSaveModal = (_: number) => {
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+};
+
+const saveWorkout = () => {
+  // logic to save workout to the user and its selected category.
+  showModal.value = false;
+};
+
 // default workout type
 const selectedWorkoutType = ref('Arms');
 
+// create more workout types, starting types for now
 const workoutTypes = ['Arms', 'Legs', 'Chest', 'Back'];
 
 // const generateWorkoutLabel = computed(() => `Generate ${selectedWorkoutType.value} Workout`);
@@ -68,16 +95,16 @@ const generateWorkout = () => {
 </script>
 
 
-<!-- NEXT TASK IS TO CREATE THE FUNCTIONS FOR EACH WORKOUT THAT CAN BE GENERATED. -->
+<!-- CREATE THE FUNCTIONS FOR EACH WORKOUT THAT CAN BE GENERATED. -->
 <!-- EACH WORKOUT WILL HAVE A POOL OF WORKOUTS FOR THAT TYPE THAT WILL HAVE 5 WORKOUTS TO BE PICKED FROM THERE AT RANDOM -->
 <!-- THE 5 RANDOM WORKOUTS FOR THAT TYPE WILL GO INTO THE 5 INPUT FIELDS FOR THE DAY SELECTED -->
 
+<!-- NEED TO DO LOGIC FOR -->
 <!-- USER SHOULD BE ABLE TO SAVE WORKOUTS TO THE RESPECTIVE CATEGORIES, EX SAVING A WORKOUT THAT IS FOR ARMS TO THE ARM CATEGORY. -->
 <!-- ON THE BACKEND THE USER WILL HAVE TO HAVE WORKOUTS SAVE TO THEM. -->
 
-<!-- HAVE UNDERNEATH THE WORKOUT CALENDER, THE CATEGORIES OF WORKOUTS AND WITH THE SAVED WORKOUTS OF THE USER ASSOCIATED WITH EACH OF THEIR RESPECTIVE CATEGORIES -->
-
-<!-- WHEN IT BECOMES MOBILE VIEW ON THIS PAGE, HAVE THE DAYS GO INTO A COLUMN STACK AND THE WORKOUT GENERATOR BUTTON AND SUCH SHOULD GO ABOVE THE DAYS SO THE USER DOESN'T HAVE TO SCROLL ALL THE WAY TO THE BUTTON TO SEE IT. -->
+<!-- WHEN IT BECOMES MOBILE VIEW ON THIS PAGE, HAVE THE DAYS GO INTO A COLUMN STACK AND THE WORKOUT GENERATOR BUTTON AND SUCH SHOULD GO ABOVE THE 
+  DAYS SO THE USER DOESN'T HAVE TO SCROLL ALL THE WAY TO THE BUTTON TO SEE IT. -->
 
 
 <template>
@@ -107,6 +134,52 @@ const generateWorkout = () => {
         </div>
       </div>
     </div>
+
+        <!-- Save buttons for each day -->
+        <div class="grid grid-cols-7 gap-4 mb-4">
+      <div v-for="(day, index) in daysOfWeek" :key="day" class="text-center">
+        <!-- ... (existing code) ... -->
+        <div class="mb-2">
+          <button @click="showSaveModal(index)" class="bg-blue-500 text-white p-2 rounded">
+            Save Workout
+          </button>
+        </div>
+      </div>
+    </div>
+
+       <!-- Categories and saved workouts section -->
+       <div class="mb-4">
+      <h2 class="text-xl font-bold mb-2">Workout Categories</h2>
+      <div class="flex space-x-4">
+        <!-- Display workout categories -->
+        <div v-for="type in workoutTypes" :key="type" class="flex-1">
+          <h3 class="text-lg font-bold">{{ type }}</h3>
+          <ul>
+            <!-- Display saved workouts for each category -->
+            <li v-for="workout in getSavedWorkoutsByCategory(type)" :key="workout">
+              {{ workout }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save modal -->
+    <div v-if="showModal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
+      <div class="bg-white p-4 rounded">
+        <h2 class="text-xl font-bold mb-2">Select Category to Save Workout</h2>
+        <select v-model="selectedCategory" class="p-2 rounded mb-2">
+          <option v-for="type in workoutTypes" :key="type" :value="type">{{ type }}</option>
+        </select>
+        <button @click="saveWorkout" class="bg-blue-500 text-white p-2 rounded">
+          Save
+        </button>
+        <button @click="closeModal" class="bg-gray-500 text-white p-2 rounded ml-2">
+          Cancel
+        </button>
+      </div>
+    </div>
+    
 
 
     <!-- WILL HAVE TO FURTHER INVESTIGATE WHY THE RED > . CODE STILL WORKS BUT ODD ERROR WHILE TYPING CODE -->
