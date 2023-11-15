@@ -112,6 +112,26 @@ const generateWorkout = () => {
     <Nav />
     <h1 class="text-2xl font-bold mb-4">User's Schedule/Workout Calendar</h1>
 
+<!-- BELOW THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR MOBILE VIEW -->
+    <!-- Dropdown menu to select workout type -->
+    <select v-model="selectedWorkoutType" class="p-2 rounded mb-2 md:hidden">
+      <option v-for="(type, index) in workoutTypes" :key="index" :value="type">{{ type }}</option>
+    </select>
+
+    <!-- Dropdown menu to select the day -->
+    <select v-model="selectedDay" class="p-2 rounded mb-2 md:hidden">
+      <option v-for="day in daysOfWeek" :key="day" :value="day">{{ day }}</option>
+    </select>
+
+    <!-- Workout Generator Button -->
+        <button
+      @click="generateWorkout"
+      class="bg-blue-500 text-white p-2 rounded mb-4 md:hidden"
+    >
+      Generate {{ selectedWorkoutType }} Workout for {{ selectedDay }}
+    </button>
+  <!-- ABOVE THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR MOBILE VIEW -->
+
     <!-- Days of the week with buttons to toggle background color and input areas -->
     <div class="grid grid-cols-7 gap-4 mb-4">
       <div v-for="(day, index) in daysOfWeek" :key="day" class="text-center">
@@ -179,24 +199,25 @@ const generateWorkout = () => {
       </div>
     </div>
     
-
-
-    <!-- WILL HAVE TO FURTHER INVESTIGATE WHY THE RED > . CODE STILL WORKS BUT ODD ERROR WHILE TYPING CODE -->
-
+<!-- BELOW THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR NORMAL VIEW -->
     <!-- Dropdown menu to select workout type -->
-    <select v-model="selectedWorkoutType" class="p-2 rounded mb-2">
+    <select v-model="selectedWorkoutType" class="p-2 rounded mb-2 hidden md:block">
       <option v-for="(type, index) in workoutTypes" :key="index" :value="type">{{ type }}</option>
     </select>
 
     <!-- Dropdown menu to select the day -->
-    <select v-model="selectedDay" class="p-2 rounded mb-2">
+    <select v-model="selectedDay" class="p-2 rounded mb-2 hidden md:block">
       <option v-for="day in daysOfWeek" :key="day" :value="day">{{ day }}</option>
     </select>
 
-    <!-- Generate Workout button with dynamic label -->
-    <button @click="generateWorkout" class="bg-blue-500 text-white p-2 rounded">
+    <!-- Workout Generator Button (Visible on LG and MD screens) -->
+    <button
+      @click="generateWorkout"
+      class="bg-blue-500 text-white p-2 rounded hidden md:block"
+    >
       Generate {{ selectedWorkoutType }} Workout for {{ selectedDay }}
     </button>
+<!-- ABOVE THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR NORMAL VIEW -->
 
   </div>
 </template>
