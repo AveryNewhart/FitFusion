@@ -138,7 +138,6 @@ const generateWorkout = () => {
         <!-- Save buttons for each day -->
         <div class="grid grid-cols-7 gap-4 mb-4">
       <div v-for="(day, index) in daysOfWeek" :key="day" class="text-center">
-        <!-- ... (existing code) ... -->
         <div class="mb-2">
           <button @click="showSaveModal(index)" class="bg-blue-500 text-white p-2 rounded">
             Save Workout
@@ -152,7 +151,7 @@ const generateWorkout = () => {
       <h2 class="text-xl font-bold mb-2">Workout Categories</h2>
       <div class="flex space-x-4">
         <!-- Display workout categories -->
-        <div v-for="type in workoutTypes" :key="type" class="flex-1">
+       <div v-for="(type, index) in workoutTypes" :key="index" class="flex-1">
           <h3 class="text-lg font-bold">{{ type }}</h3>
           <ul>
             <!-- Display saved workouts for each category -->
@@ -169,7 +168,7 @@ const generateWorkout = () => {
       <div class="bg-white p-4 rounded">
         <h2 class="text-xl font-bold mb-2">Select Category to Save Workout</h2>
         <select v-model="selectedCategory" class="p-2 rounded mb-2">
-          <option v-for="type in workoutTypes" :key="type" :value="type">{{ type }}</option>
+          <option v-for="(type, index) in workoutTypes" :key="index" :value="type">{{ type }}</option>
         </select>
         <button @click="saveWorkout" class="bg-blue-500 text-white p-2 rounded">
           Save
@@ -186,7 +185,7 @@ const generateWorkout = () => {
 
     <!-- Dropdown menu to select workout type -->
     <select v-model="selectedWorkoutType" class="p-2 rounded mb-2">
-      <option v-for="type in workoutTypes" :key="type" :value="type">{{ type }}</option>
+      <option v-for="(type, index) in workoutTypes" :key="index" :value="type">{{ type }}</option>
     </select>
 
     <!-- Dropdown menu to select the day -->
