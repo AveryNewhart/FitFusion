@@ -132,16 +132,16 @@ const generateWorkout = () => {
     </button>
   <!-- ABOVE THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR MOBILE VIEW -->
 
-    <!-- Days of the week with buttons to toggle background color and input areas -->
-    <div class="grid grid-cols-7 gap-4 mb-4">
+   <!-- Days of the week with buttons to toggle background color and input areas -->
+   <div class="flex flex-col md:flex-row md:grid md:grid-cols-7 gap-4 mb-4">
       <div v-for="(day, index) in daysOfWeek" :key="day" class="text-center">
         <div
           :class="{ 'bg-green-500': !offDays[index], 'bg-red-500': offDays[index] }"
           class="mb-2 p-2 cursor-pointer rounded"
           @click="toggleDay(index)"
         >
-            {{ day }}
-            {{ getDayDate[index] }} 
+          {{ day }}
+          {{ getDayDate[index] }}
         </div>
         <div>
           <input
@@ -155,8 +155,8 @@ const generateWorkout = () => {
       </div>
     </div>
 
-        <!-- Save buttons for each day -->
-        <div class="grid grid-cols-7 gap-4 mb-4">
+    <!-- Save buttons for each day -->
+    <div class="grid grid-cols-7 gap-4 mb-4">
       <div v-for="(day, index) in daysOfWeek" :key="day" class="text-center">
         <div class="mb-2">
           <button @click="showSaveModal(index)" class="bg-blue-500 text-white p-2 rounded">
