@@ -24,6 +24,7 @@ export default defineComponent({
 </script>
 
 <!-- IT ISN'T CLEAN CURRENTLY, AND WILL ALSO ONLY WORK FOR ON THE USERS PROFILE, BECAUSE I DONT WANT TO HAVE ANY USER BE ABLE TO CHANGE ANY USERS PROFILE PICTURE.  -->
+<!-- just need to adjust code or since the profile picture will save to the user, just not include the profile picture logic on another users profile -->
 
 <template>
   <div>
