@@ -11,14 +11,6 @@ const totalCaloriesPerDay = ref<number[]>(Array(7).fill(0));
 const totalCalories = ref(0);
 const days: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-// const addCaloriesEntry = (index: number): void => {
-//   const caloriesValue: number = parseInt(calories.value[index].toString(), 10);
-//   if (!isNaN(caloriesValue)) {
-//     totalCaloriesPerDay.value[index] += caloriesValue;
-//   }
-// };
-
-
 interface Entry {
   food: string;
   calories: number;
@@ -42,13 +34,22 @@ const addCaloriesEntry = (day: string): void => {
 
 const resetDay = (day: string): void => {
   const index = days.indexOf(day);
-  totalCalories.value -= totalCaloriesPerDay.value[index]; // Deduct daily calories when resetting
+  totalCalories.value -= totalCaloriesPerDay.value[index];
   totalCaloriesPerDay.value[index] = 0;
   entries.value[day] = [];
 };
 
+const resetWeek = (): void => {
+  totalCalories.value = 0;
+  totalCaloriesPerDay.value.fill(0);
+  entries.value = days.reduce((acc, day) => {
+    acc[day] = [];
+    return acc;
+  }, {} as { [key: string]: Entry[] });
+};
+
 const calculateTotalCalories = (): void => {
-  // totalCalories.value = totalCaloriesPerDay.value.reduce((acc, value) => acc + value, 0);
+  // leave empty, dont need to itterate over the array again
 };
 
 </script>
@@ -101,6 +102,7 @@ const calculateTotalCalories = (): void => {
       </table>
       <button @click="calculateTotalCalories">Total Calories</button>
       <p>Total Calories for the Week: {{ totalCalories }}</p>
+      <button @click="resetWeek">Reset Week</button>
     </div>
   </div>
 </template>
