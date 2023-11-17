@@ -35,19 +35,20 @@ const addCaloriesEntry = (day: string): void => {
   const index = days.indexOf(day);
   const caloriesValue: number = parseInt(calories.value[index].toString(), 10);
   if (!isNaN(caloriesValue)) {
-    totalCaloriesPerDay.value[index] += caloriesValue;
+    totalCalories.value += caloriesValue; // update total calories for the week
     entries.value[day].push({ food: foods.value[index], calories: caloriesValue });
   }
 };
 
 const resetDay = (day: string): void => {
   const index = days.indexOf(day);
+  totalCalories.value -= totalCaloriesPerDay.value[index]; // Deduct daily calories when resetting
   totalCaloriesPerDay.value[index] = 0;
   entries.value[day] = [];
 };
 
 const calculateTotalCalories = (): void => {
-  totalCalories.value = totalCaloriesPerDay.value.reduce((acc, value) => acc + value, 0);
+  // totalCalories.value = totalCaloriesPerDay.value.reduce((acc, value) => acc + value, 0);
 };
 
 </script>
@@ -87,7 +88,7 @@ const calculateTotalCalories = (): void => {
             <td>
               <button @click="resetDay(day)">Reset</button>
             </td>
-            <tr v-for="(entry, entryIndex) in entries[days[index]]" :key="entryIndex">
+            <tr v-for="(entry, entryIndex) in entries[day]" :key="entryIndex">
               <td></td>
               <td>{{ entry.food }}</td>
               <td>{{ entry.calories }}</td>
@@ -103,6 +104,7 @@ const calculateTotalCalories = (): void => {
     </div>
   </div>
 </template>
+
 
 
 
