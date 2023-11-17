@@ -11,27 +11,53 @@ const totalCaloriesPerDay = ref<number[]>(Array(7).fill(0));
 const totalCalories = ref(0);
 const days: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const addCaloriesEntry = (index: number): void => {
+// const addCaloriesEntry = (index: number): void => {
+//   const caloriesValue: number = parseInt(calories.value[index].toString(), 10);
+//   if (!isNaN(caloriesValue)) {
+//     totalCaloriesPerDay.value[index] += caloriesValue;
+//   }
+// };
+
+
+interface Entry {
+  food: string;
+  calories: number;
+}
+
+const entries = ref<{ [key: string]: Entry[] }>(
+  days.reduce((acc, day) => {
+    acc[day] = [];
+    return acc;
+  }, {} as { [key: string]: Entry[] })
+);
+
+const addCaloriesEntry = (day: string): void => {
+  const index = days.indexOf(day);
   const caloriesValue: number = parseInt(calories.value[index].toString(), 10);
   if (!isNaN(caloriesValue)) {
     totalCaloriesPerDay.value[index] += caloriesValue;
+    entries.value[day].push({ food: foods.value[index], calories: caloriesValue });
   }
+};
+
+const resetDay = (day: string): void => {
+  const index = days.indexOf(day);
+  totalCaloriesPerDay.value[index] = 0;
+  entries.value[day] = [];
 };
 
 const calculateTotalCalories = (): void => {
   totalCalories.value = totalCaloriesPerDay.value.reduce((acc, value) => acc + value, 0);
 };
+
 </script>
-
-<!-- I WANT TO ADD A ADDITIONAL SPOT FOR THE USER TO ENTER THEIR FOOD, TO ALIGN IT WITH THE AMOUNT OF CALORIES IT IS. -->
-
-<!-- ADDITIONALLY I WANT TO MAYBE HAVE AN API EVEN FOR FOOD AND THEIR CALORIES SO THE USER CAN SEARCH A FOOD AND THE CALORIES ARE AUTOMATICALLY ASSOCIATED WITH THE FOOD -->
 
 <!-- GET TOTAL CALORIES TO BE THE TOTAL SUM OF ALL THE DAYS OF THE WEEK AT ALL TIMES, SO THE USER CAN SEE THE TOTAL FOR THE WEEK TOO -->
 
-<!-- SAVE THE WEEKLY TOTAL CALORIES TO THE USER SO THEY CAN SEE THEIR TOP WEEK, TOP MONTH, ETC... -->
+<!-- SAVE THE WEEKLY TOTAL CALORIES TO THE USER SO THEY CAN SEE THEIR TOP WEEK, TOP MONTH, ETC... THIS WILL BE DONE WHEN BACKEND IS COMPLETED FOR THE USER-->
 
-<!-- HAVE A CHART? FOR THE MONTH.  -->
+<!-- POTENTIAL ADDS: -->
+<!-- HAVE A CHART? FOR THE MONTH. MAYBE A TAB TO SWITCH BETWEEN THE TWO, OR EVEN JUST UNDER THE CALORIE TRACKER CONTENT.  -->
 
 <template>
   <div>
@@ -46,6 +72,7 @@ const calculateTotalCalories = (): void => {
             <th>Calories</th>
             <th>Add</th>
             <th>Total Calories</th>
+            <th>Reset</th>
           </tr>
         </thead>
         <tbody>
@@ -54,9 +81,20 @@ const calculateTotalCalories = (): void => {
             <td><input type="text" v-model="foods[index]" placeholder="Food"></td>
             <td><input type="number" v-model="calories[index]" placeholder="Calories"></td>
             <td>
-              <button @click="addCaloriesEntry(index)">Add</button>
+              <button @click="addCaloriesEntry(day)">Add</button>
             </td>
             <td>{{ totalCaloriesPerDay[index] }}</td>
+            <td>
+              <button @click="resetDay(day)">Reset</button>
+            </td>
+            <tr v-for="(entry, entryIndex) in entries[days[index]]" :key="entryIndex">
+              <td></td>
+              <td>{{ entry.food }}</td>
+              <td>{{ entry.calories }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
           </tr>
         </tbody>
       </table>
@@ -65,6 +103,7 @@ const calculateTotalCalories = (): void => {
     </div>
   </div>
 </template>
+
 
 
 <style scoped>
