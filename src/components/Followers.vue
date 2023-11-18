@@ -15,9 +15,9 @@ const followers = [
   { id: 10, name: 'Drew' },
   { id: 11, name: 'Cindy' },
   { id: 12, name: 'Mike' },
-  { id: 13, name: 'cat 2' },
-  { id: 14, name: 'cat 3' },
-  { id: 15, name: 'cat 4' },
+  { id: 13, name: 'Stormy' },
+  { id: 14, name: 'Odie' },
+  { id: 15, name: 'Stripes' },
   // add more followers as needed to see modal is scrollable
 ];
 
