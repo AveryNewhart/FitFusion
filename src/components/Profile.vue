@@ -105,4 +105,18 @@ import UsersRoutes from './UsersRoutes.vue';
   margin-bottom: 10px;
 }
 
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
+.followingDiv {
+  border: 2px solid rgb(87, 11, 17);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
+.followerDiv {
+  border: 2px solid rgb(118, 134, 15);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 </style>
