@@ -23,8 +23,8 @@ const saveBio = () => {
 
 <template>
   <div class="relative">
-    <h3>{{ bio || 'Bio is empty' }}</h3>
-    <button @click="openModal" class="ml-2 text-blue-500 cursor-pointer">Edit</button>
+    <h3 class="bioText">{{ bio || 'Bio is empty' }}</h3>
+    <button @click="openModal" class="bioEditBtn ml-2 cursor-pointer rounded">Edit</button>
 
     <!-- modal -->
     <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -40,4 +40,15 @@ const saveBio = () => {
 </template>
 
 <style scoped>
+
+.bioText {
+  color: white;
+}
+
+.bioEditBtn {
+  background-color: #925ff0;
+  border: 2px solid #a3fda1;
+  padding: 3px;
+}
+
 </style>

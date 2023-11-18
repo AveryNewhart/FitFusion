@@ -15,9 +15,9 @@ const following = [
   { id: 10, name: 'Drew' },
   { id: 11, name: 'Cindy' },
   { id: 12, name: 'Mike' },
-  { id: 13, name: 'cat 2' },
-  { id: 14, name: 'cat 3' },
-  { id: 15, name: 'cat 4' },
+  { id: 13, name: 'Stormy' },
+  { id: 14, name: 'Odie' },
+  { id: 15, name: 'Stripes' },
   // add more users as needed to see modal is scrollable
 ];
 
@@ -39,14 +39,13 @@ const toggleFollowingList = () => {
 
 <template>
   <div class="">
-    <p>Following List</p>
 
     <!-- display the number of users the user is following -->
-    <p>Total Following: {{ totalFollowing }}</p>
+    <p class="followingP">Following: <span class="followingSpan">{{ totalFollowing }}</span></p>
 
     <!-- button to open/close the modal -->
     <button class="viewFollowingBtn" @click="toggleFollowingList">
-      {{ isModalVisible ? 'Close Following' : 'View Following' }}
+      {{ isModalVisible ? 'Close' : 'View' }}
     </button>
 
     <!-- modal to display list of users the user is following -->
@@ -72,11 +71,22 @@ const toggleFollowingList = () => {
 <style scoped>
 
 .viewFollowingBtn {
-  background-color: limegreen;
-  border: 1px solid purple;
+  background-color: #A3FDA1;
+  border: 2px solid #925FF0;
   margin: 5px;
   padding: 5px;
   cursor: pointer;
+  border-radius: 10px;
+  color: #2d2d2d;
+  font-weight: bold;
+}
+
+.followingP {
+  color: #925FF0;
+}
+
+.followingSpan {
+  color: #A3FDA1;
 }
 
 .modal-overlay {

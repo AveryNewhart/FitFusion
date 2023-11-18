@@ -13,17 +13,17 @@ import UsersRoutes from './UsersRoutes.vue';
 </script>
 
 <!-- SET UP AN AREA FOR FAVORITE WORKOUTS AND FOR EACH CATEGORY -->
+<!-- HAVE SET UP LIKE UserRoutes.vue file! -->
 <!-- MAKE A NEW COMPONENT FOR IT. -->
 
 <template>
  <div>
     <Nav />
  </div> 
-  <div class="">
-    <h1 class="text-center">Your FitFusion Profile</h1>
+  <div class="profileBackground">
+    <h1 class="text-center mainH1OfProf">Your FitFusion Profile</h1>
     <div class="mainProfileDiv">
-      <h2>this is where the users data will go/be called in. the users username next to the profile picture and such</h2>
-      <h2>Username HERE</h2>
+      <h2 class="usernameText">Username HERE</h2>
       <ProfilePicture />
       <div class="followingDiv">
         <Following />
@@ -39,7 +39,7 @@ import UsersRoutes from './UsersRoutes.vue';
       </div>
     </div>
     <div class="PrsAndGoals">
-      <h3 class="text-center">GOALS AND PRS</h3>
+      <h3 class="text-center goalsHead">GOALS AND PRS</h3>
       <div class="personalBestsDiv">
         <PersonalBests />
       </div>
@@ -55,6 +55,25 @@ import UsersRoutes from './UsersRoutes.vue';
 </template>
 
 <style scoped>
+
+.profileBackground {
+  /* background-color: #4E515C; */
+  background-color: #2d2d2d;
+}
+
+.goalsHead {
+  color: #925FF0;
+  font-weight: bold;
+}
+
+.usernameText {
+  color: white;
+  font-weight: bold;
+}
+
+.mainH1OfProf {
+  color: #925FF0;
+}
 
 /* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .usersRoutesDiv {
