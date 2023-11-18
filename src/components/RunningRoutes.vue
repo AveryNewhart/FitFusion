@@ -13,7 +13,8 @@ const searchRoutes = () => {
 
 </script>
 
-<!-- NEXT IS CREATING ALL THE LOGIC, SMASH API? -->
+<!-- NEXT IS CREATING ALL THE LOGIC, SMASH API or MAPBOX API -->
+
 
 <template>
   <div>
