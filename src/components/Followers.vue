@@ -76,6 +76,7 @@ const toggleFollowerList = () => {
   border: 1px solid limegreen;
   margin: 5px;
   cursor: pointer;
+  padding: 5px;
 }
 
 .modal-overlay {
