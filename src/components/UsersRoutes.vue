@@ -20,7 +20,7 @@ const closeModal = () => {
   <template>
     <div class="relative">
       <!-- button to trigger the modal -->
-      <button @click="openModal" class="bg-blue-500 text-white px-4 py-2 rounded">SAVED ROUTES</button>
+      <button @click="openModal" class="savedRoutesBtn px-4 py-2 rounded">SAVED ROUTES</button>
   
       <!-- modal -->
       <div v-if="showModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
@@ -42,4 +42,12 @@ const closeModal = () => {
   </template>
 
 <style scoped>
+
+.savedRoutesBtn {
+  background-color: #925FF0;
+  border: 2px solid #A3FDA1;
+  color: #2d2d2d;
+  font-weight: bold;
+}
+
 </style>

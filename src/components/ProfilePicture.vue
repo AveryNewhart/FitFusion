@@ -25,12 +25,13 @@ export default defineComponent({
 
 <!-- IT ISN'T CLEAN CURRENTLY, AND WILL ALSO ONLY WORK FOR ON THE USERS PROFILE, BECAUSE I DONT WANT TO HAVE ANY USER BE ABLE TO CHANGE ANY USERS PROFILE PICTURE.  -->
 <!-- just need to adjust code or since the profile picture will save to the user, just not include the profile picture logic on another users profile -->
+<!-- look at project 3 or music project? i think i did it there -->
 
 <template>
   <div>
     <div>
       <img :src="imageUrl" alt="" class="uploaded-image">
-      <button class="editBtn" @click="showEditOptions">Edit</button>
+      <button class="editBtn rounded" @click="showEditOptions">Edit</button>
     </div>
     <form v-if="showFileInput" action="index.html" method="post">
       <input type="file" name="file" id="file" @change="handleFileChange" accept="image/*">
@@ -46,9 +47,9 @@ export default defineComponent({
 }
 
 .editBtn {
-  background-color: gray;
-  color: aquamarine;
-  border: 1px solid green;
+  background-color: #925ff0;
+  border: 2px solid #a3fda1;
+  padding: 3px;
 }
 
 

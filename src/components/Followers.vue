@@ -39,14 +39,13 @@ const toggleFollowerList = () => {
 
 <template>
   <div class="">
-    <p>Follower List</p>
 
     <!-- display the number of followers -->
-    <p>Total Followers: {{ totalFollowers }}</p>
+    <p class="followerP">Followers: <span class="followerSpan">{{ totalFollowers }}</span></p>
 
     <!-- button to open/close the modal -->
     <button class="viewFollowersBtn" @click="toggleFollowerList">
-      {{ isModalVisible ? 'Close Followers' : 'View Followers' }}
+      {{ isModalVisible ? 'Close' : 'View' }}
     </button>
 
     <!-- modal to display followers -->
@@ -72,11 +71,22 @@ const toggleFollowerList = () => {
 <style scoped>
 
 .viewFollowersBtn {
-  background-color: purple;
-  border: 1px solid limegreen;
+  background-color: #925ff0;
+  border: 2px solid #A3FDA1;
   margin: 5px;
-  cursor: pointer;
   padding: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+  color: #2d2d2d;
+  font-weight: bold;
+}
+
+.followerP {
+  color: #A3FDA1;
+}
+
+.followerSpan {
+  color: #925ff0;
 }
 
 .modal-overlay {

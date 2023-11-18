@@ -43,10 +43,10 @@ onMounted(() => {
 
 <template>
   <div>
-    <h1>User's Goals (5 GOALS MAX)</h1>
+    <h1 class="text-white">User's Goals (5 GOALS MAX)</h1>
     <div>
-      <input v-model="newGoal" class="goalInput" />
-      <button @click="addGoal" class="bg-blue-500 text-white p-2">Add Goal</button>
+      <input v-model="newGoal" class="goalInput" placeholder="enter a goal..." />
+      <button @click="addGoal" class="addGoalBtn rounded p-2">Add Goal</button>
     </div>
     <div class="flex flex-wrap justify-center">
       <div v-for="(goal, index) in goals" :key="index" class="p-2">
@@ -67,7 +67,9 @@ onMounted(() => {
 <style scoped>
 
 .goalInput {
-  border: 1px solid blue;
+  border: 1px solid #925ff0;
+  color: #925ff0;
+  background-color: #a3fda1;
 }
 
 .editButton {
@@ -84,6 +86,11 @@ onMounted(() => {
 
 .goalText {
   background-color: yellow;
+}
+
+.addGoalBtn {
+  background-color: #925ff0;
+  border: 2px solid #a3fda1;
 }
 
 </style>

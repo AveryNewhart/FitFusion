@@ -62,7 +62,7 @@ const cancelEditModal = () => {
 
 <template>
     <div>
-      <h3>Personal Bests Section</h3>
+      <h3 class="text-white">Personal Bests Section</h3>
       <button class="mainEdit p-1" @click="openEditModal">Edit Personal Bests</button>
   
       <!-- modal for editing personal bests -->
@@ -88,8 +88,8 @@ const cancelEditModal = () => {
       <div v-for="personalBest in selectedPersonalBests" :key="personalBest.type">
         <!-- display personal best information -->
         <div>
-          <span>{{ personalBest.type }}:</span>
-          <span v-if="personalBest.visible">{{ personalBest.value }}</span>
+          <span class="bestType">{{ personalBest.type }}:</span>
+          <span class="bestValue" v-if="personalBest.visible">{{ personalBest.value }}</span>
           <span v-else>Not set</span>
         </div>
       </div>
@@ -99,9 +99,19 @@ const cancelEditModal = () => {
 <style scoped>
 
 .mainEdit {
-    border: 1px solid darkblue;
-    background-color: orange;
+    border: 2px solid #A3FDA1;
+    background-color: #925ff0;
     border-radius: 10px;
+}
+
+.bestType {
+  color: #925ff0;
+  margin: 5px;
+
+}
+
+.bestValue {
+  color: #A3FDA1;
 }
 
 .editInput {
