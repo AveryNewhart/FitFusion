@@ -2,18 +2,25 @@
 import { ref, onMounted } from 'vue';
 
 interface Goal {
-  text: string;
+  title: string;
+  description: string;
   editing: boolean;
 }
 
 const goals = ref<Goal[]>([]);
-  const newGoal = ref('');
+const newGoalTitle = ref('');
+const newGoalDescription = ref('');
 const maxGoals = 5;
 
 const addGoal = () => {
-  if (newGoal.value && goals.value.length < maxGoals) {
-    goals.value.push({ text: newGoal.value, editing: false });
-    newGoal.value = '';
+  if (newGoalTitle.value && newGoalDescription.value && goals.value.length < maxGoals) {
+    goals.value.push({
+      title: newGoalTitle.value,
+      description: newGoalDescription.value,
+      editing: false,
+    });
+    newGoalTitle.value = '';
+    newGoalDescription.value = '';
   }
 };
 
@@ -37,34 +44,59 @@ onMounted(() => {
 });
 </script>
 
-<!-- NEXT I WANT TO MAKE IT SO THE USER CAN HAVE A TITLE FOR THEIR GOAL, AND THEN A DESCRIPTION OF COURSE -->
 <!-- MAKE IT SO THE "ADD GOAL" BUTTON IS ONLY VIEWABLE ON THE USERS OWN PROFILE. 
   IF ON ANOTHER USERS PROFILE, HAVE JUST THE USERS GOALS, THE ADD GOAL BUTTON SHOULDN'T BE THERE BECAUSE WHY BE ABLE TO ADD GOALS TO SOME OTHER USERS PROFILE. -->
 
-<template>
-  <div>
-    <h1 class="text-white">User's Goals (5 GOALS MAX)</h1>
+  <!-- MAKE IT SO FOR ALL THE GOALS THERE IS JUST ONE EDIT BUTTON. ONCE THAT BUTTON IS CLICKED, A SAVE BUTTON WILL POP UP FOR THE USER TO SAVE WHAT THEY EDIT.  -->
+  <!-- ONCE THE EDIT BUTTON IS CLICKED, THE GOALS AND THEIR INPUTS WILL BECOME EDITABLE. SORT OF LIKE HOW IT IS NOW, BUT MAKE IT SO ONLY ONE BUTTON. -->
+
+  <!-- MAKE IT SO THE INPUT FIELDS ARENT THERE AT FIRST. MAKE IT SO WHEN THE USER CLICKS THE BUTTON TO ADD A GOAL, A MODAL POPS UP WITH A TITLE AND DESCRIPTION INPUTS FOR THE USER TO ENTER THEIR GOAL -->
+
+  <template>
     <div>
-      <input v-model="newGoal" class="goalInput" placeholder="enter a goal..." />
-      <button @click="addGoal" class="addGoalBtn rounded p-2">Add Goal</button>
-    </div>
-    <div class="flex flex-wrap justify-center">
-      <div v-for="(goal, index) in goals" :key="index" class="p-2">
-        <div class="goal-box">
-          <input v-if="goal.editing" v-model="goal.text" @keyup.enter="saveGoal(index)" @keyup.esc="cancelEdit(index)" class="goalInput">
-          <span v-else class="goalText">{{ goal.text }}</span>
-          <button @click="editGoal(index)" v-if="!goal.editing" class="editButton">Edit</button>
-          <button @click="deleteGoal(index)" class="deleteButton">Delete</button>
+      <h1 class="text-white">User's Goals (5 GOALS MAX)</h1>
+      <div>
+        <input v-model="newGoalTitle" class="goalInput" placeholder="enter a goal title..." />
+        <textarea v-model="newGoalDescription" class="goalInput" placeholder="enter a goal description..."></textarea>
+        <button @click="addGoal" class="addGoalBtn rounded p-2">Add Goal</button>
+      </div>
+      <div class="flex flex-wrap justify-center">
+        <div v-for="(goal, index) in goals" :key="index" class="p-2">
+          <div class="goal-box">
+            <div v-if="goal.editing">
+              <input v-model="goal.title" class="goalInput" placeholder="enter a goal title..." />
+              <textarea v-model="goal.description" class="goalInput" placeholder="enter a goal description..."></textarea>
+              <button @click="saveGoal(index)" class="editButton rounded">Save</button>
+              <button @click="cancelEdit(index)" class="deleteButton rounded">Cancel</button>
+            </div>
+            <div v-else>
+              <h3 class="goalTitle">{{ goal.title }}</h3>
+              <p class="goalDescription">{{ goal.description }}</p>
+              <button @click="editGoal(index)" class="editButton rounded">Edit</button>
+              <button @click="deleteGoal(index)" class="deleteButton rounded">Delete</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</template>
+  </template>
+  
 
 
 
 
 <style scoped>
+
+.goalTitle {
+  font-size: 1.2em;
+  /* margin-bottom: 5px; */
+  color: #925ff0;
+}
+
+.goalDescription {
+  /* margin-bottom: 10px; */
+  color: white;
+}
 
 .goalInput {
   border: 1px solid #925ff0;
@@ -75,13 +107,15 @@ onMounted(() => {
 .editButton {
   margin-left: 5px;
   margin-right: 5px;
-  background: green;
+  background: #925ff0;
+  padding: 2px;
 }
 
 .deleteButton {
   margin-left: 5px;
   margin-right: 5px;
   background: red;
+  padding: 2px;
 }
 
 .goalText {
