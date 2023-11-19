@@ -13,6 +13,12 @@ const newGoalDescription = ref('');
 const maxGoals = 5;
 const showModal = ref(false);
 
+const showEditModal = ref(false);
+
+const saveAllGoals = () => {
+  showEditModal.value = false; // Close the modal after saving goals
+};
+
 const addGoal = () => {
   if (newGoalTitle.value && newGoalDescription.value && goals.value.length < maxGoals) {
     goals.value.push({
@@ -48,13 +54,14 @@ onMounted(() => {});
 <!-- MAKE IT SO THE "ADD GOAL" BUTTON IS ONLY VIEWABLE ON THE USERS OWN PROFILE. 
   IF ON ANOTHER USERS PROFILE, HAVE JUST THE USERS GOALS, THE ADD GOAL BUTTON SHOULDN'T BE THERE BECAUSE WHY BE ABLE TO ADD GOALS TO SOME OTHER USERS PROFILE. -->
 
-<!-- NEED TO MAKE IT SO THERE IS ONE EDIT BUTTON. WHEN THE EDIT BUTTON IS CLICKED, IT OPENS A MODAL THAT HAS ALL OF THE GOALS AND THEIR TITLE AND DESCRIPTIONS AND THE INPUTS ARE EDITABLE. -->
+<!-- REMOVE THE EDIT AND DELETE THAT GOES WITH EACH GOAL THAT IS ADDED. MOVE THE DELETE BUTTON TO ASSOCIATE WITH EACH GOAL THAT IS IN THE MODAL WHEN THE USER GOES TO EDIT THEIR GOALS -->
 
   <template>
     <div>
       <h1 class="text-white">User's Goals (5 GOALS MAX)</h1>
       <div>
         <button @click="showModal = true" class="addGoalBtn rounded p-2">Add Goal</button>
+        <button @click="showEditModal = true" class="editButton rounded p-2">Edit Goals</button>
       </div>
       <div class="flex flex-wrap justify-center">
         <div v-for="(goal, index) in goals" :key="index" class="p-2">
@@ -92,6 +99,19 @@ onMounted(() => {});
           <button @click="addGoal" class="addGoalBtn rounded p-2">Add Goal</button>
         </div>
       </div>
+
+          <!-- Modal for editing goals -->
+    <div v-if="showEditModal" class="modal">
+      <div class="modal-content">
+        <span @click="showEditModal = false" class="close">&times;</span>
+        <div v-for="(goal, index) in goals" :key="index" class="goal-box">
+          <input v-model="goal.title" class="goalInput" placeholder="enter a goal title..." />
+          <textarea v-model="goal.description" class="goalInput" placeholder="enter a goal description..."></textarea>
+        </div>
+        <button @click="saveAllGoals" class="addGoalBtn rounded p-2">Save Goals</button>
+      </div>
+    </div>
+
     </div>
   </template>
   
