@@ -2,18 +2,33 @@
 import { ref, onMounted } from 'vue';
 
 interface Goal {
-  text: string;
+  title: string;
+  description: string;
   editing: boolean;
 }
 
 const goals = ref<Goal[]>([]);
-  const newGoal = ref('');
+const newGoalTitle = ref('');
+const newGoalDescription = ref('');
 const maxGoals = 5;
+const showModal = ref(false);
+
+const showEditModal = ref(false);
+
+const saveAllGoals = () => {
+  showEditModal.value = false; // Close the modal after saving goals
+};
 
 const addGoal = () => {
-  if (newGoal.value && goals.value.length < maxGoals) {
-    goals.value.push({ text: newGoal.value, editing: false });
-    newGoal.value = '';
+  if (newGoalTitle.value && newGoalDescription.value && goals.value.length < maxGoals) {
+    goals.value.push({
+      title: newGoalTitle.value,
+      description: newGoalDescription.value,
+      editing: false,
+    });
+    newGoalTitle.value = '';
+    newGoalDescription.value = '';
+    showModal.value = false; // Close the modal after adding a goal
   }
 };
 
@@ -33,38 +48,121 @@ const deleteGoal = (index: number) => {
   goals.value.splice(index, 1);
 };
 
-onMounted(() => {
-});
+onMounted(() => {});
 </script>
 
-<!-- NEXT I WANT TO MAKE IT SO THE USER CAN HAVE A TITLE FOR THEIR GOAL, AND THEN A DESCRIPTION OF COURSE -->
 <!-- MAKE IT SO THE "ADD GOAL" BUTTON IS ONLY VIEWABLE ON THE USERS OWN PROFILE. 
   IF ON ANOTHER USERS PROFILE, HAVE JUST THE USERS GOALS, THE ADD GOAL BUTTON SHOULDN'T BE THERE BECAUSE WHY BE ABLE TO ADD GOALS TO SOME OTHER USERS PROFILE. -->
 
-<template>
-  <div>
-    <h1 class="text-white">User's Goals (5 GOALS MAX)</h1>
+<!-- REMOVE THE EDIT AND DELETE THAT GOES WITH EACH GOAL THAT IS ADDED. MOVE THE DELETE BUTTON TO ASSOCIATE WITH EACH GOAL THAT IS IN THE MODAL WHEN THE USER GOES TO EDIT THEIR GOALS -->
+
+  <template>
     <div>
-      <input v-model="newGoal" class="goalInput" placeholder="enter a goal..." />
-      <button @click="addGoal" class="addGoalBtn rounded p-2">Add Goal</button>
-    </div>
-    <div class="flex flex-wrap justify-center">
-      <div v-for="(goal, index) in goals" :key="index" class="p-2">
-        <div class="goal-box">
-          <input v-if="goal.editing" v-model="goal.text" @keyup.enter="saveGoal(index)" @keyup.esc="cancelEdit(index)" class="goalInput">
-          <span v-else class="goalText">{{ goal.text }}</span>
-          <button @click="editGoal(index)" v-if="!goal.editing" class="editButton">Edit</button>
-          <button @click="deleteGoal(index)" class="deleteButton">Delete</button>
+      <h1 class="text-white">User's Goals (5 GOALS MAX)</h1>
+      <div>
+        <button @click="showModal = true" class="addGoalBtn rounded p-2">Add Goal</button>
+        <button @click="showEditModal = true" class="editButton rounded p-2">Edit Goals</button>
+      </div>
+      <div class="flex flex-wrap justify-center">
+        <div v-for="(goal, index) in goals" :key="index" class="p-2">
+          <div class="goal-box">
+            <div v-if="goal.editing">
+              <input v-model="goal.title" class="goalInput" placeholder="enter a goal title..." />
+              <textarea
+                v-model="goal.description"
+                class="goalInput"
+                placeholder="enter a goal description..."
+              ></textarea>
+              <button @click="saveGoal(index)" class="editButton rounded">Save</button>
+              <button @click="cancelEdit(index)" class="deleteButton rounded">Cancel</button>
+            </div>
+            <div v-else>
+              <h3 class="goalTitle">{{ goal.title }}</h3>
+              <p class="goalDescription">{{ goal.description }}</p>
+              <button @click="editGoal(index)" class="editButton rounded">Edit</button>
+              <button @click="deleteGoal(index)" class="deleteButton rounded">Delete</button>
+            </div>
+          </div>
         </div>
       </div>
+  
+      <!-- Modal for adding goals -->
+      <div v-if="showModal" class="modal">
+        <div class="modal-content">
+          <span @click="showModal = false" class="close">&times;</span>
+          <input v-model="newGoalTitle" class="goalInput" placeholder="enter a goal title..." />
+          <textarea
+            v-model="newGoalDescription"
+            class="goalInput"
+            placeholder="enter a goal description..."
+          ></textarea>
+          <button @click="addGoal" class="addGoalBtn rounded p-2">Add Goal</button>
+        </div>
+      </div>
+
+          <!-- Modal for editing goals -->
+    <div v-if="showEditModal" class="modal">
+      <div class="modal-content">
+        <span @click="showEditModal = false" class="close">&times;</span>
+        <div v-for="(goal, index) in goals" :key="index" class="goal-box">
+          <input v-model="goal.title" class="goalInput" placeholder="enter a goal title..." />
+          <textarea v-model="goal.description" class="goalInput" placeholder="enter a goal description..."></textarea>
+        </div>
+        <button @click="saveAllGoals" class="addGoalBtn rounded p-2">Save Goals</button>
+      </div>
     </div>
-  </div>
-</template>
+
+    </div>
+  </template>
+  
 
 
 
 
 <style scoped>
+
+.goalTitle {
+  font-size: 1.2em;
+  /* margin-bottom: 5px; */
+  color: #925ff0;
+}
+
+.goalDescription {
+  /* margin-bottom: 10px; */
+  color: white;
+}
+
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 400px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
 
 .goalInput {
   border: 1px solid #925ff0;
@@ -75,13 +173,15 @@ onMounted(() => {
 .editButton {
   margin-left: 5px;
   margin-right: 5px;
-  background: green;
+  background: #925ff0;
+  padding: 2px;
 }
 
 .deleteButton {
   margin-left: 5px;
   margin-right: 5px;
   background: red;
+  padding: 2px;
 }
 
 .goalText {

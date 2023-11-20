@@ -55,11 +55,11 @@ const toggleFollowerList = () => {
         <button class="closeBtn" @click="toggleFollowerList">x</button>
 
         <!-- search bar -->
-        <input v-model="searchQuery" placeholder="Search followers">
+        <input class="followerSearch" v-model="searchQuery" placeholder="Search followers">
 
         <!-- list of followers -->
         <ul>
-          <li v-for="follower in filteredFollowers" :key="follower.id">
+          <li class="text-white" v-for="follower in filteredFollowers" :key="follower.id">
             {{ follower.name }}
           </li>
         </ul>
@@ -79,6 +79,11 @@ const toggleFollowerList = () => {
   border-radius: 10px;
   color: #2d2d2d;
   font-weight: bold;
+}
+
+.followerSearch {
+  background-color: #A3FDA1;
+  border: 1px solid #925ff0;
 }
 
 .followerP {
@@ -103,7 +108,7 @@ const toggleFollowerList = () => {
 }
 
 .modal {
-  background-color: white;
+  background-color: #2d2d2d;
   padding: 20px;
   border-radius: 8px;
   max-height: 40vh; /*  maximum height for the modal */
@@ -116,10 +121,10 @@ const toggleFollowerList = () => {
   background-color: red;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 3px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0;
+  right: 0;
   cursor: pointer;
 }
 
