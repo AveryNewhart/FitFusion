@@ -1,7 +1,7 @@
-import { createApp } from 'vue';
+import { createApp, h } from 'vue'; // <-- imported h and provide for Apollo server
+import { apolloClient } from './apolloclient';
 import { createRouter, createWebHistory } from 'vue-router';
 import { DefaultApolloClient } from '@vue/apollo-composable';
-import { ApolloClient, InMemoryCache } from '@apollo/client/core';
 import './style.css'
 import App from './App.vue';
 import Home from './components/Home.vue';
@@ -10,14 +10,11 @@ import Login from './components/Login.vue';
 import Feed from './components/Feed.vue';
 import CalorieTracker from './components/CalorieTracker.vue'
 import RunningRoutes from './components/RunningRoutes.vue';
-import WorkoutCalender from './components/WorkoutCalender.vue';
+import WorkoutCalender from './components/workoutCalender.vue';
 
-const apolloClient = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: 'https://rickandmortyapi.com/graphql', // Update with your GraphQL API URL
-});
-
-const app = createApp(App);
+const app = createApp({
+  render: () => h(App),
+})
 
 app.use(createRouter({
   history: createWebHistory(),
