@@ -4,13 +4,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { DefaultApolloClient } from '@vue/apollo-composable';
 import './style.css'
 import App from './App.vue';
-import Home from './components/Home.vue';
-import Profile from './components/Profile.vue';
-import Login from './components/Login.vue';
-import Feed from './components/Feed.vue';
-import CalorieTracker from './components/CalorieTracker.vue'
-import RunningRoutes from './components/RunningRoutes.vue';
-import WorkoutCalender from './components/workoutCalender.vue';
+import Home from './views/Home.vue';
+import Profile from './views/Profile.vue';
+import Login from './views/Login.vue';
+import Feed from './views/Feed.vue';
+import CalorieTracker from './views/CalorieTracker.vue'
+import RunningRoutes from './views/RunningRoutes.vue';
+import WorkoutCalender from './views/WorkoutCalender.vue';
 
 const app = createApp({
   render: () => h(App),

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import Nav from './/Nav.vue';
+import Nav from '../components/Nav.vue';
 
 const searchLocation = ref('');
 

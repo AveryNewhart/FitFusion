@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import Nav from './/Nav.vue';
+import Nav from '../components/Nav.vue';
 
 import { ref } from 'vue';
 
