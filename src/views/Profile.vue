@@ -1,14 +1,14 @@
 <script setup lang="ts">
 
-import Nav from './/Nav.vue';
-import Goals from './Goals.vue';
-import ProfilePicture from './ProfilePicture.vue';
-import Followers from './Followers.vue';
-import Following from './Following.vue';
-import UsersPosts from './UsersPosts.vue';
-import PersonalBests from './PersonalBests.vue';
-import Bio from './Bio.vue';
-import UsersRoutes from './UsersRoutes.vue';
+import Nav from '../components/Nav.vue';
+import Goals from '../components/Goals.vue';
+import ProfilePicture from '../components/ProfilePicture.vue';
+import Followers from '../components/Followers.vue';
+import Following from '../components/Following.vue';
+import UsersPosts from '../components/UsersPosts.vue';
+import PersonalBests from '../components/PersonalBests.vue';
+import Bio from '../components/Bio.vue';
+import UsersRoutes from '../components/UsersRoutes.vue';
 
 </script>
 
