@@ -28,13 +28,10 @@ const addGoal = () => {
     });
     newGoalTitle.value = '';
     newGoalDescription.value = '';
-    showModal.value = false; // Close the modal after adding a goal
+    showModal.value = false; // close the modal after adding a goal
   }
 };
 
-const editGoal = (index: number) => {
-  goals.value[index].editing = true;
-};
 
 const saveGoal = (index: number) => {
   goals.value[index].editing = false;
@@ -44,9 +41,6 @@ const cancelEdit = (index: number) => {
   goals.value[index].editing = false;
 };
 
-const deleteGoal = (index: number) => {
-  goals.value.splice(index, 1);
-};
 
 onMounted(() => {});
 </script>
@@ -54,7 +48,9 @@ onMounted(() => {});
 <!-- MAKE IT SO THE "ADD GOAL" BUTTON IS ONLY VIEWABLE ON THE USERS OWN PROFILE. 
   IF ON ANOTHER USERS PROFILE, HAVE JUST THE USERS GOALS, THE ADD GOAL BUTTON SHOULDN'T BE THERE BECAUSE WHY BE ABLE TO ADD GOALS TO SOME OTHER USERS PROFILE. -->
 
-<!-- REMOVE THE EDIT AND DELETE THAT GOES WITH EACH GOAL THAT IS ADDED. MOVE THE DELETE BUTTON TO ASSOCIATE WITH EACH GOAL THAT IS IN THE MODAL WHEN THE USER GOES TO EDIT THEIR GOALS -->
+  <!-- HAVE THE GOALS BE THEIR OWN NUMBERED BOXES WITH A SMALL BORDER -->
+
+<!--MOVE THE DELETE BUTTON TO ASSOCIATE WITH EACH GOAL THAT IS IN THE MODAL WHEN THE USER GOES TO EDIT THEIR GOALS -->
 
   <template>
     <div>
@@ -79,8 +75,8 @@ onMounted(() => {});
             <div v-else>
               <h3 class="goalTitle">{{ goal.title }}</h3>
               <p class="goalDescription">{{ goal.description }}</p>
-              <button @click="editGoal(index)" class="editButton rounded">Edit</button>
-              <button @click="deleteGoal(index)" class="deleteButton rounded">Delete</button>
+              <!-- <button @click="editGoal(index)" class="editButton rounded">Edit</button>
+              <button @click="deleteGoal(index)" class="deleteButton rounded">Delete</button> -->
             </div>
           </div>
         </div>
