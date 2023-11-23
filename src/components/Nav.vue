@@ -19,6 +19,8 @@ const closeSettingsModal = () => {
 <!-- DECIDE FONT FOR TEXT -->
 <!-- DECIDE COLORS OF BUTTONS, DO I WANT BACKGROUNDS, COLOR CHANGING TEXT, SHADOWS, ETC. MAKE FUTURISTIC STYLE -->
 
+<!-- MAKE THE BOTTOM BORDER ACTUALLY HAVE A COLOR CHANGING ANIMATION, NOT JUST A STATIC COLOR CHANGE -->
+
 <template>
   <nav class="navBackground p-4">
     <div class="container mx-auto flex justify-between items-center">
