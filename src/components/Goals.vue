@@ -54,6 +54,8 @@ onMounted(() => {});
 
 <!-- REMOVE THE X FROM THE MODAL THAT OPENS TO EDIT GOALS -->
 
+<!-- MAKE AN OPTION TO ADD A PROGRESS BAR OR SOMETHING FOR THE USER TO TRACK THEIR GOAL PROGRESS -->
+
   <template>
     <div>
       <h1 class="text-white">User's Goals (5 GOALS MAX)</h1>
