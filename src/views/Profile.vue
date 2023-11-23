@@ -9,6 +9,7 @@ import UsersPosts from '../components/UsersPosts.vue';
 import PersonalBests from '../components/PersonalBests.vue';
 import Bio from '../components/Bio.vue';
 import UsersRoutes from '../components/UsersRoutes.vue';
+import UserWorkouts from '../components/UserWorkouts.vue';
 
 </script>
 
@@ -33,6 +34,7 @@ import UsersRoutes from '../components/UsersRoutes.vue';
       </div>
       <div class="usersRoutesDiv">
         <UsersRoutes />
+        <UserWorkouts />
       </div>
       <div class="bioDiv">
         <Bio />
