@@ -15,39 +15,35 @@ import UserWorkouts from '../components/UserWorkouts.vue';
 
 <!-- STYLE WHAT WILL BE THE HEADER OF THE PROFILE AND ALL THE COMPONENTS POSITIONING -->
 
-<!-- PROFILE HEADER -->
-<!-- I WANT THE USERS USERNAME CENTERED AT THE TOP OF ITS DIV, THE PROFILE PICTURE TO THE LEFT, THEN THE 4 BUTTONS OF FOLLOWERS FOLLOWING SAVED ROUTES AND SAVED WORKOUTS TO BE TO THE RIGHT OF THE PROFILE PICTURE IN A 2 ROW 2 COLUMN FORMATION -->
-<!-- THE BIO WILL BE CENTERED UNDER ALL OF THAT  -->
-
-
-<!-- PERSONAL BESTS AND GOALS SECTION -->
-<!-- THE GOALS AND PERSONAL BESTS SECTIONS IN THEIR OWN DIV UNDER THE PROFILE HEADER. -->
-
-
-<!-- USERS POSTS -->
-<!-- UNDER ALL OF THE OTHER STUFF, MAKE A BUTTON ALSO FOR THE BOTTOM RIGHT OF THE SCREEN THAT ALLOWS THE USER TO "RETURN TO TOP" OF THE PAGE -->
+<!-- WITH THE EXTRA SPACE, SHOULD I ADD THE PERSONAL BESTS SECTION TO THE PROFILE HEADER? -->
 
 <template>
- <div>
+  <div>
     <Nav />
- </div> 
+  </div>
   <div class="profileBackground">
     <h1 class="text-center mainH1OfProf">Your FitFusion Profile</h1>
     <div class="mainProfileDiv">
-      <h2 class="usernameText">Username HERE</h2>
-      <ProfilePicture />
-      <div class="followingDiv">
-        <Following />
+      <div>
+        <h2 class="usernameText">Username HERE</h2>
+        <div class="bioDiv">
+          <Bio />
+        </div>
       </div>
-      <div class="followerDiv">
-        <Followers />
+      <div class="profilePicDiv">
+        <ProfilePicture />
       </div>
-      <div class="usersRoutesDiv">
-        <UsersRoutes />
-        <UserWorkouts />
-      </div>
-      <div class="bioDiv">
-        <Bio />
+      <div class="statsDiv">
+        <div class="followingDiv">
+          <Following />
+        </div>
+        <div class="followerDiv">
+          <Followers />
+        </div>
+        <div class="usersRoutesDiv">
+          <UsersRoutes />
+          <UserWorkouts />
+        </div>
       </div>
     </div>
     <div class="PrsAndGoals">
@@ -63,14 +59,20 @@ import UserWorkouts from '../components/UserWorkouts.vue';
       <UsersPosts />
     </div>
   </div>
-
 </template>
 
 <style scoped>
 
 .profileBackground {
   /* background-color: #4E515C; */
+  /* background-color: #2d2d2d; */
   background-color: #2d2d2d;
+  color: white;
+  padding: 20px;
+}
+
+.profilePicDiv {
+  /* border: 1px solid red; */
 }
 
 .goalsHead {
@@ -79,7 +81,7 @@ import UserWorkouts from '../components/UserWorkouts.vue';
 }
 
 .usernameText {
-  color: white;
+  /* color: white; */
   font-weight: bold;
 }
 
@@ -87,67 +89,56 @@ import UserWorkouts from '../components/UserWorkouts.vue';
   color: #925FF0;
 }
 
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.usersRoutesDiv {
-  border: 1px solid green;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.goalDiv {
-  border: 1px solid purple;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.personalBestsDiv {
-  border: 1px solid darkgoldenrod;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .mainProfileDiv {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 5px solid red;
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.usersPostsDiv {
-  border: 5px solid darkblue;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
 .bioDiv {
-  border: 1px solid rgb(212, 10, 195);
-  margin-top: 10px;
-  margin-bottom: 10px;
+  max-width: 150px;
 }
 
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.PrsAndGoals {
-  border: 5px solid rgb(11, 87, 62);
-  margin-top: 10px;
-  margin-bottom: 10px;
+
+.statsDiv {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.followingDiv {
-  border: 2px solid rgb(87, 11, 17);
-  margin-top: 10px;
-  margin-bottom: 10px;
+.usersRoutesDiv,
+.goalDiv {
+  border: 1px solid transparent;
+  margin: 10px;
+  padding: 10px;
 }
 
-/* styling of the margin and border just for now, will change when fully styled into their own tabs that only appear once they are "clicked" on to become active */
-.followerDiv {
-  border: 2px solid rgb(118, 134, 15);
-  margin-top: 10px;
-  margin-bottom: 10px;
+.personalBestsDiv,
+.followingDiv,
+.followerDiv,
+.bioDiv {
+  border: 1px solid transparent;
+  /* margin: 10px; */
+  padding: 10px;
+}
+
+.PrsAndGoals,
+.usersPostsDiv {
+  border: 1px solid transparent;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.returnToTopButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #925FF0;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 </style>

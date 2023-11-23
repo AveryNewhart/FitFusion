@@ -31,7 +31,7 @@ export default defineComponent({
   <div>
     <div>
       <img :src="imageUrl" alt="" class="uploaded-image">
-      <button class="editBtn rounded" @click="showEditOptions">Edit</button>
+      <button class="editBtn rounded" @click="showEditOptions">Edit Profile Picture</button>
     </div>
     <form v-if="showFileInput" action="index.html" method="post">
       <input type="file" name="file" id="file" @change="handleFileChange" accept="image/*">
