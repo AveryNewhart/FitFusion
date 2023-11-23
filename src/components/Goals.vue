@@ -28,13 +28,10 @@ const addGoal = () => {
     });
     newGoalTitle.value = '';
     newGoalDescription.value = '';
-    showModal.value = false; // Close the modal after adding a goal
+    showModal.value = false; // close the modal after adding a goal
   }
 };
 
-const editGoal = (index: number) => {
-  goals.value[index].editing = true;
-};
 
 const saveGoal = (index: number) => {
   goals.value[index].editing = false;
@@ -48,13 +45,16 @@ const deleteGoal = (index: number) => {
   goals.value.splice(index, 1);
 };
 
+
 onMounted(() => {});
 </script>
 
 <!-- MAKE IT SO THE "ADD GOAL" BUTTON IS ONLY VIEWABLE ON THE USERS OWN PROFILE. 
   IF ON ANOTHER USERS PROFILE, HAVE JUST THE USERS GOALS, THE ADD GOAL BUTTON SHOULDN'T BE THERE BECAUSE WHY BE ABLE TO ADD GOALS TO SOME OTHER USERS PROFILE. -->
 
-<!-- REMOVE THE EDIT AND DELETE THAT GOES WITH EACH GOAL THAT IS ADDED. MOVE THE DELETE BUTTON TO ASSOCIATE WITH EACH GOAL THAT IS IN THE MODAL WHEN THE USER GOES TO EDIT THEIR GOALS -->
+<!-- REMOVE THE X FROM THE MODAL THAT OPENS TO EDIT GOALS -->
+
+<!-- MAKE AN OPTION TO ADD A PROGRESS BAR OR SOMETHING FOR THE USER TO TRACK THEIR GOAL PROGRESS -->
 
   <template>
     <div>
@@ -66,6 +66,7 @@ onMounted(() => {});
       <div class="flex flex-wrap justify-center">
         <div v-for="(goal, index) in goals" :key="index" class="p-2">
           <div class="goal-box">
+            <div class="goal-number">{{ index + 1 }}</div>
             <div v-if="goal.editing">
               <input v-model="goal.title" class="goalInput" placeholder="enter a goal title..." />
               <textarea
@@ -79,8 +80,8 @@ onMounted(() => {});
             <div v-else>
               <h3 class="goalTitle">{{ goal.title }}</h3>
               <p class="goalDescription">{{ goal.description }}</p>
-              <button @click="editGoal(index)" class="editButton rounded">Edit</button>
-              <button @click="deleteGoal(index)" class="deleteButton rounded">Delete</button>
+              <!-- <button @click="editGoal(index)" class="editButton rounded">Edit</button>
+              <button @click="deleteGoal(index)" class="deleteButton rounded">Delete</button> -->
             </div>
           </div>
         </div>
@@ -100,17 +101,21 @@ onMounted(() => {});
         </div>
       </div>
 
-          <!-- Modal for editing goals -->
-    <div v-if="showEditModal" class="modal">
-      <div class="modal-content">
-        <span @click="showEditModal = false" class="close">&times;</span>
-        <div v-for="(goal, index) in goals" :key="index" class="goal-box">
-          <input v-model="goal.title" class="goalInput" placeholder="enter a goal title..." />
-          <textarea v-model="goal.description" class="goalInput" placeholder="enter a goal description..."></textarea>
+      <!-- Modal for editing goals -->
+      <div v-if="showEditModal" class="modal">
+        <div class="modal-content">
+          <span @click="showEditModal = false" class="close">&times;</span>
+          <div v-for="(goal, index) in goals" :key="index" class="goal-box">
+          <div>
+            <input v-model="goal.title" class="goalInput" placeholder="enter a goal title..." />
+            <textarea v-model="goal.description" class="goalInput" placeholder="enter a goal description..."></textarea>
+          </div>
+          <button @click="deleteGoal(index)" class="deleteButton rounded">Delete</button>
         </div>
         <button @click="saveAllGoals" class="addGoalBtn rounded p-2">Save Goals</button>
+        </div>
       </div>
-    </div>
+
 
     </div>
   </template>
@@ -191,6 +196,18 @@ onMounted(() => {});
 .addGoalBtn {
   background-color: #925ff0;
   border: 2px solid #a3fda1;
+}
+
+.goal-box {
+  position: relative;
+}
+
+.goal-number {
+  background-color: #925ff0;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8em;
 }
 
 </style>

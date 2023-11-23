@@ -9,12 +9,23 @@ import UsersPosts from '../components/UsersPosts.vue';
 import PersonalBests from '../components/PersonalBests.vue';
 import Bio from '../components/Bio.vue';
 import UsersRoutes from '../components/UsersRoutes.vue';
+import UserWorkouts from '../components/UserWorkouts.vue';
 
 </script>
 
-<!-- SET UP AN AREA FOR FAVORITE WORKOUTS AND FOR EACH CATEGORY -->
-<!-- HAVE SET UP LIKE UserRoutes.vue file! -->
-<!-- MAKE A NEW COMPONENT FOR IT. -->
+<!-- STYLE WHAT WILL BE THE HEADER OF THE PROFILE AND ALL THE COMPONENTS POSITIONING -->
+
+<!-- PROFILE HEADER -->
+<!-- I WANT THE USERS USERNAME CENTERED AT THE TOP OF ITS DIV, THE PROFILE PICTURE TO THE LEFT, THEN THE 4 BUTTONS OF FOLLOWERS FOLLOWING SAVED ROUTES AND SAVED WORKOUTS TO BE TO THE RIGHT OF THE PROFILE PICTURE IN A 2 ROW 2 COLUMN FORMATION -->
+<!-- THE BIO WILL BE CENTERED UNDER ALL OF THAT  -->
+
+
+<!-- PERSONAL BESTS AND GOALS SECTION -->
+<!-- THE GOALS AND PERSONAL BESTS SECTIONS IN THEIR OWN DIV UNDER THE PROFILE HEADER. -->
+
+
+<!-- USERS POSTS -->
+<!-- UNDER ALL OF THE OTHER STUFF, MAKE A BUTTON ALSO FOR THE BOTTOM RIGHT OF THE SCREEN THAT ALLOWS THE USER TO "RETURN TO TOP" OF THE PAGE -->
 
 <template>
  <div>
@@ -33,6 +44,7 @@ import UsersRoutes from '../components/UsersRoutes.vue';
       </div>
       <div class="usersRoutesDiv">
         <UsersRoutes />
+        <UserWorkouts />
       </div>
       <div class="bioDiv">
         <Bio />
