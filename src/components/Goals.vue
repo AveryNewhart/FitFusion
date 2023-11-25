@@ -56,6 +56,8 @@ onMounted(() => {});
 
 <!-- MAKE AN OPTION TO ADD A PROGRESS BAR OR SOMETHING FOR THE USER TO TRACK THEIR GOAL PROGRESS -->
 
+<!-- SET A MAX WIDTH OR JUST A WIDTH AND TEXT WRAP OF SOME SORT TO THE GOALS WHEN THEY ARE DISPLAYED. -->
+
   <template>
     <div>
       <h1 class="text-white">User's Goals (5 GOALS MAX)</h1>
@@ -77,7 +79,7 @@ onMounted(() => {});
               <button @click="saveGoal(index)" class="editButton rounded">Save</button>
               <button @click="cancelEdit(index)" class="deleteButton rounded">Cancel</button>
             </div>
-            <div v-else>
+            <div class="widthForGoals" v-else>
               <h3 class="goalTitle">{{ goal.title }}</h3>
               <p class="goalDescription">{{ goal.description }}</p>
               <!-- <button @click="editGoal(index)" class="editButton rounded">Edit</button>
@@ -131,6 +133,10 @@ onMounted(() => {});
   /* margin-bottom: 5px; */
   color: #925ff0;
 }
+
+/* .widthForGoals {
+  max-width: 50px;
+} */
 
 .goalDescription {
   /* margin-bottom: 10px; */

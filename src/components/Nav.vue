@@ -16,19 +16,24 @@ const closeSettingsModal = () => {
 
 </script>
 
+<!-- DECIDE FONT FOR TEXT -->
+<!-- DECIDE COLORS OF BUTTONS, DO I WANT BACKGROUNDS, COLOR CHANGING TEXT, SHADOWS, ETC. MAKE FUTURISTIC STYLE -->
+
+<!-- MAKE THE BOTTOM BORDER ACTUALLY HAVE A COLOR CHANGING ANIMATION, NOT JUST A STATIC COLOR CHANGE -->
+
 <template>
-  <nav class="bg-gradient-to-r from-green-400 to-blue-500 p-4">
+  <nav class="navBackground p-4">
     <div class="container mx-auto flex justify-between items-center">
-      <router-link to="/" class="text-white text-2xl font-bold">FitFusion</router-link>
+      <router-link to="/" class="text-white text-2xl font-bold navHeader">FitFusion</router-link>
 
       <div class="space-x-4">
-        <router-link to="/" class="text-white">Home</router-link>
-        <router-link to="/profile" class="text-white">Profile</router-link>
-        <router-link to="/login" class="text-white">Login/Signup</router-link>
-        <router-link to="/feed" class="text-white">Feed</router-link>
-        <router-link to="/calorietracker" class="text-white">Calorie Tracker</router-link>
-        <router-link to="/runningroutes" class="text-white">Running Routes</router-link>
-        <router-link to="/workoutcalender" class="text-white">Workout Calender</router-link>
+        <router-link to="/" class="navButtons">Home</router-link>
+        <router-link to="/profile" class="navButtons">Profile</router-link>
+        <router-link to="/login" class="navButtons">Login/Signup</router-link>
+        <router-link to="/feed" class="navButtons">Feed</router-link>
+        <router-link to="/calorietracker" class="navButtons">Calorie Tracker</router-link>
+        <router-link to="/runningroutes" class="navButtons">Running Routes</router-link>
+        <router-link to="/workoutcalender" class="navButtons">Workout Calender</router-link>
 
     <button class="links" @click="openSettingsModal">Settings</button>
 
@@ -48,6 +53,10 @@ const closeSettingsModal = () => {
 
 
 <style scoped>
+
+.navHeader {
+  margin-bottom: 10px;
+}
 
 .modal {
   display: none;
@@ -81,7 +90,36 @@ const closeSettingsModal = () => {
 
 .links {
   margin-right: 25px;
+  margin-bottom: 10px;
+  color: #A3FDA1;
 }
+
+.links:hover {
+  color: #925FF0;
+}
+
+.navButtons {
+  color: #925FF0;
+}
+
+.navButtons:hover {
+  color: #A3FDA1;
+}
+
+.navBackground {
+  background-color: #2d2d2d;
+}
+
+/* gradually changing border color effect */
+.navBackground::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, #A3FDA1, #925FF0);
+}
+
 
 
 </style>
