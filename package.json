@@ -11,6 +11,8 @@
   "dependencies": {
     "@apollo/client": "^3.8.7",
     "@jridgewell/sourcemap-codec": "^1.4.15",
+    "@mapbox/mapbox-gl-draw": "^1.4.3",
+    "@mapbox/mapbox-gl-geocoder": "^5.0.1",
     "@vue/apollo-components": "4.0.0-beta.10",
     "@vue/apollo-composable": "4.0.0-beta.11",
     "@vue/apollo-option": "4.0.0-beta.9",
@@ -25,6 +27,8 @@
   },
   "devDependencies": {
     "@types/mapbox-gl": "^2.7.18",
+    "@types/mapbox__mapbox-gl-draw": "^1.4.6",
+    "@types/mapbox__mapbox-gl-geocoder": "^4.7.7",
     "@types/node": "^20.9.2",
     "@vitejs/plugin-vue": "^4.5.0",
     "autoprefixer": "^10.4.16",

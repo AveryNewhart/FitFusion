@@ -1,19 +1,56 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import {  onMounted, onBeforeUnmount } from 'vue';
+import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import MapboxDraw from '@mapbox/mapbox-gl-draw';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import Nav from '../components/Nav.vue';
 
-const searchLocation = ref('');
+let map: mapboxgl.Map | null = null;
 
-const searchRoutes = () => {
-  // logic for searching routes based on the entered location
-  // use the value of searchLocation here
-};
+  onMounted(() => {
+    // initialize the map
+    map = new mapboxgl.Map({
+      container: document.getElementById('map') as HTMLDivElement,
+      style: 'mapbox://styles/mapbox/streets-v11', // can choose other styles, will have to look at docs to see which one will look best
+      center: [-74.5, 40], // initial map center, can change to anywhere
+      zoom: 9, // initial map zoom, can change later, make sure this is able to go up and down
+      accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
+    });
+
+    // geocoder control to the map
+    const geocoder = new MapboxGeocoder({
+      accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
+      mapboxgl: mapboxgl,
+    });
+
+    map.addControl(geocoder);
+
+    // draw control to the map
+    const draw = new MapboxDraw({
+      displayControlsDefault: false,
+      controls: {
+        line_string: true,
+        trash: true,
+      },
+    });
+
+    map.addControl(draw);
+
+    // any additional map functionality here
+  });
+
+  onBeforeUnmount(() => {
+  if (map) {
+    map.remove();
+  }
+});
+
+
 
 
 </script>
-
-<!-- NEXT IS CREATING ALL THE LOGIC, SMASH API or MAPBOX API -->
 
 
 <template>
@@ -24,23 +61,8 @@ const searchRoutes = () => {
   <div class="flex flex-col items-center">
     <h1 class="text-3xl font-semibold mb-4">Running Routes</h1>
 
-    <!-- Search Bar -->
-    <div class="mb-4">
-      <input
-        v-model="searchLocation"
-        placeholder="where's the next run?"
-        class="border rounded px-3 py-2"
-      />
-      <button
-        @click="searchRoutes"
-        class="bg-blue-500 text-white px-4 py-2 rounded ml-2"
-      >
-        Search
-      </button>
-    </div>
-
     <!-- MAP CONTAINER -->
-    <div ref="mapContainer" class="w-full h-96 rounded-lg mb-8 mapContainer">the map will be in here</div>
+    <div ref="map" id="map" class="w-full h-96 rounded-lg mb-8 map"></div>
     <!-- MAP CONTAINER -->
 
     <!-- save a route -->
@@ -49,7 +71,7 @@ const searchRoutes = () => {
     </div>
 
     <!-- Personal Best Section -->
-    <div class="w-full mt-8 mb-4">
+    <div class="w-full pbSec mb-4">
       <h2 class="text-xl font-semibold mb-2">Personal Best For This Route... </h2>
       <!-- Display the personal best time -->
       <!-- <p>{{ personalBestTime ? `Your Personal Best: ${personalBestTime}` : 'No Personal Best recorded yet' }}</p> -->
@@ -82,12 +104,17 @@ const searchRoutes = () => {
 
 <style scoped>
 
-.mapContainer {
+.map {
   border: 2px solid darkgreen;
+  z-index: 999;
 }
 
 .mainRunningDiv {
   background-color: #2d2d2d;
+}
+
+.pbSec {
+  margin-top: 150px;
 }
 
 </style>
