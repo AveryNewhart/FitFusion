@@ -20,8 +20,9 @@ const searchRoutes = () => {
   <div>
     <Nav />
   </div>
-  <div class="flex flex-col items-center mt-8">
-    <h1 class="text-3xl font-semibold mb-4">Generate Running Routes</h1>
+  <div class="mainRunningDiv">
+  <div class="flex flex-col items-center">
+    <h1 class="text-3xl font-semibold mb-4">Running Routes</h1>
 
     <!-- Search Bar -->
     <div class="mb-4">
@@ -76,12 +77,17 @@ const searchRoutes = () => {
       </ol>
     </div>
   </div>
+  </div>
 </template>
 
 <style scoped>
 
 .mapContainer {
   border: 2px solid darkgreen;
+}
+
+.mainRunningDiv {
+  background-color: #2d2d2d;
 }
 
 </style>

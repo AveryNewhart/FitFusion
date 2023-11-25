@@ -4,14 +4,23 @@ import Nav from '../components/Nav.vue';
 
 </script>
 
+<!-- ADD COLOR SCHEME TO THE PAGE -->
+
+<!-- HAVE A BUTTON TO ADD A POST. HAVE IT OPEN A MODAL THAT ALLOWS THE USER TO ENTER TEXT FOR A POST, A SPOT FOR A PHOTO FILE, AND THEN A CLOSE BUTTON FOR IF THE USER DOESNT WANT TO POST IT. -->
+
+<!-- DECIDE WHAT OTHER CONTENT WILL BE ON THE FEED PAGE:
+		-SEARCHBAR TO SEARCH USERS
+		-ON DESKTOP, THE USERS PROFILE PICTURE AND USERNAME ON THE RIGHT OR LEFT SIDE TO TAKE UP SOME OF THE BLANK SPACE, MAYBE SEARCH BAR ABOVE THAT
+		-WHATS NEW/RECENT NEWS SECTION ON DESKTOP TO TAKE UP SPACE? -->
+
 <template>
  <div>
     <Nav />
  </div> 
-  <div class="">
-    <h1>public feed</h1>
-  </div>
-
+  <div class="feedMainDiv">
+	<div>
+    	<h1 class="text-center font-bold text-xl feedHead">FitFusion Feed</h1>
+	</div>
   <div class = "main panel panel-default">
     <div class = "panel-body">
 
@@ -35,11 +44,22 @@ import Nav from '../components/Nav.vue';
         <p class="read">click here to view comment section(x amount of comments)(have dropdown menu appear) <span class="right"><b>Add Comment</b> <i class = "fa fa-comment-o"></i></span></p>
       </div>
     </div>
+	</div>
   </div>
 
 </template>
 
 <style scoped>
+
+.feedMainDiv {
+	background-color: #2d2d2d;
+	height: 100vh;
+}
+
+.feedHead {
+	color: #925ff0;
+}
+
 
 .main{
 	width: 	50vw;
@@ -117,19 +137,6 @@ import Nav from '../components/Nav.vue';
 	color: #d32f2f;
 }
 
-.menu{
-	width: 100%;
-	background: inherit;
-	height: 3vw;
-	display: none;
-}
-
-.menu a{
-	margin-left: 2vw;
-	margin-right: 2vw;
-	font-size: 2vw;
-	color: #d32f2f;
-}
 
 @media only screen and (max-width: 425px){
 	.main{
