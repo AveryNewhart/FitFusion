@@ -4,14 +4,16 @@ import Nav from '../components/Nav.vue';
 
 </script>
 
+<!-- ADD COLOR SCHEME TO THE PAGE -->
+
 <template>
  <div>
     <Nav />
  </div> 
-  <div class="">
-    <h1>public feed</h1>
-  </div>
-
+  <div class="feedMainDiv">
+	<div>
+    	<h1 class="text-center font-bold text-xl feedHead">FitFusion Feed</h1>
+	</div>
   <div class = "main panel panel-default">
     <div class = "panel-body">
 
@@ -35,11 +37,22 @@ import Nav from '../components/Nav.vue';
         <p class="read">click here to view comment section(x amount of comments)(have dropdown menu appear) <span class="right"><b>Add Comment</b> <i class = "fa fa-comment-o"></i></span></p>
       </div>
     </div>
+	</div>
   </div>
 
 </template>
 
 <style scoped>
+
+.feedMainDiv {
+	background-color: #2d2d2d;
+	height: 100vh;
+}
+
+.feedHead {
+	color: #925ff0;
+}
+
 
 .main{
 	width: 	50vw;
@@ -117,19 +130,6 @@ import Nav from '../components/Nav.vue';
 	color: #d32f2f;
 }
 
-.menu{
-	width: 100%;
-	background: inherit;
-	height: 3vw;
-	display: none;
-}
-
-.menu a{
-	margin-left: 2vw;
-	margin-right: 2vw;
-	font-size: 2vw;
-	color: #d32f2f;
-}
 
 @media only screen and (max-width: 425px){
 	.main{
