@@ -1,4 +1,18 @@
 <script setup lang="ts">
+
+// <!-- NEED TO DO LOGIC FOR -->
+// <!-- USER SHOULD BE ABLE TO SAVE WORKOUTS TO THE RESPECTIVE CATEGORIES, EX SAVING A WORKOUT THAT IS FOR ARMS TO THE ARM CATEGORY. -->
+// <!-- ON THE BACKEND THE USER WILL HAVE TO HAVE WORKOUTS SAVE TO THEM. -->
+
+// <!-- HAVE IT SO THE USER IS ABLE TO ADD A WORKOUT TO ONE OF THE CATEGORIES SO THAT IS ADDED TO THE LIST OF OPTIONS THE GENERATE BUTTON CHOOSES FROM -->
+
+// <!-- MAKE THE "SAVED WORKOUT" A CLICKABLE LINK THAT OPENS A MODAL OF THE SAVED WORKOUT, LET THE USER NAME THEIR SAVED WORKOUT -->
+// <!-- LET THERE BE A COPY BUTTON FOR THE USER TO BE ABLE TO COPY THE WHOLE WORKOUT AND THEN THEY SHOULD BE ABLE TO PASTE THE WORKOUT WHEN THEY CLICK WHICH DAY THEY WANT IT. -->
+
+// <!-- CREATE THE FUNCTIONS FOR EACH WORKOUT THAT CAN BE GENERATED. -->
+// <!-- EACH WORKOUT WILL HAVE A POOL OF WORKOUTS FOR THAT TYPE THAT WILL HAVE 5 WORKOUTS TO BE PICKED FROM THERE AT RANDOM -->
+// <!-- THE 5 RANDOM WORKOUTS FOR THAT TYPE WILL GO INTO THE 5 INPUT FIELDS FOR THE DAY SELECTED -->
+
 import { ref, computed } from 'vue';
 
 import Nav from '../components/Nav.vue';
@@ -95,20 +109,12 @@ const generateWorkout = () => {
 </script>
 
 
-<!-- CREATE THE FUNCTIONS FOR EACH WORKOUT THAT CAN BE GENERATED. -->
-<!-- EACH WORKOUT WILL HAVE A POOL OF WORKOUTS FOR THAT TYPE THAT WILL HAVE 5 WORKOUTS TO BE PICKED FROM THERE AT RANDOM -->
-<!-- THE 5 RANDOM WORKOUTS FOR THAT TYPE WILL GO INTO THE 5 INPUT FIELDS FOR THE DAY SELECTED -->
+<!-- ADD A SMALL "KEY" RIGHT ABOVE THE WORKOUT CALENDER THAT INDICATES IF THE USER CLICKS ON A DAY THE COLOR WILL CHANGE SO THEY CAN MARK IT AS AN OFF DAY. 
+  I ALSO WANT TO MAKE THE CHANGE SO THAT WHEN THE USER DOES CLICK THE DAY, ALONG WITH THE COLOR OF THE DAY BECOMING RED,  GREY OUT ALL OF THE INPUTS FOR THAT DAY SO THE USER CAN'T TYPE IN THEM. -->
+  <!--  IN SAVE MODAL MESS WITH BACKGROUND OPACITY AND SIZING/POSITIONING INSIDE THE MODAL -->
+<!-- MAKE WORKOUT TYPE AND DAY BE ON THE SAME LINE ABOVE THE GENERATE BUTTON FOR SPACING PURPOSES -->
 
-<!-- NEED TO DO LOGIC FOR -->
-<!-- USER SHOULD BE ABLE TO SAVE WORKOUTS TO THE RESPECTIVE CATEGORIES, EX SAVING A WORKOUT THAT IS FOR ARMS TO THE ARM CATEGORY. -->
-<!-- ON THE BACKEND THE USER WILL HAVE TO HAVE WORKOUTS SAVE TO THEM. -->
-
-<!-- HAVE IT SO THE USER IS ABLE TO ADD A WORKOUT TO ONE OF THE CATEGORIES SO THAT IS ADDED TO THE LIST OF OPTIONS THE GENERATE BUTTON CHOOSES FROM -->
-
-<!-- MAKE THE "SAVED WORKOUT" A CLICKABLE LINK THAT OPENS A MODAL OF THE SAVED WORKOUT, LET THE USER NAME THEIR SAVED WORKOUT -->
-<!-- LET THERE BE A COPY BUTTON FOR THE USER TO BE ABLE TO COPY THE WHOLE WORKOUT AND THEN THEY SHOULD BE ABLE TO PASTE THE WORKOUT WHEN THEY CLICK WHICH DAY THEY WANT IT. -->
-
-<!-- FOR MOBILE STYLING MIGHT HAVE TO SWAY AWAY FROM CURRENT WAY, OR ADJUST WIDTHS TO BE 100% WHEN SCREEN BECOMES SMALLER WITH PURE CSS -->
+<!-- WHEN MAKING FUTURISITIC STYLE, MAKE IT SO THE 2 MAIN COLORS MORPH TOGETHER A LOT AND HAVE SORT OF ANIMATIONS, SO UNDERLINES, BORDERS, BACKGROUNDS AREN'T JUST STATIC -->
 
 
 
@@ -116,7 +122,8 @@ const generateWorkout = () => {
 <template>
   <div class="">
     <Nav />
-    <h1 class="text-2xl font-bold mb-4">User's Schedule/Workout Calendar</h1>
+    <div class="mainWorkoutCal">
+    <h1 class="text-2xl text-center font-bold mb-4 headerText">User's Schedule/Workout Calendar</h1>
 
 <!-- BELOW THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR MOBILE VIEW -->
     <!-- Dropdown menu to select workout type -->
@@ -132,7 +139,7 @@ const generateWorkout = () => {
     <!-- Workout Generator Button -->
         <button
       @click="generateWorkout"
-      class="bg-blue-500 text-white p-2 rounded mb-4 md:hidden"
+      class="generateBtn text-white p-2 rounded mb-4 md:hidden"
     >
       Generate {{ selectedWorkoutType }} Workout for {{ selectedDay }}
     </button>
@@ -142,7 +149,7 @@ const generateWorkout = () => {
    <div class="flex flex-col md:flex-row md:grid md:grid-cols-7 gap-4 mb-4">
       <div v-for="(day, index) in daysOfWeek" :key="day" class="text-center">
         <div
-          :class="{ 'bg-green-500': !offDays[index], 'bg-red-500': offDays[index] }"
+          :class="{ 'onBg': !offDays[index], 'bg-red-500': offDays[index] }"
           class="mb-2 p-2 cursor-pointer rounded"
           @click="toggleDay(index)"
         >
@@ -165,7 +172,7 @@ const generateWorkout = () => {
     <div class="grid grid-cols-7 gap-4 mb-4">
       <div v-for="(day, index) in daysOfWeek" :key="day" class="text-center">
         <div class="mb-2">
-          <button @click="showSaveModal(index)" class="bg-blue-500 text-white p-2 rounded">
+          <button @click="showSaveModal(index)" class="saveBtn text-white p-2 rounded">
             Save Workout
           </button>
         </div>
@@ -174,14 +181,14 @@ const generateWorkout = () => {
 
        <!-- Categories and saved workouts section -->
        <div class="mb-4">
-      <h2 class="text-xl font-bold mb-2">Workout Categories</h2>
-      <div class="flex space-x-4">
+      <h2 class="headerText text-center font-bold mb-2 text-lg">Workout Categories</h2>
+      <div class="flex space-x-4 text-center">
         <!-- Display workout categories -->
        <div v-for="(type, index) in workoutTypes" :key="index" class="flex-1">
-          <h3 class="text-lg font-bold">{{ type }}</h3>
+          <h3 class="workoutType text-lg font-bold">{{ type }}</h3>
           <ul>
             <!-- Display saved workouts for each category -->
-            <li v-for="workout in getSavedWorkoutsByCategory(type)" :key="workout">
+            <li v-for="workout in getSavedWorkoutsByCategory(type)" :key="workout" class="workout">
               {{ workout }}
             </li>
           </ul>
@@ -189,17 +196,19 @@ const generateWorkout = () => {
       </div>
     </div>
 
+
+
     <!-- Save modal -->
-    <div v-if="showModal" class="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
-      <div class="bg-white p-4 rounded">
-        <h2 class="text-xl font-bold mb-2">Select Category to Save Workout</h2>
+    <div v-if="showModal" class="fixed top-0 left-0 w-full h-full bgColor bg-opacity-50 flex items-center justify-center">
+      <div class="bgModal p-4 rounded">
+        <h2 class="text-xl text-white font-bold mb-2">Select Category to Save Workout</h2>
         <select v-model="selectedCategory" class="p-2 rounded mb-2">
           <option v-for="(type, index) in workoutTypes" :key="index" :value="type">{{ type }}</option>
         </select>
-        <button @click="saveWorkout" class="bg-blue-500 text-white p-2 rounded">
+        <button @click="saveWorkout" class="saveBtn text-white p-2 rounded">
           Save
         </button>
-        <button @click="closeModal" class="bg-gray-500 text-white p-2 rounded ml-2">
+        <button @click="closeModal" class="bg-red-500 text-white p-2 rounded ml-2">
           Cancel
         </button>
       </div>
@@ -219,15 +228,76 @@ const generateWorkout = () => {
     <!-- Workout Generator Button (Visible on LG and MD screens) -->
     <button
       @click="generateWorkout"
-      class="bg-blue-500 text-white p-2 rounded hidden md:block"
+      class="text-white p-2 rounded hidden md:block generateBtn"
     >
       Generate {{ selectedWorkoutType }} Workout for {{ selectedDay }}
     </button>
 <!-- ABOVE THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR NORMAL VIEW -->
 
+
+    </div>
   </div>
 </template>
 
 
 <style scoped>
+
+.mainWorkoutCal {
+  background: #2d2d2d;
+  height: 100vh;
+}
+
+.headerText {
+  /* color: #A3FDA1; */
+  color: #925ff0;
+}
+
+select {
+  background-color: #925ff0;
+  color: white;
+  border: 2px solid #A3FDA1;
+}
+
+.generateBtn {
+  background-color: #925ff0;
+  border: 2px solid #A3FDA1;
+}
+
+.saveBtn {
+  background-color: #A3FDA1;
+  color: #2d2d2d;
+  border: 2px solid #925ff0;
+}
+
+input {
+  background-color: #925ff0;
+  color: #2d2d2d;
+}
+
+.bgColor {
+  background-color: #925ff0;
+}
+
+.onBg {
+  background-color: #A3FDA1;
+}
+
+.bgModal {
+  background-color: #2d2d2d;
+}
+
+.workoutType {
+  color: #A3FDA1;
+  border-bottom: 2px solid #925ff0;
+}
+
+.workout {
+  color: white;
+}
+
+.workout:hover {
+  color: #A3FDA1;
+  cursor: pointer;
+}
+
 </style>
