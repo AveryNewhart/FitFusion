@@ -19,28 +19,37 @@ let map: mapboxgl.Map | null = null;
       accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
     });
 
-    // geocoder control to the map
-    const geocoder = new MapboxGeocoder({
-      accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
-      mapboxgl: mapboxgl,
-    });
+      //  default controls
+      map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+      map.addControl(new mapboxgl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true }), 'top-left');
+      map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
+      map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+      map.addControl(new mapboxgl.AttributionControl(), 'bottom-right');
 
-    map.addControl(geocoder);
+      const attributionControl = document.querySelector('.mapboxgl-ctrl-attrib');
+        if (attributionControl) {
+          (attributionControl as HTMLElement).style.display = 'none';
+        }
 
-    // draw control to the map
-    const draw = new MapboxDraw({
-      displayControlsDefault: false,
-      controls: {
-        line_string: true,
-        trash: true,
-      },
-    });
 
-    map.addControl(draw);
+      // geocoder control to the map
+      const geocoder = new MapboxGeocoder({
+        accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
+        mapboxgl: mapboxgl,
+      });
 
-    // navigation controls (zoom buttons)
-    const navigationControl = new mapboxgl.NavigationControl();
-      map.addControl(navigationControl, 'top-left');
+      map.addControl(geocoder);
+
+      // draw control to the map
+      const draw = new MapboxDraw({
+        displayControlsDefault: false,
+        controls: {
+          line_string: true,
+          trash: true,
+        },
+      });
+
+      map.addControl(draw);
 
     // any additional map functionality here
   });
@@ -120,5 +129,6 @@ let map: mapboxgl.Map | null = null;
 .pbSec {
   margin-top: 150px;
 }
+
 
 </style>
