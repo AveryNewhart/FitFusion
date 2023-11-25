@@ -38,6 +38,10 @@ let map: mapboxgl.Map | null = null;
 
     map.addControl(draw);
 
+    // navigation controls (zoom buttons)
+    const navigationControl = new mapboxgl.NavigationControl();
+      map.addControl(navigationControl, 'top-left');
+
     // any additional map functionality here
   });
 
