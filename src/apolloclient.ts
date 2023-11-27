@@ -7,7 +7,7 @@ import {
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: 'http://localhost:4042/graphql'
+  uri: 'http://localhost:4000/graphql'
 });
 
 export const apolloClient = new ApolloClient({
