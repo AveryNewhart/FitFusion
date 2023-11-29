@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import {  ref, onMounted, onBeforeUnmount } from 'vue';
+import { 
+  //  ref, 
+  onMounted, onBeforeUnmount } from 'vue';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
@@ -10,7 +12,7 @@ import Nav from '../components/Nav.vue';
 
 let map: mapboxgl.Map | null = null;
 let geocoder: MapboxGeocoder | null = null;
-const searchLocation = ref('');
+// const searchLocation = ref('');
 
   onMounted(() => {
     // initialize the map
@@ -29,6 +31,8 @@ const searchLocation = ref('');
       map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
       map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
 
+
+//! this is commented out logic for if i would like to add the map back to the overlay of the map itself.
 
       // // geocoder control to the map
       // const geocoder = new MapboxGeocoder({
@@ -85,39 +89,24 @@ const searchLocation = ref('');
   }
 });
 
-// Trigger Mapbox Geocoder search when custom search button is clicked
+
+// // Trigger Mapbox Geocoder search when custom search button is clicked
 // const searchRoutes = () => {
-//   // use the value of searchLocation here
-//   // if (searchLocation.value && geocoder) {
-//   //   // Manually set the Geocoder input value
-//   //   geocoder.setInput(searchLocation.value);
+//   if (searchLocation.value && geocoder) {
+//     // Manually set the Geocoder input value
+//     geocoder.setInput(searchLocation.value);
 
-//   //   // Trigger the Geocoder search
-//   //   geocoder.on('result', (result) => {
-//   //     console.log('Geocoder result:', result);
-//   //     // Handle the result here, e.g., center the map on the result
-//   //     map?.flyTo({ center: result.result.center, zoom: 12 });
-//   //   });
-//   // }
+//     // Trigger the Geocoder search
+//     geocoder.query(searchLocation.value);
+//   }
 // };
-
-
-// Trigger Mapbox Geocoder search when custom search button is clicked
-const searchRoutes = () => {
-  if (searchLocation.value && geocoder) {
-    // Manually set the Geocoder input value
-    geocoder.setInput(searchLocation.value);
-
-    // Trigger the Geocoder search
-    geocoder.query(searchLocation.value);
-  }
-};
 
 
 </script>
 
-<!-- GET SEARCH BAR TO WORK FOR MY CUSTOM SEARCH BAR, FIGURE OUT HOW TO STYLE SEARCH BAR NOW, OR SEE I IF OTHER SEARCH BAR ON MAPBOX SITE -->
-<!-- DO I HAVE TO BUT THE SEARCH ROUTE LOGIC INTO THE MAP FUNCTION? LIKE WHERE GEOCODER IS DEFINED, DO I PUT THAT INSIDE THE SEARCH ROUTES FUNCTION? -->
+<!-- STYLE THE MAPBOX SEARCHBAR NOW THAT IT IS ABOVE THE MAP, MAKE IT SO WHEN YOU START TYPING, THERE BECOMES A BACKGROUND BEHIND THE LIST THAT IS POPULATING AND HAVE IT SO THE LIST CAN OVERFLOW SO IT STAYS SMOOTH. -->
+<!-- CHANGE THE BACKGROUND OF THE INPUT, THE PLACEHOLDER OF IT, AND THE COLOR OF THE TEXT. -->
+<!-- MAKE IT SO ONLY THE FIVE CLOSEST RESPONSES POPULATE SO IT DOESNT TAKE UP CRAZY SPACE. -->
 
 <!-- GET ROUTE RUNNING LINES TO BE DOTTED WHILE DRAWING THEN SOLID WHEN FINISHED -->
 
@@ -137,7 +126,7 @@ const searchRoutes = () => {
       <h1 class="text-3xl font-semibold mb-4 runningHeader">Running Routes</h1>
 
       <div class="mb-4 mySearch">
-        <input
+        <!-- <input
           v-model="searchLocation"
           placeholder="where's the next run?"
           class="border rounded px-3 py-2"
@@ -147,7 +136,7 @@ const searchRoutes = () => {
           class="saveBtn px-4 py-2 ml-2"
         >
           Search
-        </button>
+        </button> -->
       </div>
 
       <!-- MAP CONTAINER -->
