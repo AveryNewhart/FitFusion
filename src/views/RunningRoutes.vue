@@ -5,6 +5,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+
 import Nav from '../components/Nav.vue';
 
 let map: mapboxgl.Map | null = null;
@@ -13,11 +14,12 @@ let map: mapboxgl.Map | null = null;
     // initialize the map
     map = new mapboxgl.Map({
       container: document.getElementById('map') as HTMLDivElement,
-      style: 'mapbox://styles/mapbox/dark-v11', // can choose other styles, will have to look at docs to see which one will look best
+      style: 'mapbox://styles/averynewhart/clpesz87q006q01qm5h5l70y7', // can choose other styles, will have to look at docs to see which one will look best
       center: [-74.5, 40], // initial map center, can change to anywhere
       zoom: 9, // initial map zoom, can change later, make sure this is able to go up and down
       accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
     });
+
 
       //  default controls
       map.addControl(new mapboxgl.NavigationControl(), 'top-left');
@@ -64,6 +66,12 @@ let map: mapboxgl.Map | null = null;
 
 
 </script>
+
+<!-- FINISH ADDING COLOR SCHEME -->
+
+<!-- MAKE IT SO MAP FULLSCREEN WORKS, CHANGE THE HEIGHT TO BE ABLE TO BECOME THE MAX HEIGHT -->
+
+<!-- STYLE THE MAP -->
 
 
 <template>
