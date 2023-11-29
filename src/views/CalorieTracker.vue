@@ -122,12 +122,14 @@ const resetWeek = (): void => {
 }
 
 .trackH1 {
-  color: #a3fda1;
+  /* color: #a3fda1; */
+  color: #925ff0;
   margin-bottom: 15px;
 }
 
 .borderG {
-  border: 3px solid #a3fda1;
+  /* border: 3px solid #a3fda1; */
+  border: 3px solid #925ff0;
 }
 
 table {
@@ -136,14 +138,18 @@ table {
 }
 
 thead,  .dayBg{
-  background-color: #925ff0;
-  color: white;
-  border: 3px solid #a3fda1;
+  /* background-color: #925ff0; */
+  background-color: #a3fda1;
+  /* color: white; */
+  color: #2d2d2d;
+  /* border: 3px solid #a3fda1; */
+  border: 3px solid #925ff0;
 }
 
 thead th {
   padding: 10px;
-  border-right: 3px solid #a3fda1;
+  /* border-right: 3px solid #a3fda1; */
+  border-right: 3px solid #925ff0;
 }
 
 .caloriesCircle {
@@ -154,18 +160,22 @@ thead th {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #925ff0; 
+  /* background-color: #925ff0;  */
+  background-color: #a3fda1;
 }
 
 .caloriesText {
   position: relative; 
   z-index: 1; 
-  color: white;
+  /* color: white; */
+  color: #2d2d2d;
 }
 
 .inputBg {
-  background-color: #a3fda1;
-  border: 3px solid #925ff0;
+  /* background-color: #a3fda1; */
+  background-color: #925ff0;
+  /* border: 3px solid #925ff0; */
+  border: 3px solid #a3fda1;
   color: #2d2d2d;
   border-radius: 5px;
   padding: 5px;
@@ -184,15 +194,21 @@ button {
 }
 
 .addBtn {
-  background-color: #a3fda1;
-  color: #2d2d2d;
-  border: 2px solid #925ff0;
+  /* background-color: #a3fda1; */
+  background-color: #925ff0;
+  /* color: #2d2d2d; */
+  color: white;
+  /* border: 2px solid #925ff0; */
+  border: 2px solid #a3fda1;
 }
 
 .addBtn:hover {
-  background-color: #925ff0;
-  color: white;
-  border: 2px solid #a3fda1;
+  /* background-color: #925ff0; */
+  background-color: #a3fda1;
+  /* color: white; */
+  color: #2d2d2d;
+  /* border: 2px solid #a3fda1; */
+  border: 2px solid #925ff0;
 }
 
 .resetBtn:hover {
@@ -206,12 +222,14 @@ button {
 }
 
 .weekH1 {
-  color: #925ff0;
+  /* color: #925ff0; */
+  color: #a3fda1;
   margin-bottom: 15px;
 }
 
 .calorieSpan {
-  color: #a3fda1;
+  /* color: #a3fda1; */
+  color: #925ff0;
 }
 </style>
 
