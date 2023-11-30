@@ -32,16 +32,33 @@ let geocoder: MapboxGeocoder | null = null;
       map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
 
 
-//! this is commented out logic for if i would like to add the map back to the overlay of the map itself.
+      //  Mapbox Geocoder control
+      geocoder = new MapboxGeocoder({
+        accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
+        mapboxgl: mapboxgl,
+      });
 
-      // // geocoder control to the map
-      // const geocoder = new MapboxGeocoder({
-      //   accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
-      //   mapboxgl: mapboxgl,
-      // });
+      // Geocoder control to the integrated search bar
+      // geocoder.addTo('.mySearch');
+
+      map.addControl(geocoder);
+
+      // styles to the Mapbox Geocoder
+      const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
+        if (geocoderInput) {
+          (geocoderInput as HTMLInputElement).style.backgroundColor = '#a3fda1';
+        }
+
+      // handle geocoder result
+      geocoder.on('result', (result) => {
+      // log the result to the console for now
+      console.log('Geocoder result:', result);
+
+      // center the map on the result
+      map!.flyTo({ center: result.result.center, zoom: 12 });
+    });
       
 
-      // map.addControl(geocoder);
 
       // draw control to the map
       const draw = new MapboxDraw({
@@ -64,23 +81,33 @@ let geocoder: MapboxGeocoder | null = null;
 
       map.addControl(draw);
 
-        //  Mapbox Geocoder control
-      geocoder = new MapboxGeocoder({
-        accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
-        mapboxgl: mapboxgl,
-      });
+    // !!!!! THIS IS COMMENTED OUT LOGIC FOR IF SEARCH BAR IS MOVED BACK TO THE TOP OF THE PAGE !!!!!!!
 
-      // Geocoder control to the integrated search bar
-      geocoder.addTo('.mySearch');
+    //           //  Mapbox Geocoder control
+    //           geocoder = new MapboxGeocoder({
+    //     accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
+    //     mapboxgl: mapboxgl,
+    //   });
 
-      // handle geocoder result
-      geocoder.on('result', (result) => {
-      // log the result to the console for now
-      console.log('Geocoder result:', result);
+    //   // Geocoder control to the integrated search bar
+    //   // geocoder.addTo('.mySearch');
 
-      // center the map on the result
-      map!.flyTo({ center: result.result.center, zoom: 12 });
-    });
+    //   // styles to the Mapbox Geocoder
+    //   const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
+    //     if (geocoderInput) {
+    //       (geocoderInput as HTMLInputElement).style.backgroundColor = '#a3fda1';
+    //     }
+
+    //   // handle geocoder result
+    //   geocoder.on('result', (result) => {
+    //   // log the result to the console for now
+    //   console.log('Geocoder result:', result);
+
+    //   // center the map on the result
+    //   map!.flyTo({ center: result.result.center, zoom: 12 });
+    // });
+
+
   });
 
   onBeforeUnmount(() => {
@@ -90,21 +117,9 @@ let geocoder: MapboxGeocoder | null = null;
 });
 
 
-// // Trigger Mapbox Geocoder search when custom search button is clicked
-// const searchRoutes = () => {
-//   if (searchLocation.value && geocoder) {
-//     // Manually set the Geocoder input value
-//     geocoder.setInput(searchLocation.value);
-
-//     // Trigger the Geocoder search
-//     geocoder.query(searchLocation.value);
-//   }
-// };
-
-
 </script>
 
-<!-- STYLE THE MAPBOX SEARCHBAR NOW THAT IT IS ABOVE THE MAP, MAKE IT SO WHEN YOU START TYPING, THERE BECOMES A BACKGROUND BEHIND THE LIST THAT IS POPULATING AND HAVE IT SO THE LIST CAN OVERFLOW SO IT STAYS SMOOTH. -->
+<!-- MAKE IT SO WHEN YOU START TYPING, THERE BECOMES A BACKGROUND BEHIND THE LIST THAT IS POPULATING AND HAVE IT SO THE LIST CAN OVERFLOW OVER THE MAP SO IT STAYS SMOOTH. -->
 <!-- CHANGE THE BACKGROUND OF THE INPUT, THE PLACEHOLDER OF IT, AND THE COLOR OF THE TEXT. -->
 <!-- MAKE IT SO ONLY THE FIVE CLOSEST RESPONSES POPULATE SO IT DOESNT TAKE UP CRAZY SPACE. -->
 
@@ -131,6 +146,7 @@ let geocoder: MapboxGeocoder | null = null;
           placeholder="where's the next run?"
           class="border rounded px-3 py-2"
         />
+        
         <button
           @click="searchRoutes"
           class="saveBtn px-4 py-2 ml-2"
@@ -236,6 +252,10 @@ let geocoder: MapboxGeocoder | null = null;
   border: 3px solid #925ff0;
   color: #2d2d2d;
 }
+/* 
+.mySearch  {
+  background-color: #a3fda1;
+} */
 
 
 
