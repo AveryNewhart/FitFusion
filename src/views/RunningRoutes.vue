@@ -56,6 +56,13 @@ let geocoder: MapboxGeocoder | null = null;
           // (geocoderInput as HTMLInputElement).style.padding = '2px';
         }
 
+      const geocoderContainer = document.querySelector('.suggestions-wrapper');
+        if (geocoderContainer) {
+          (geocoderContainer as HTMLDivElement).style.backgroundColor = '#2d2d2d';
+          (geocoderContainer as HTMLDivElement).style.color = '#a3fda1';
+          (geocoderContainer as HTMLDivElement).style.borderRadius = '5px';
+          (geocoderContainer as HTMLDivElement).style.border = '2px solid #925ff0';
+        }
         
 
       // handle geocoder result
