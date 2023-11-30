@@ -46,7 +46,12 @@ let geocoder: MapboxGeocoder | null = null;
       // styles to the Mapbox Geocoder
       const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
         if (geocoderInput) {
-          (geocoderInput as HTMLInputElement).style.backgroundColor = '#a3fda1';
+          (geocoderInput as HTMLInputElement).style.backgroundColor = '#925ff0';
+          (geocoderInput as HTMLInputElement).style.color = 'white';
+          (geocoderInput as HTMLInputElement).style.border = '2px solid #a3fda1';
+          (geocoderInput as HTMLInputElement).style.borderRadius = '5px';
+          (geocoderInput as HTMLInputElement).style.padding = '2px';
+          
         }
 
       // handle geocoder result
@@ -131,6 +136,8 @@ let geocoder: MapboxGeocoder | null = null;
 
 <!-- when mobile styling the running data boxes, adjust the height size of the text to sync up with the size of the boxes downsizing for when users have zoom feature on their phone -->
 
+
+<!-- ADD A SECTION TO SEE THE ROUTES IN THE AREA!!!!!! -->
 
 <template>
   <div>
