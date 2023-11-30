@@ -119,7 +119,7 @@ let geocoder: MapboxGeocoder | null = null;
 
 </script>
 
-<!-- MAKE IT SO WHEN YOU START TYPING, THERE BECOMES A BACKGROUND BEHIND THE LIST THAT IS POPULATING AND HAVE IT SO THE LIST CAN OVERFLOW OVER THE MAP SO IT STAYS SMOOTH. -->
+<!-- MAKE IT SO WHEN YOU START TYPING, THERE BECOMES A BACKGROUND BEHIND THE LIST THAT IS POPULATING.-->
 <!-- CHANGE THE BACKGROUND OF THE INPUT, THE PLACEHOLDER OF IT, AND THE COLOR OF THE TEXT. -->
 <!-- MAKE IT SO ONLY THE FIVE CLOSEST RESPONSES POPULATE SO IT DOESNT TAKE UP CRAZY SPACE. -->
 
@@ -140,7 +140,7 @@ let geocoder: MapboxGeocoder | null = null;
     <div class="flex flex-col items-center">
       <h1 class="text-3xl font-semibold mb-4 runningHeader">Running Routes</h1>
 
-      <div class="mb-4 mySearch">
+      <!-- <div class="mb-4 mySearch"> -->
         <!-- <input
           v-model="searchLocation"
           placeholder="where's the next run?"
@@ -153,7 +153,7 @@ let geocoder: MapboxGeocoder | null = null;
         >
           Search
         </button> -->
-      </div>
+      <!-- </div> -->
 
       <!-- MAP CONTAINER -->
       <div ref="map" id="map" class="w-full h-96 rounded-lg mb-8 map"></div>
