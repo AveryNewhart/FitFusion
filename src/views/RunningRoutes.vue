@@ -35,6 +35,7 @@ let geocoder: MapboxGeocoder | null = null;
       //  Mapbox Geocoder control
       geocoder = new MapboxGeocoder({
         accessToken: 'pk.eyJ1IjoiYXZlcnluZXdoYXJ0IiwiYSI6ImNsb2MzZWhldTBobGgyam80cWVqNjRraHQifQ.y2LJ6rP0_ze_zP3yXaSvTQ',
+        placeholder: 'next run is waiting',
         mapboxgl: mapboxgl,
       });
 
@@ -43,6 +44,8 @@ let geocoder: MapboxGeocoder | null = null;
 
       map.addControl(geocoder);
 
+      
+
       // styles to the Mapbox Geocoder
       const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
         if (geocoderInput) {
@@ -50,9 +53,10 @@ let geocoder: MapboxGeocoder | null = null;
           (geocoderInput as HTMLInputElement).style.color = 'white';
           (geocoderInput as HTMLInputElement).style.border = '2px solid #a3fda1';
           (geocoderInput as HTMLInputElement).style.borderRadius = '5px';
-          (geocoderInput as HTMLInputElement).style.padding = '2px';
-          
+          // (geocoderInput as HTMLInputElement).style.padding = '2px';
         }
+
+        
 
       // handle geocoder result
       geocoder.on('result', (result) => {
@@ -111,6 +115,7 @@ let geocoder: MapboxGeocoder | null = null;
     //   // center the map on the result
     //   map!.flyTo({ center: result.result.center, zoom: 12 });
     // });
+    
 
 
   });
