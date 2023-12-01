@@ -56,14 +56,28 @@ let geocoder: MapboxGeocoder | null = null;
           // (geocoderInput as HTMLInputElement).style.padding = '2px';
         }
 
-      const geocoderContainer = document.querySelector('.suggestions-wrapper');
+      const geocoderContainer = document.querySelector('.suggestions');
         if (geocoderContainer) {
           (geocoderContainer as HTMLDivElement).style.backgroundColor = '#2d2d2d';
           (geocoderContainer as HTMLDivElement).style.color = '#a3fda1';
           (geocoderContainer as HTMLDivElement).style.borderRadius = '5px';
           (geocoderContainer as HTMLDivElement).style.border = '2px solid #925ff0';
-        }
-        
+          (geocoderContainer as HTMLDivElement).style.marginTop = '5px';
+          (geocoderContainer as HTMLDivElement).style.height = '100px';
+          (geocoderContainer as HTMLDivElement).style.overflowY = 'scroll';
+          (geocoderContainer as HTMLDivElement).style.cursor = 'pointer';
+
+        // event listener to the container for dynamically added items
+        geocoderContainer.addEventListener('DOMNodeInserted', (event) => {
+          const insertedElement = event.target as HTMLElement;
+
+          // check if the inserted element is an li
+          if (insertedElement.tagName === 'LI') {
+            insertedElement.style.borderBottom = '2px solid #925ff0';
+            insertedElement.style.marginBottom = '3px';
+          }
+        });
+      }
 
       // handle geocoder result
       geocoder.on('result', (result) => {
