@@ -63,7 +63,8 @@ let geocoder: MapboxGeocoder | null = null;
           (geocoderContainer as HTMLDivElement).style.borderRadius = '5px';
           (geocoderContainer as HTMLDivElement).style.border = '2px solid #925ff0';
           (geocoderContainer as HTMLDivElement).style.marginTop = '5px';
-          (geocoderContainer as HTMLDivElement).style.height = '100px';
+          (geocoderContainer as HTMLDivElement).style.height = '125px';
+          (geocoderContainer as HTMLDivElement).style.maxWidth = '175px';
           (geocoderContainer as HTMLDivElement).style.overflowY = 'scroll';
           (geocoderContainer as HTMLDivElement).style.cursor = 'pointer';
 
