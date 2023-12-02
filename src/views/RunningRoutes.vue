@@ -5,6 +5,7 @@ import {
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
@@ -44,54 +45,42 @@ let geocoder: MapboxGeocoder | null = null;
 
       map.addControl(geocoder);
 
-      
-
-      // styles to the Mapbox Geocoder
-      // const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
-      //   if (geocoderInput) {
-      //     (geocoderInput as HTMLInputElement).style.backgroundColor = '#925ff0';
-      //     (geocoderInput as HTMLInputElement).style.color = 'white';
-      //     (geocoderInput as HTMLInputElement).style.border = '2px solid #a3fda1';
-      //     (geocoderInput as HTMLInputElement).style.borderRadius = '5px';
-      //     // (geocoderInput as HTMLInputElement).style.padding = '2px';
-      //   }
 
       const searchIcon = document.querySelector('.mapboxgl-ctrl-geocoder--icon-search');
         if (searchIcon) {
           // remove the search icon
           searchIcon.parentNode?.removeChild(searchIcon);
         }
-        const geocoderContainer = document.querySelector('.suggestions');
-const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
 
-if (geocoderContainer && geocoderInput) {
-  // Apply styles to the container
-  (geocoderContainer as HTMLDivElement).style.backgroundColor = '#2d2d2d';
-  (geocoderContainer as HTMLDivElement).style.color = '#a3fda1';
-  (geocoderContainer as HTMLDivElement).style.borderRadius = '5px';
-  (geocoderContainer as HTMLDivElement).style.border = '2px solid #925ff0';
-  (geocoderContainer as HTMLDivElement).style.marginTop = '5px';
-  (geocoderContainer as HTMLDivElement).style.height = '100px';
-  (geocoderContainer as HTMLDivElement).style.overflowY = 'scroll';
-  (geocoderContainer as HTMLDivElement).style.cursor = 'pointer';
-  (geocoderContainer as HTMLDivElement).style.position = 'relative'; // Position relative for absolute positioning of the close button
+      const geocoderContainer = document.querySelector('.suggestions');
+      const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
 
-  // Apply styles to the input
-  (geocoderInput as HTMLInputElement).style.backgroundColor = '#925ff0';
-  (geocoderInput as HTMLInputElement).style.color = 'white';
-  (geocoderInput as HTMLInputElement).style.border = '2px solid #a3fda1';
-  (geocoderInput as HTMLInputElement).style.borderRadius = '5px';
+        if (geocoderContainer && geocoderInput) {
+          (geocoderContainer as HTMLDivElement).style.backgroundColor = '#2d2d2d';
+          (geocoderContainer as HTMLDivElement).style.color = '#a3fda1';
+          (geocoderContainer as HTMLDivElement).style.borderRadius = '5px';
+          (geocoderContainer as HTMLDivElement).style.border = '2px solid #925ff0';
+          (geocoderContainer as HTMLDivElement).style.marginTop = '5px';
+          (geocoderContainer as HTMLDivElement).style.height = '100px';
+          (geocoderContainer as HTMLDivElement).style.overflowY = 'scroll';
+          (geocoderContainer as HTMLDivElement).style.cursor = 'pointer';
+          (geocoderContainer as HTMLDivElement).style.position = 'relative'; // position relative for absolute positioning of the close button
 
-    // Hide the default close button using CSS
-    const customStyles = document.createElement('style');
-      customStyles.innerHTML = `
-        .mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--icon-close {
-          fill: #f56565 !important;
-        }
-    `;
-    document.head.appendChild(customStyles);
+          (geocoderInput as HTMLInputElement).style.backgroundColor = '#925ff0';
+          (geocoderInput as HTMLInputElement).style.color = 'white';
+          (geocoderInput as HTMLInputElement).style.border = '2px solid #a3fda1';
+          (geocoderInput as HTMLInputElement).style.borderRadius = '5px';
 
-    // Event listener to clear the input when the close icon is clicked
+      // hide the default close button using CSS
+      const customStyles = document.createElement('style');
+        customStyles.innerHTML = `
+          .mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--icon-close {
+            fill: #f56565 !important;
+          }
+      `;
+      document.head.appendChild(customStyles);
+
+    // event listener to clear the input when the close icon is clicked
     geocoderContainer.addEventListener('click', (event: Event) => {
       const target = event.target as HTMLElement;
       const closeIcon = target.closest('.mapboxgl-ctrl-geocoder--icon-close');
