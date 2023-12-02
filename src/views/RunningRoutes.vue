@@ -56,6 +56,12 @@ let geocoder: MapboxGeocoder | null = null;
           // (geocoderInput as HTMLInputElement).style.padding = '2px';
         }
 
+      const searchIcon = document.querySelector('.mapboxgl-ctrl-geocoder--icon-search');
+        if (searchIcon) {
+          // remove the search icon
+          searchIcon.parentNode?.removeChild(searchIcon);
+        }
+
       const geocoderContainer = document.querySelector('.suggestions');
         if (geocoderContainer) {
           (geocoderContainer as HTMLDivElement).style.backgroundColor = '#2d2d2d';
@@ -67,17 +73,23 @@ let geocoder: MapboxGeocoder | null = null;
           (geocoderContainer as HTMLDivElement).style.maxWidth = '175px';
           (geocoderContainer as HTMLDivElement).style.overflowY = 'scroll';
           (geocoderContainer as HTMLDivElement).style.cursor = 'pointer';
+          
 
-        // event listener to the container for dynamically added items
-        geocoderContainer.addEventListener('DOMNodeInserted', (event) => {
-          const insertedElement = event.target as HTMLElement;
-
-          // check if the inserted element is an li
-          if (insertedElement.tagName === 'LI') {
-            insertedElement.style.borderBottom = '2px solid #925ff0';
-            insertedElement.style.marginBottom = '3px';
-          }
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            // check added nodes for li elements
+            mutation.addedNodes.forEach((addedNode) => {
+              if (addedNode instanceof HTMLElement && addedNode.tagName === 'LI') {
+                addedNode.style.borderBottom = '2px solid #925ff0';
+                addedNode.style.marginBottom = '3px';
+              }
+            });
+          });
         });
+
+        // configure and start the observer
+        const observerConfig = { childList: true, subtree: true };
+        observer.observe(geocoderContainer, observerConfig);
       }
 
       // handle geocoder result
