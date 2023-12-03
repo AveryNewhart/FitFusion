@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
 
-const url = "mongodb+srv://omega23:DEdRiCDIOqVFsSIe@fit-fusion.gout9hd.mongodb.net/"; // Replace with your MongoDB connection string
+const url = `${process.env.VUE_APP_MONGODB_URI}` // Replace with your MongoDB connection string
 const dbName = 'fit-fusion'; // Replace with your database name
 
 export async function connectToDB() {
