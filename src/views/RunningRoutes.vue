@@ -118,26 +118,59 @@ let geocoder: MapboxGeocoder | null = null;
       
 
 
-      // draw control to the map
-      const draw = new MapboxDraw({
-        displayControlsDefault: false,
-        controls: {
-          line_string: true,
-          trash: true,
-        },
-        styles: [
-          {
-            id: 'gl-draw-line',
-            type: 'line', // mess with this area to get the line to be dashed while drawing, then solid when then user is done drawing the route. 
-            paint: {
-              'line-color': '#925ff0', // line color
-              'line-width': 2,
-            },
-          },
-          ],
-      });
+  //!! HAVE TO STILL MESS WITH THE LINE BEING DASHED/SOLID
 
-      map.addControl(draw);
+    // draw control to the map
+    const draw = new MapboxDraw({
+      displayControlsDefault: false,
+      controls: {
+        line_string: true,
+        trash: true,
+      },
+      styles: [
+        // style for inactive (solid) line
+        {
+          'id': 'gl-draw-line-inactive',
+          'type': 'line',
+          'filter': ['all', ['==', 'active', 'false'],
+            ['==', '$type', 'LineString'],
+            ['!=', 'mode', 'static']
+          ],
+          'layout': {
+            'line-cap': 'round',
+            'line-join': 'round'
+          },
+          'paint': {
+            'line-color': '#925ff0',
+            'line-width': 2
+          }
+        },
+
+        // style for active (dashed) line
+        {
+          'id': 'gl-draw-line-active',
+          'type': 'line',
+          'filter': ['all', ['==', '$type', 'LineString'],
+            ['==', 'active', 'true']
+          ],
+          'layout': {
+            'line-cap': 'round',
+            'line-join': 'round'
+          },
+          'paint': {
+            'line-color': '#925ff0',
+            'line-dasharray': [0.2, 2],
+            'line-width': 2
+          }
+        },
+      ],
+    });
+
+    map!.addControl(draw);
+
+  //!! HAVE TO STILL MESS WITH THE LINE BEING DASHED/SOLID
+
+
 
     // !!!!! THIS IS COMMENTED OUT LOGIC FOR IF SEARCH BAR IS MOVED BACK TO THE TOP OF THE PAGE !!!!!!!
 
