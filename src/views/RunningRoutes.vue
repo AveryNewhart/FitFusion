@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { 
-  //  ref, 
-  onMounted, onBeforeUnmount } from 'vue';
+   ref, 
+  onMounted, onBeforeUnmount, computed } from 'vue';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
@@ -12,6 +13,8 @@ import Nav from '../components/Nav.vue';
 
 let map: mapboxgl.Map | null = null;
 let geocoder: MapboxGeocoder | null = null;
+
+let isFullscreen = ref(false);
 // const searchLocation = ref('');
 
   onMounted(() => {
@@ -44,26 +47,98 @@ let geocoder: MapboxGeocoder | null = null;
 
       map.addControl(geocoder);
 
-      
 
-      // styles to the Mapbox Geocoder
-      const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
-        if (geocoderInput) {
-          (geocoderInput as HTMLInputElement).style.backgroundColor = '#925ff0';
-          (geocoderInput as HTMLInputElement).style.color = 'white';
-          (geocoderInput as HTMLInputElement).style.border = '2px solid #a3fda1';
-          (geocoderInput as HTMLInputElement).style.borderRadius = '5px';
-          // (geocoderInput as HTMLInputElement).style.padding = '2px';
+      const searchIcon = document.querySelector('.mapboxgl-ctrl-geocoder--icon-search');
+        if (searchIcon) {
+          // remove the search icon
+          searchIcon.parentNode?.removeChild(searchIcon);
         }
 
-      const geocoderContainer = document.querySelector('.suggestions-wrapper');
-        if (geocoderContainer) {
+      const navigationControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group') as HTMLDivElement;
+       // Get the container of the GeolocateControl
+      // Get the container of the GeolocateControl
+      const geolocateControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group:nth-child(2)') as HTMLDivElement;
+
+      // Get the container of the ScaleControl
+      const scaleControlContainer = document.querySelector('.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-group') as HTMLDivElement;
+
+      // Get the container of the FullscreenControl
+      const fullscreenControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group:nth-child(3)') as HTMLDivElement;
+
+
+
+      // Apply styles to each control
+      if (navigationControlContainer) {
+        navigationControlContainer.style.backgroundColor = '#925ff0';
+      }
+
+      if (geolocateControlContainer) {
+        geolocateControlContainer.style.backgroundColor = '#925ff0';
+      }
+
+      if (scaleControlContainer) {
+        scaleControlContainer.style.backgroundColor = '#925ff0';
+      }
+
+      if (fullscreenControlContainer) {
+        fullscreenControlContainer.style.backgroundColor = '#925ff0';
+      }
+
+
+      const geocoderContainer = document.querySelector('.suggestions');
+      const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
+
+        if (geocoderContainer && geocoderInput) {
           (geocoderContainer as HTMLDivElement).style.backgroundColor = '#2d2d2d';
           (geocoderContainer as HTMLDivElement).style.color = '#a3fda1';
           (geocoderContainer as HTMLDivElement).style.borderRadius = '5px';
           (geocoderContainer as HTMLDivElement).style.border = '2px solid #925ff0';
-        }
-        
+          (geocoderContainer as HTMLDivElement).style.marginTop = '5px';
+          (geocoderContainer as HTMLDivElement).style.height = '100px';
+          (geocoderContainer as HTMLDivElement).style.overflowY = 'scroll';
+          (geocoderContainer as HTMLDivElement).style.cursor = 'pointer';
+          (geocoderContainer as HTMLDivElement).style.position = 'relative'; // position relative for absolute positioning of the close button
+
+          (geocoderInput as HTMLInputElement).style.backgroundColor = '#925ff0';
+          (geocoderInput as HTMLInputElement).style.color = 'white';
+          (geocoderInput as HTMLInputElement).style.border = '2px solid #a3fda1';
+          (geocoderInput as HTMLInputElement).style.borderRadius = '5px';
+
+      // hide the default close button using CSS
+      const customStyles = document.createElement('style');
+        customStyles.innerHTML = `
+          .mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--icon-close {
+            fill: #f56565 !important;
+          }
+      `;
+      document.head.appendChild(customStyles);
+
+    // event listener to clear the input when the close icon is clicked
+    geocoderContainer.addEventListener('click', (event: Event) => {
+      const target = event.target as HTMLElement;
+      const closeIcon = target.closest('.mapboxgl-ctrl-geocoder--icon-close');
+
+      if (closeIcon) {
+        (geocoderInput as HTMLInputElement).value = '';
+      }
+    });
+
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            // check added nodes for li elements
+            mutation.addedNodes.forEach((addedNode) => {
+              if (addedNode instanceof HTMLElement && addedNode.tagName === 'LI') {
+                addedNode.style.borderBottom = '2px solid #925ff0';
+                addedNode.style.marginBottom = '3px';
+              }
+            });
+          });
+        });
+
+        // configure and start the observer
+        const observerConfig = { childList: true, subtree: true };
+        observer.observe(geocoderContainer, observerConfig);
+      }
 
       // handle geocoder result
       geocoder.on('result', (result) => {
@@ -76,26 +151,74 @@ let geocoder: MapboxGeocoder | null = null;
       
 
 
-      // draw control to the map
-      const draw = new MapboxDraw({
-        displayControlsDefault: false,
-        controls: {
-          line_string: true,
-          trash: true,
-        },
-        styles: [
-          {
-            id: 'gl-draw-line',
-            type: 'line', // mess with this area to get the line to be dashed while drawing, then solid when then user is done drawing the route. 
-            paint: {
-              'line-color': '#925ff0', // line color
-              'line-width': 2,
-            },
-          },
-          ],
-      });
+  //!! HAVE TO STILL MESS WITH THE LINE BEING DASHED/SOLID
 
-      map.addControl(draw);
+    // draw control to the map
+    const draw = new MapboxDraw({
+      displayControlsDefault: false,
+      controls: {
+        line_string: true,
+        trash: true,
+      },
+      styles: [
+        // style for inactive (solid) line
+        {
+          'id': 'gl-draw-line-inactive',
+          'type': 'line',
+          'filter': ['all', ['==', 'active', 'false'],
+            ['==', '$type', 'LineString'],
+            ['!=', 'mode', 'static']
+          ],
+          'layout': {
+            'line-cap': 'round',
+            'line-join': 'round'
+          },
+          'paint': {
+            'line-color': '#925ff0',
+            'line-width': 2
+          }
+        },
+
+        // style for active (dashed) line
+        {
+          'id': 'gl-draw-line-active',
+          'type': 'line',
+          'filter': ['all', ['==', '$type', 'LineString'],
+            ['==', 'active', 'true']
+          ],
+          'layout': {
+            'line-cap': 'round',
+            'line-join': 'round'
+          },
+          'paint': {
+            'line-color': '#925ff0',
+            'line-dasharray': [0.2, 2],
+            'line-width': 2
+          }
+        },
+      ],
+    });
+
+    map!.addControl(draw);
+
+      // Get the Draw button
+      const drawButton = document.querySelector('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_line') as HTMLButtonElement;
+
+      // Get the Delete button
+      const deleteButton = document.querySelector('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_trash') as HTMLButtonElement;
+
+            // Apply styles to the Draw button
+        if (drawButton) {
+          drawButton.style.backgroundColor = '#a3fda1';
+        }
+
+        // Apply styles to the Delete button
+        if (deleteButton) {
+          deleteButton.style.backgroundColor = '#f56565';
+        }
+    
+
+
 
     // !!!!! THIS IS COMMENTED OUT LOGIC FOR IF SEARCH BAR IS MOVED BACK TO THE TOP OF THE PAGE !!!!!!!
 
@@ -124,14 +247,42 @@ let geocoder: MapboxGeocoder | null = null;
     // });
     
 
-
+  // listen for the Mapbox style data event to determine if the style is loaded
+  map!.on('data', (event) => {
+    if (event.isStyleLoaded) {
+      adjustMapHeight();
+    }
   });
+
+  // listen for the fullscreenchange event on the document
+  document.addEventListener('fullscreenchange', () => {
+    isFullscreen.value = document.fullscreenElement !== null;
+    adjustMapHeight();
+  });
+});
 
   onBeforeUnmount(() => {
   if (map) {
     map.remove();
   }
 });
+
+const adjustMapHeight = () => {
+  const mapContainer = document.getElementById('map') as HTMLDivElement;
+  if (isFullscreen.value) {
+    mapContainer.style.height = '100vh';
+  } else {
+    mapContainer.style.height = '96rem'; // Adjust the height as needed
+  }
+};
+
+const mapContainerClass = computed(() => {
+  return {
+    'h-96': !isFullscreen.value,
+    'h-full': isFullscreen.value,
+  };
+});
+
 
 
 </script>
@@ -159,23 +310,9 @@ let geocoder: MapboxGeocoder | null = null;
     <div class="flex flex-col items-center">
       <h1 class="text-3xl font-semibold mb-4 runningHeader">Running Routes</h1>
 
-      <!-- <div class="mb-4 mySearch"> -->
-        <!-- <input
-          v-model="searchLocation"
-          placeholder="where's the next run?"
-          class="border rounded px-3 py-2"
-        />
-        
-        <button
-          @click="searchRoutes"
-          class="saveBtn px-4 py-2 ml-2"
-        >
-          Search
-        </button> -->
-      <!-- </div> -->
 
       <!-- MAP CONTAINER -->
-      <div ref="map" id="map" class="w-full h-96 rounded-lg mb-8 map"></div>
+      <div ref="map" id="map" :class="mapContainerClass" class="w-full rounded-lg mb-8 map"></div>
       <!-- MAP CONTAINER -->
 
       <!-- save a route -->
