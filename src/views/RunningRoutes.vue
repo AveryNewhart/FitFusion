@@ -54,6 +54,11 @@ let isFullscreen = ref(false);
           searchIcon.parentNode?.removeChild(searchIcon);
         }
 
+      const navigationControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group') as HTMLDivElement;
+        if (navigationControlContainer) {
+          navigationControlContainer.style.backgroundColor = '#925ff0';
+        }
+
       const geocoderContainer = document.querySelector('.suggestions');
       const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
 
