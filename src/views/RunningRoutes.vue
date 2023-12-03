@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { 
-  //  ref, 
-  onMounted, onBeforeUnmount } from 'vue';
+   ref, 
+  onMounted, onBeforeUnmount, computed } from 'vue';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
@@ -13,6 +13,8 @@ import Nav from '../components/Nav.vue';
 
 let map: mapboxgl.Map | null = null;
 let geocoder: MapboxGeocoder | null = null;
+
+let isFullscreen = ref(false);
 // const searchLocation = ref('');
 
   onMounted(() => {
@@ -168,7 +170,7 @@ let geocoder: MapboxGeocoder | null = null;
 
     map!.addControl(draw);
 
-  //!! HAVE TO STILL MESS WITH THE LINE BEING DASHED/SOLID
+    
 
 
 
@@ -199,14 +201,42 @@ let geocoder: MapboxGeocoder | null = null;
     // });
     
 
-
+  // listen for the Mapbox style data event to determine if the style is loaded
+  map!.on('data', (event) => {
+    if (event.isStyleLoaded) {
+      adjustMapHeight();
+    }
   });
+
+  // listen for the fullscreenchange event on the document
+  document.addEventListener('fullscreenchange', () => {
+    isFullscreen.value = document.fullscreenElement !== null;
+    adjustMapHeight();
+  });
+});
 
   onBeforeUnmount(() => {
   if (map) {
     map.remove();
   }
 });
+
+const adjustMapHeight = () => {
+  const mapContainer = document.getElementById('map') as HTMLDivElement;
+  if (isFullscreen.value) {
+    mapContainer.style.height = '100vh';
+  } else {
+    mapContainer.style.height = '96rem'; // Adjust the height as needed
+  }
+};
+
+const mapContainerClass = computed(() => {
+  return {
+    'h-96': !isFullscreen.value,
+    'h-full': isFullscreen.value,
+  };
+});
+
 
 
 </script>
@@ -234,23 +264,9 @@ let geocoder: MapboxGeocoder | null = null;
     <div class="flex flex-col items-center">
       <h1 class="text-3xl font-semibold mb-4 runningHeader">Running Routes</h1>
 
-      <!-- <div class="mb-4 mySearch"> -->
-        <!-- <input
-          v-model="searchLocation"
-          placeholder="where's the next run?"
-          class="border rounded px-3 py-2"
-        />
-        
-        <button
-          @click="searchRoutes"
-          class="saveBtn px-4 py-2 ml-2"
-        >
-          Search
-        </button> -->
-      <!-- </div> -->
 
       <!-- MAP CONTAINER -->
-      <div ref="map" id="map" class="w-full h-96 rounded-lg mb-8 map"></div>
+      <div ref="map" id="map" :class="mapContainerClass" class="w-full rounded-lg mb-8 map"></div>
       <!-- MAP CONTAINER -->
 
       <!-- save a route -->
