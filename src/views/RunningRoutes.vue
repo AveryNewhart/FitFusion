@@ -55,9 +55,35 @@ let isFullscreen = ref(false);
         }
 
       const navigationControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group') as HTMLDivElement;
-        if (navigationControlContainer) {
-          navigationControlContainer.style.backgroundColor = '#925ff0';
-        }
+       // Get the container of the GeolocateControl
+      // Get the container of the GeolocateControl
+      const geolocateControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group:nth-child(2)') as HTMLDivElement;
+
+      // Get the container of the ScaleControl
+      const scaleControlContainer = document.querySelector('.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-group') as HTMLDivElement;
+
+      // Get the container of the FullscreenControl
+      const fullscreenControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group:nth-child(3)') as HTMLDivElement;
+
+
+
+      // Apply styles to each control
+      if (navigationControlContainer) {
+        navigationControlContainer.style.backgroundColor = '#925ff0';
+      }
+
+      if (geolocateControlContainer) {
+        geolocateControlContainer.style.backgroundColor = '#925ff0';
+      }
+
+      if (scaleControlContainer) {
+        scaleControlContainer.style.backgroundColor = '#925ff0';
+      }
+
+      if (fullscreenControlContainer) {
+        fullscreenControlContainer.style.backgroundColor = '#925ff0';
+      }
+
 
       const geocoderContainer = document.querySelector('.suggestions');
       const geocoderInput = document.querySelector('.mapboxgl-ctrl-geocoder input');
@@ -175,6 +201,21 @@ let isFullscreen = ref(false);
 
     map!.addControl(draw);
 
+      // Get the Draw button
+      const drawButton = document.querySelector('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_line') as HTMLButtonElement;
+
+      // Get the Delete button
+      const deleteButton = document.querySelector('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_trash') as HTMLButtonElement;
+
+            // Apply styles to the Draw button
+        if (drawButton) {
+          drawButton.style.backgroundColor = '#a3fda1';
+        }
+
+        // Apply styles to the Delete button
+        if (deleteButton) {
+          deleteButton.style.backgroundColor = '#f56565';
+        }
     
 
 
