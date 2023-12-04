@@ -3,7 +3,7 @@ module.exports = {
     service: {
       name: 'fitfusion',
       // URL to the GraphQL API
-      url: 'http://localhost:4000/graphql',
+      url: 'http://localhost:3020/graphql',
     },
     // Files processed by the extension
     includes: [
