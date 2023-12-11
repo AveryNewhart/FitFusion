@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { 
-   ref, 
-  onMounted, onBeforeUnmount, computed } from 'vue';
+  onMounted, onBeforeUnmount
+} from 'vue';
 import mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
@@ -14,8 +14,6 @@ import Nav from '../components/Nav.vue';
 let map: mapboxgl.Map | null = null;
 let geocoder: MapboxGeocoder | null = null;
 
-let isFullscreen = ref(false);
-// const searchLocation = ref('');
 
   onMounted(() => {
     // initialize the map
@@ -32,7 +30,10 @@ let isFullscreen = ref(false);
       map.addControl(new mapboxgl.NavigationControl(), 'top-left');
       map.addControl(new mapboxgl.GeolocateControl({ positionOptions: { enableHighAccuracy: true }, trackUserLocation: true }), 'top-left');
       map.addControl(new mapboxgl.ScaleControl(), 'bottom-left');
-      map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
+
+      // COMMENTED OUT FULLSCREEN FOR NOW
+
+      // map.addControl(new mapboxgl.FullscreenControl(), 'top-left');
 
 
       //  Mapbox Geocoder control
@@ -60,7 +61,7 @@ let isFullscreen = ref(false);
       const geolocateControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group:nth-child(2)') as HTMLDivElement;
 
       // Get the container of the ScaleControl
-      const scaleControlContainer = document.querySelector('.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-group') as HTMLDivElement;
+      const scaleControlContainer = document.querySelector('.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-scale') as HTMLDivElement;
 
       // Get the container of the FullscreenControl
       const fullscreenControlContainer = document.querySelector('.mapboxgl-ctrl-top-left .mapboxgl-ctrl-group:nth-child(3)') as HTMLDivElement;
@@ -70,14 +71,18 @@ let isFullscreen = ref(false);
       // Apply styles to each control
       if (navigationControlContainer) {
         navigationControlContainer.style.backgroundColor = '#925ff0';
+        navigationControlContainer.style.border = '2px solid #a3fda1';
       }
 
       if (geolocateControlContainer) {
         geolocateControlContainer.style.backgroundColor = '#925ff0';
+        geolocateControlContainer.style.border = '2px solid #a3fda1'
       }
 
       if (scaleControlContainer) {
         scaleControlContainer.style.backgroundColor = '#925ff0';
+        scaleControlContainer.style.border = '2px solid #a3fda1';
+        scaleControlContainer.style.borderRadius = '10px';
       }
 
       if (fullscreenControlContainer) {
@@ -201,20 +206,20 @@ let isFullscreen = ref(false);
 
     map!.addControl(draw);
 
-      // Get the Draw button
+      // get the Draw button
       const drawButton = document.querySelector('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_line') as HTMLButtonElement;
 
-      // Get the Delete button
+      // get the Delete button
       const deleteButton = document.querySelector('.mapbox-gl-draw_ctrl-draw-btn.mapbox-gl-draw_trash') as HTMLButtonElement;
 
-            // Apply styles to the Draw button
         if (drawButton) {
           drawButton.style.backgroundColor = '#a3fda1';
+          drawButton.style.border = '2px solid #925ff0';
         }
 
-        // Apply styles to the Delete button
         if (deleteButton) {
           deleteButton.style.backgroundColor = '#f56565';
+          deleteButton.style.border = '2px solid #925ff0'
         }
     
 
@@ -245,20 +250,24 @@ let isFullscreen = ref(false);
     //   // center the map on the result
     //   map!.flyTo({ center: result.result.center, zoom: 12 });
     // });
-    
 
-  // listen for the Mapbox style data event to determine if the style is loaded
-  map!.on('data', (event) => {
-    if (event.isStyleLoaded) {
-      adjustMapHeight();
+
+  // Wait for the geolocate control to be ready
+  map!.on('load', () => {
+    // Access the user location marker elements
+    const userLocationContainer = document.querySelector('.mapboxgl-user-location') as HTMLElement;
+    const userLocationDot = userLocationContainer?.querySelector('.mapboxgl-user-location-dot::after') as HTMLElement;
+    const userLocationAccuracyCircle = userLocationContainer?.querySelector('.mapboxgl-user-location-header') as HTMLElement;
+
+    // Check if the marker elements exist
+    if (userLocationContainer && userLocationDot && userLocationAccuracyCircle) {
+      // Customize the marker style
+      userLocationContainer.style.backgroundColor = 'transparent'; // Set container background to transparent
+      userLocationDot.style.backgroundColor = 'white'; // Set dot color to white
+      userLocationAccuracyCircle.style.borderColor = '#a3fda1'; // Set circle border color to blue
     }
   });
-
-  // listen for the fullscreenchange event on the document
-  document.addEventListener('fullscreenchange', () => {
-    isFullscreen.value = document.fullscreenElement !== null;
-    adjustMapHeight();
-  });
+    
 });
 
   onBeforeUnmount(() => {
@@ -267,21 +276,6 @@ let isFullscreen = ref(false);
   }
 });
 
-const adjustMapHeight = () => {
-  const mapContainer = document.getElementById('map') as HTMLDivElement;
-  if (isFullscreen.value) {
-    mapContainer.style.height = '100vh';
-  } else {
-    mapContainer.style.height = '96rem'; // Adjust the height as needed
-  }
-};
-
-const mapContainerClass = computed(() => {
-  return {
-    'h-96': !isFullscreen.value,
-    'h-full': isFullscreen.value,
-  };
-});
 
 
 
@@ -310,9 +304,12 @@ const mapContainerClass = computed(() => {
     <div class="flex flex-col items-center">
       <h1 class="text-3xl font-semibold mb-4 runningHeader">Running Routes</h1>
 
+      <!--   :class="mapContainerClass" -->
 
       <!-- MAP CONTAINER -->
-      <div ref="map" id="map" :class="mapContainerClass" class="w-full rounded-lg mb-8 map"></div>
+      <div ref="map" id="map" 
+    
+       class="w-full rounded-lg mb-8 map"></div>
       <!-- MAP CONTAINER -->
 
       <!-- save a route -->
@@ -358,7 +355,8 @@ const mapContainerClass = computed(() => {
 
 <style scoped>
 .map {
-  border: 2px solid darkgreen;
+  border: 2px solid #a3fda1;
+  height: 35rem;
   /* z-index: 999; */
 }
 
