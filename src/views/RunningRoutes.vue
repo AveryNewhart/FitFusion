@@ -371,7 +371,9 @@ let geocoder: MapboxGeocoder | null = null;
 .runningDataDiv {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;margin-top: 15px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .routeData {

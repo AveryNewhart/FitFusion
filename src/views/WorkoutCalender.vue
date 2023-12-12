@@ -19,6 +19,13 @@ import Nav from '../components/Nav.vue';
 
 const currentDate = new Date();
 
+const selectedWorkout = ref('');
+const showWorkoutDetailsModal = ref(false);
+const selectedWorkoutDetails = ref('');
+const showModal = ref(false);
+const selectedCategory = ref('');
+const selectedWorkoutContent = ref('');
+
 const getDayDate = computed(() => {
   // array to hold the formatted dates
   const formattedDates = [];
@@ -54,11 +61,21 @@ const getSavedWorkoutsByCategory = (_: string): string[] => {
 };
 
 
-const showModal = ref(false);
-const selectedCategory = ref('');
+const showWorkoutDetails = (workout: string) => {
+  selectedWorkoutDetails.value = workout;
+  showWorkoutDetailsModal.value = true;
+};
+
+const closeWorkoutDetailsModal = () => {
+  showWorkoutDetailsModal.value = false;
+};
+
+
 
 // might have to change _ to index when logic is added
-const showSaveModal = (_: number) => {
+const showSaveModal = (workout: string) => {
+  selectedWorkout.value = workout;
+  selectedWorkoutContent.value = workout;
   showModal.value = true;
 };
 
@@ -67,7 +84,7 @@ const closeModal = () => {
 };
 
 const saveWorkout = () => {
-  // logic to save workout to the user and its selected category.
+  // Logic to save workout to the user and its selected category.
   showModal.value = false;
 };
 
@@ -172,27 +189,41 @@ const generateWorkout = () => {
     <div class="grid grid-cols-7 gap-4 mb-4">
       <div v-for="(day, index) in daysOfWeek" :key="day" class="text-center">
         <div class="mb-2">
-          <button @click="showSaveModal(index)" class="saveBtn text-white p-2 rounded">
+          <button @click="showSaveModal(getSavedWorkoutsByCategory(selectedWorkoutType)[index])" class="saveBtn text-white p-2 rounded">
             Save Workout
           </button>
         </div>
       </div>
     </div>
 
-       <!-- Categories and saved workouts section -->
-       <div class="mb-4">
+
+    <!-- Categories and saved workouts section -->
+    <div class="mb-4">
       <h2 class="headerText text-center font-bold mb-2 text-lg">Workout Categories</h2>
       <div class="flex space-x-4 text-center">
         <!-- Display workout categories -->
-       <div v-for="(type, index) in workoutTypes" :key="index" class="flex-1">
+        <div v-for="(type, typeIndex) in workoutTypes" :key="typeIndex" class="flex-1">
           <h3 class="workoutType text-lg font-bold">{{ type }}</h3>
           <ul>
             <!-- Display saved workouts for each category -->
-            <li v-for="workout in getSavedWorkoutsByCategory(type)" :key="workout" class="workout">
-              {{ workout }}
+            <li v-for="(workout, workoutIndex) in getSavedWorkoutsByCategory(type)" :key="workoutIndex" class="workout">
+              <button @click="showWorkoutDetails(workout)" class="workoutButton">
+                {{ workout }}
+              </button>
             </li>
           </ul>
         </div>
+      </div>
+    </div>
+
+    <!-- Workout details modal -->
+    <div v-if="showWorkoutDetailsModal" class="fixed top-0 left-0 w-full h-full bgColor bg-opacity-50 flex items-center justify-center">
+      <div class="bgModal p-4 rounded">
+        <h2 class="text-xl text-white font-bold mb-2">Workout Details</h2>
+        <p class="text-white">{{ selectedWorkoutDetails }}</p>
+        <button @click="closeWorkoutDetailsModal" class="bg-red-500 text-white p-2 rounded ml-2">
+          Close
+        </button>
       </div>
     </div>
 
@@ -201,7 +232,8 @@ const generateWorkout = () => {
     <!-- Save modal -->
     <div v-if="showModal" class="fixed top-0 left-0 w-full h-full bgColor bg-opacity-50 flex items-center justify-center">
       <div class="bgModal p-4 rounded">
-        <h2 class="text-xl text-white font-bold mb-2">Select Category to Save Workout</h2>
+        <h2 class="text-xl text-white font-bold mb-2">Selected Workout</h2>
+        <p class="text-white">{{ selectedWorkoutContent }}</p>
         <select v-model="selectedCategory" class="p-2 rounded mb-2">
           <option v-for="(type, index) in workoutTypes" :key="index" :value="type">{{ type }}</option>
         </select>
@@ -213,6 +245,7 @@ const generateWorkout = () => {
         </button>
       </div>
     </div>
+
     
 <!-- BELOW THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR NORMAL VIEW -->
     <!-- Dropdown menu to select workout type -->
