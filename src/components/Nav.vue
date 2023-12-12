@@ -27,9 +27,9 @@ const closeSettingsModal = () => {
       <router-link to="/" class="text-white text-2xl font-bold navHeader">FitFusion</router-link>
 
       <div class="space-x-4">
-        <router-link to="/" class="navButtons">Home</router-link>
+        <!-- <router-link to="/" class="navButtons">Home</router-link> -->
         <router-link to="/profile" class="navButtons">Profile</router-link>
-        <router-link to="/login" class="navButtons">Login/Signup</router-link>
+        <router-link to="/" class="navButtons">Login/Signup</router-link>
         <router-link to="/feed" class="navButtons">Feed</router-link>
         <router-link to="/calorietracker" class="navButtons">Calorie Tracker</router-link>
         <router-link to="/runningroutes" class="navButtons">Running Routes</router-link>
