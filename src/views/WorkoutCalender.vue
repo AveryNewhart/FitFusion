@@ -16,7 +16,7 @@
 import { ref, computed } from 'vue';
 
 import Nav from '../components/Nav.vue';
-import WorkoutCarousel from '../components/workoutCarousel.vue';
+import WorkoutCarousel from '../components/WorkoutCarousel.vue';
 
 const currentDate = new Date();
 
