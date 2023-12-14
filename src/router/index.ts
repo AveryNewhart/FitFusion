@@ -5,7 +5,7 @@ import Feed from '../views/Feed.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import RunningRoutes from '../views/RunningRoutes.vue'
-import WorkoutCalender from '../views/WorkoutCalender.vue'
+import WorkoutCalendar from '../views/WorkoutCalendar.vue'
 
 const routes = [
   // { 
@@ -41,7 +41,7 @@ const routes = [
   { 
     path: '/workoutcalender', 
     name: 'WorkoutCalender', 
-    component: WorkoutCalender 
+    component: WorkoutCalendar 
   },
 ]
 
