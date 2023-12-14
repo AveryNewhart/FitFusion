@@ -6,6 +6,8 @@
 // <!-- SAVE THE WEEKLY TOTAL CALORIES TO THE USER SO THEY CAN SEE THEIR TOP WEEK, TOP MONTH, ETC... THIS WILL BE DONE WHEN BACKEND IS COMPLETED FOR THE USER-->
 
 import Nav from '../components/Nav.vue';
+import MealCarousel from '../components/MealCarousel.vue';
+import MealPrepCal from '../components/MealPrepCal.vue';
 
 import { ref } from 'vue';
 
@@ -107,6 +109,12 @@ const resetWeek = (): void => {
         <h2 class="weekH1">Total Calories for the Week:<span class="calorieSpan"> {{ totalCalories }}</span></h2>
         <button @click="resetWeek" class="bg-red-500">Reset Week</button>
       </div>
+      <div class="mealPrepCalender">
+        <MealPrepCal />
+      </div>
+      <div>
+        <MealCarousel />
+      </div>
     </div>
   </div>
 </template>
@@ -118,7 +126,7 @@ const resetWeek = (): void => {
 .calories-tracker {
   text-align: center;
   background-color: #2d2d2d;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .trackH1 {
@@ -231,6 +239,12 @@ button {
   /* color: #a3fda1; */
   color: #925ff0;
 }
+
+.mealPrepCalender {
+  border: 2px solid lightblue;
+  margin: 10px 0;
+}
+
 </style>
 
 

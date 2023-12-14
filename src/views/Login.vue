@@ -5,10 +5,10 @@ import Nav from '../components/Nav.vue';
 import { ref } from 'vue';
 
 // Initially show login form
-const loginMode = ref('login');
+const loginMode = ref('signup');
 
 const toggleForm = () => {
-  loginMode.value = loginMode.value === 'login' ? 'signup' : 'login';
+  loginMode.value = loginMode.value === 'signup' ? 'login' : 'signup';
 };
 
 

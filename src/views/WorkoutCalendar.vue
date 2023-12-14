@@ -16,6 +16,7 @@
 import { ref, computed } from 'vue';
 
 import Nav from '../components/Nav.vue';
+import WorkoutCarousel from '../components/WorkoutCarousel.vue';
 
 const currentDate = new Date();
 
@@ -267,6 +268,11 @@ const generateWorkout = () => {
     </button>
 <!-- ABOVE THIS IS THE DAYS, WORKOUT, AND GENERATE BUTTON FOR NORMAL VIEW -->
 
+<div class="workoutCar">
+      <WorkoutCarousel />
+    </div>
+
+
 
     </div>
   </div>
@@ -277,7 +283,7 @@ const generateWorkout = () => {
 
 .mainWorkoutCal {
   background: #2d2d2d;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .headerText {
