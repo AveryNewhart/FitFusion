@@ -5,7 +5,7 @@ import Feed from '../views/Feed.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import RunningRoutes from '../views/RunningRoutes.vue'
-import WorkoutCalendar from '../views/WorkoutCalendar.vue'
+import WorkoutCalendar from '../views/WorkoutCalender.vue'
 
 const routes = [
   // { 
