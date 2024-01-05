@@ -1,13 +1,7 @@
-import {
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache
-} from '@apollo/client/core';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core';
 
-// HTTP connection to the API
 const httpLink = createHttpLink({
-  // You should use an absolute URL here
-  uri: 'http://localhost:4042/graphql'
+  uri: 'http://localhost:4042/graphql',
 });
 
 export const apolloClient = new ApolloClient({
@@ -15,10 +9,11 @@ export const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   defaultOptions: {
     query: {
-      fetchPolicy: 'no-cache'
-    }
-  }
+      fetchPolicy: 'no-cache',
+    },
+  },
 });
+
 
 
 // import { ApolloClient, InMemoryCache } from '@apollo/client/core'
