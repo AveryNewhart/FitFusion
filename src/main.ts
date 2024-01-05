@@ -13,6 +13,7 @@ const apolloProvider = createApolloProvider({
 createApp({
   setup() {
     provide(DefaultApolloClient, apolloClient)
+    return {};
   },
 
   render: () => h(App),
